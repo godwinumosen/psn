@@ -3470,6 +3470,8 @@ Version:	1.1
 .why-choose{
 	background:#fff;
 }
+
+/*
 .why-choose .choose-right{
 	height:100%;
 	width:100%;
@@ -3529,6 +3531,8 @@ Version:	1.1
     -webkit-animation-delay: 2s;
     animation-delay: 2s;
 }
+
+*/
 /*=======================
 	End Why choose CSS
 =========================*/
@@ -3547,6 +3551,7 @@ Version:	1.1
 	text-align:center;
 	padding:100px 265px;
 }
+
 .call-action .content h2{
 	color:#fff;
 	font-size:32px;
