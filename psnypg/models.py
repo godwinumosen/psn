@@ -54,7 +54,6 @@ class ExcosPicturePost(models.Model):
         return reverse('index',)
     
     
-    
 #Excos full details model
 class ExcosUser(models.Model):
     excos_user_name = models.CharField(max_length=255)
