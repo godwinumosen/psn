@@ -1,16 +1,4 @@
-/**
-* Template Name: Mentor
-* Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-* Updated: Aug 07 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
-/* Fonts */
 :root {
   --default-font: "Open Sans",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --heading-font: "Raleway",  sans-serif;
@@ -64,6 +52,14 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  
+  
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
 }
 
 a {
@@ -1099,7 +1095,7 @@ section,
 }
 
 .why-us .icon-box p {
-  font-size: 15px;
+  font-size: 17px;
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
@@ -1107,6 +1103,79 @@ section,
   color: var(--contrast-color);
   background: var(--accent-color);
 }
+
+
+ .service-card {
+    background-color: #198754; /* Bootstrap success */
+    color: #fff;
+    transition: all 0.35s ease;
+    cursor: pointer;
+  }
+
+  .service-card .text-muted {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  .service-card .icon-box {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transition: all 0.35s ease;
+  }
+
+  .service-card a {
+    color: #fff;
+  }
+
+  .service-card:hover {
+    background-color: #fff;
+    color: #198754;
+    transform: translateY(-6px);
+    box-shadow: 0 .75rem 1.5rem rgba(0,0,0,.15);
+  }
+
+  .service-card:hover .text-muted,
+  .service-card:hover a {
+    color: #198754 !important;
+  }
+
+  .service-card:hover .icon-box {
+    background-color: rgba(25, 135, 84, 0.1);
+    color: #198754;
+  }
+
+
+   .news-card {
+    transition: all 0.3s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.12);
+  }
+
+  .news-badge {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .news-img {
+    height: 220px;
+    object-fit: cover;
+  }
+
+  /* ===== FIX NEWS CARD TEXT HOVER ===== */
+
+.news-card h5,
+.news-card a {
+  color: #212529; /* normal dark text */
+  transition: color 0.3s ease;
+}
+
+.news-card:hover h5,
+.news-card:hover a {
+  color: #198754; /* green on hover */
+}
+
 
 /*--------------------------------------------------------------
 # Features Section
