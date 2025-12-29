@@ -1027,6 +1027,51 @@ section,
   font-weight: 600;
 }
 
+
+
+/* -----------------------------
+   Counts Section Overrides
+------------------------------*/
+
+.counts .stats-box {
+  background-color: #198754; /* green */
+  color: #fff;
+  max-width: 220px;        /* smaller box */
+  margin: 0 auto;          /* center box */
+  border-radius: 14px;
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Number */
+.counts .stats-box span {
+  font-size: 2rem;         /* smaller than 48px */
+  color: #fff;             /* override accent color */
+}
+
+/* Text */
+.counts .stats-box p {
+  color: #fff;             /* override muted text */
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+/* Mobile fine-tuning */
+@media (max-width: 576px) {
+  .counts .stats-box {
+    max-width: 180px;
+    padding: 18px 14px;
+  }
+
+  .counts .stats-box span {
+    font-size: 1.6rem;
+  }
+}
+
+
 /*--------------------------------------------------------------
 # Why Us Section
 --------------------------------------------------------------*/
@@ -1175,6 +1220,16 @@ section,
 .news-card:hover a {
   color: #198754; /* green on hover */
 }
+
+
+html, body {
+  overflow-x: hidden;
+}
+
+
+
+
+
 
 
 /*--------------------------------------------------------------

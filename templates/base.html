@@ -37,69 +37,64 @@
 
 </head>
 
-
-<div class="bg-success text-white py-2 py-md-3">
-  <div class="container-fluid px-3 px-md-4 pe-md-5">
-    <div class="d-flex justify-content-between align-items-center">
-
-      <!-- Left -->
-      <div class="d-flex flex-column flex-md-row 
-                  align-items-start align-items-md-center 
-                  gap-2 gap-md-4">
-
-        <div class="text-nowrap">
-          <i class="bi bi-envelope-fill me-2"></i>
-          info@psnrivers.org
-        </div>
-
-        <div class="text-nowrap">
-          <i class="bi bi-telephone-fill me-2"></i>
-          +234 801 234 5678
-        </div>
-      </div>
-
-      <!-- Right -->
-      <div>
-        <a href="#" class="text-white fw-semibold text-decoration-none d-none d-md-inline">
-          Members Portal
-        </a>
-
-        <a href="#" class="text-white text-decoration-none d-inline d-md-none">
-          <i class="bi bi-person-circle fs-5"></i>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-
-
 <body class="index-page">
 
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+  <!-- Top Bar -->
+  <div class="bg-success text-white py-2 py-md-3">
+    <div class="container-fluid px-3 px-md-4 pe-md-5">
+      <div class="d-flex justify-content-between align-items-center">
+
+        <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 gap-md-4">
+          <div class="text-nowrap">
+            <i class="bi bi-envelope-fill me-2"></i> info@psnrivers.org
+          </div>
+          <div class="text-nowrap">
+            <i class="bi bi-telephone-fill me-2"></i> +234 801 234 5678
+          </div>
+        </div>
+
+        <div>
+          <a href="#" class="text-white fw-semibold text-decoration-none d-none d-md-inline">
+            Members Portal
+          </a>
+          <a href="#" class="text-white text-decoration-none d-inline d-md-none">
+            <i class="bi bi-person-circle fs-5"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header id="header" class="header sticky-top">
+    <div class="container-xl d-flex align-items-center">
 
       <a href="{% url 'index' %}" class="logo d-flex align-items-center me-auto">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-         <img src="{% static 'assets/img/psn-logo.png'%}" alt=""> 
-        <h5 class="sitename">Pharmaceutical Society of Nigeria, <br>Rivers State Branch</h5>
+        <img src="{% static 'assets/img/psn-logo.png' %}" alt="">
+        <h5 class="sitename ms-2">
+          Pharmaceutical Society of Nigeria,<br>
+          Rivers State Branch
+        </h5>
       </a>
 
+      <!-- Navigation -->
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{% url 'index' %}" class="active">Home<br></a></li>
-          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="{% url 'index' %}" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="courses.html">News & Events</a></li>
-          <li><a href="trainers.html" class="active">Directory</a></li>
-          <li><a href="events.html"class="active">Contact</a></li>
-          
+          <li><a href="trainers.html">Directory</a></li>
+          <li><a href="events.html">Contact</a></li>
+        </ul>
+
+        <!-- Mobile Toggle -->
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="courses.html">Sign In</a>
-       <a class="btn-getstarted" href="courses.html">Join PSN</a>
+      <a class="btn-getstarted ms-3" href="courses.html">Sign In</a>
+      <a class="btn-getstarted ms-2" href="courses.html">Join PSN</a>
+
     </div>
   </header>
 
