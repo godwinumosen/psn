@@ -28,6 +28,11 @@
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
+  --background-color: #ffffff;
+  --surface-color: #008D72;
+}
+
+.light-backgroundd {
   --background-color: #51ad6d;
   --surface-color: #008D72;
 }
@@ -1034,8 +1039,8 @@ section,
 ------------------------------*/
 
 .counts .stats-box {
-  background-color: #198754; /* green */
-  color: #fff;
+  background-color: #fff; /* green */
+  color: #198754;
   max-width: 220px;        /* smaller box */
   margin: 0 auto;          /* center box */
   border-radius: 14px;
@@ -1049,12 +1054,12 @@ section,
 /* Number */
 .counts .stats-box span {
   font-size: 2rem;         /* smaller than 48px */
-  color: #fff;             /* override accent color */
+  color: #198754;             /* override accent color */
 }
 
 /* Text */
 .counts .stats-box p {
-  color: #fff;             /* override muted text */
+  color: #198754;             /* override muted text */
   font-size: 0.85rem;
   margin-top: 6px;
 }
