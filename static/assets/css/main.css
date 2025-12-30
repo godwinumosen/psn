@@ -57,14 +57,13 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: Georgia, serif;
-  
-  
+  font-size: 1.rem;
 }
 
 p {
     margin-top: 0;
     margin-bottom: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.rem;
 }
 
 a {
