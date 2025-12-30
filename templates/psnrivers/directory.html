@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Directory {% endblock %}
+
+{% block extra_css %}
+<style>
+  .shadow-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .shadow-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+  }
+  /* Ensure images in the directory (if added later) are uniform */
+  .icon-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-title py-5 bg-success mb-5" data-aos="fade">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 text-white">          
+        <p><a href="/" class="text-white-50">Home</a> <span class="mx-2">></span> Directory</p>
+        <h1 class="display-4 fw-bold">Directory</h1>
+        <p class="lead mb-0">Find registered pharmacists and licensed pharmacies across Rivers State.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mb-5">
+  
+  <div class="card border-0 shadow-sm rounded-4 mb-5 text-center shadow-hover">
+    <div class="card-body p-4 p-md-5">
+      <div class="d-flex justify-content-center mb-4">
+        <div class="bg-light rounded-circle p-3 text-success d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+          </svg>
+        </div>
+      </div>
+      <h3 class="fw-bold mb-3">Members Only Access</h3>
+      <p class="text-muted mx-auto mb-4" style="max-width: 600px;">
+        The directory is available exclusively to registered PSN Rivers members. Please sign in to access the pharmacist and pharmacy directory.
+      </p>
+      
+      <div class="d-grid d-md-flex justify-content-md-center gap-3">
+        <a href="#" class="btn btn-success px-4 py-2 rounded-pill">Sign In</a>
+        <a href="#" class="btn btn-outline-success px-4 py-2 rounded-pill">Register as member</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="text-center fw-bold mb-5">What You Can Find</h2>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card h-100 border-0 shadow-sm p-4 rounded-4 shadow-hover">
+        <div class="card-body">
+          <div class="bg-light rounded-3 d-inline-block p-3 mb-4 text-success icon-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+          </div>
+          <h4 class="fw-bold mb-3">Find a Pharmacist</h4>
+          <p class="text-muted mb-4 small">
+            Search for registered pharmacists by name, specialty, or location. Access contact information and areas of practice.
+          </p>
+          <ul class="list-unstyled text-muted small">
+            <li class="mb-3 d-flex align-items-center"><span class="text-warning fw-bold fs-5 me-3">›</span> Name and credentials</li>
+            <li class="mb-3 d-flex align-items-center"><span class="text-warning fw-bold fs-5 me-3">›</span> Practice location</li>
+            <li class="mb-3 d-flex align-items-center"><span class="text-warning fw-bold fs-5 me-3">›</span> Contact information</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100 border-0 shadow-sm p-4 rounded-4 shadow-hover">
+        <div class="card-body">
+          <div class="bg-light rounded-3 d-inline-block p-3 mb-4 text-warning icon-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+              <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+              <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+            </svg>
+          </div>
+          <h4 class="fw-bold mb-3">Find a Pharmacy</h4>
+          <p class="text-muted mb-4 small">
+            Locate licensed pharmacies in Rivers State. View operating hours, services offered, and contact details.
+          </p>
+          <ul class="list-unstyled text-muted small">
+            <li class="mb-3 d-flex align-items-center"><span class="text-warning fw-bold fs-5 me-3">›</span> Pharmacy name and address</li>
+            <li class="mb-3 d-flex align-items-center"><span class="text-warning fw-bold fs-5 me-3">›</span> Operating hours</li>
+            <li class="mb-3 d-flex align-items-center"><span class="text-warning fw-bold fs-5 me-3">›</span> Services available</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

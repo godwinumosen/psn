@@ -15,5 +15,7 @@ urlpatterns = [
     path("about/code/", views.code, name="code"),
     path("about/constitution/", views.constitution, name="constitution"),
     path("about/executive/", views.executive, name="executive"),
+    path('directory/', views.directory, name='directory'),
+    path('member_portal/', views.member_portal, name='member_portal'),
     
 ]

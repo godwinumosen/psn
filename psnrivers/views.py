@@ -61,4 +61,10 @@ def constitution (request):
 def executive (request):
     return render(request, "psnrivers/executive.html")
 
+def directory (request):
+    return render(request, "psnrivers/directory.html")
+
+def member_portal (request):
+    return render(request, "psnrivers/member_portal.html")
+
     

@@ -54,7 +54,7 @@
         </div>
 
         <div>
-          <a href="#" class="text-white fw-semibold text-decoration-none d-none d-md-inline">
+          <a href="{% url 'member_portal' %}" class="text-white fw-semibold text-decoration-none d-none d-md-inline">
             Members Portal
           </a>
           <a href="#" class="text-white text-decoration-none d-inline d-md-none">
@@ -102,7 +102,7 @@
           </a>
         </li>
 
-        <li><a href="trainers.html">Directory</a></li>
+        <li><a href="{% url 'directory' %}">Directory</a></li>
 
         <li>
           <a href="{% url 'contact' %}"

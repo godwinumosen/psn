@@ -5,8 +5,55 @@
 {% block content_title %} Constitution{% endblock %}
 
 {% block about_content %}
-<h3 class="fw-bold">Executive Council</h3>
+
 <p class="text-muted">
-Leadership and governance of the association.
+  The Constitution of the Pharmaceutical Society of Nigeria, Rivers State Branch, governs the operations, 
+  membership, and activities of our organization. It outlines the structure, duties of officers, and procedures for 
+  conducting the affairs of the society.
 </p>
+
+<div class="card border border-light-subtle rounded-3 mb-5">
+    <div class="card-body p-4">
+        <div class="d-flex align-items-center">
+            <div class="bg-light rounded p-3 me-3 text-success">
+                <i class="bi bi-book"></i> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                  <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.14 2.59.08 3.298.703.707-.624 1.889-.863 3.298-.703 1.377.14 2.798.621 3.68 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.81 8.985.936 8 1.783z"/>
+                </svg>
+            </div>
+            <div>
+                <h6 class="fw-bold mb-1">Download Constitution</h6>
+                <p class="text-muted small mb-0">Access the complete PSN Rivers State Constitution document in PDF format.</p>
+            </div>
+        </div>
+        <div class="mt-3 ps-5 ms-2">
+            <a href="{% static 'documents/constitution.pdf' %}" class="btn btn-success btn-sm px-3" download="PSN_Rivers_Constitution.pdf">
+                <i class="bi bi-download me-1"></i> Download PDF
+            </a>
+        </div>
+    </div>
+</div>
+
+<h4 class="fw-bold mb-4">Key Provisions</h4>
+
+<div class="mb-4">
+    <h6 class="fw-bold">Article 1: Name and Headquarters</h6>
+    <p class="text-muted">
+        The organization shall be known as the Pharmaceutical Society of Nigeria, Rivers State Branch, with headquarters in Port Harcourt.
+    </p>
+</div>
+
+<div class="mb-4">
+    <h6 class="fw-bold">Article 2: Membership</h6>
+    <p class="text-muted">
+        Membership is open to all pharmacists registered with the Pharmacists Council of Nigeria practicing or residing in Rivers State.
+    </p>
+</div>
+
+<div class="mb-4">
+    <h6 class="fw-bold">Article 3: Governance</h6>
+    <p class="text-muted">
+        The Branch shall be governed by an Executive Council elected by members at the Annual General Meeting for a tenure of two years.
+    </p>
+</div>
 {% endblock %}

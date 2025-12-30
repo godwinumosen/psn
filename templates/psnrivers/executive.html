@@ -2,12 +2,46 @@
 {% load static %}
 
 {% block executive %}active{% endblock %}
-{% block page_title %} Executive{% endblock %}
-{% block content_title %} Executive{% endblock %}
+{% block page_title %} Executive Council{% endblock %}
+{% block content_title %} Executive Council{% endblock %}
 
 {% block about_content %}
+
 <h3 class="fw-bold">Executive Council</h3>
 <p class="text-muted">
-Leadership and governance of the association.
+    The Executive Council of PSN Rivers State Branch is comprised of dedicated professionals elected to lead and serve 
+    our members. The current council serves for the 2023-2025 tenure.
 </p>
+
+<div class="row g-4 mt-2">
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm text-center">
+            <img src="{% static 'assets/img/psn-logo.png' %}" class="card-img-top rounded-top" alt="Pharm. Dr. Chukwuemeka Okonkwo">
+            <div class="card-body">
+                <h6 class="fw-bold mb-1">Pharm. Dr. Chukwuemeka Okonkwo</h6>
+                <small class="text-warning fw-bold text-uppercase">Chairman</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm text-center">
+            <img src="{% static 'assets/img/psn-logo.png' %}" class="card-img-top rounded-top" alt="Pharm. Mrs. Adaeze Nwosu">
+            <div class="card-body">
+                <h6 class="fw-bold mb-1">Pharm. Mrs. Adaeze Nwosu</h6>
+                <small class="text-warning fw-bold text-uppercase">Vice Chairman</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm text-center">
+            <img src="{% static 'assets/img/psn-logo.png' %}" class="card-img-top rounded-top" alt="Pharm. Emeka Obi">
+            <div class="card-body">
+                <h6 class="fw-bold mb-1">Pharm. Emeka Obi</h6>
+                <small class="text-warning fw-bold text-uppercase">General Secretary</small>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
