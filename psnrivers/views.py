@@ -7,26 +7,37 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.urls import reverse
 from django.urls import reverse_lazy
-#from .models import ServicesPagePicture,RealEstatePicture,FacilityManagementPicture,ConstructionPicture
+from .models import PsnRiversPost
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin  
 
 
 def index (request):
-    return render (request, 'psnrivers/index.html')
+    return render (request, 'psnrivers/home.html')
 
-'''class HomeView(ListView): 
-    model = DeusMagnusMainPost 
+class HomeView(ListView): 
+    model = PsnRiversPost 
     template_name = 'psnrivers/home.html'
-   
-    def get_context_data(self, **kwargs):  
-        context = super().get_context_data(**kwargs)
-        
-        context['bash_ps'] = BashPicture.objects.all()  
-        return context    '''
-        
     
+    #def get_context_data(self, **kwargs):  
+     #   context = super().get_context_data(**kwargs)
+        
+        #context['bash_ps'] = BashPicture.objects.all()  
+        #return context    
+        
+
+#The first ArticleDetailView page down
+class ArticleDetailView(DetailView):
+    model = PsnRiversPost
+    template_name = 'psnrivers/article_detail.html'
+    def ArticleDetailViewPsnRiversPost(request, pk): 
+        object = get_object_or_404(PsnRiversPost, pk=pk)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+        return render(request, 'article_detail.html', {'detail': object})
+
+        
+        
+        
 def news_events (request):
     return render (request, 'psnrivers/news_events.html')
 
