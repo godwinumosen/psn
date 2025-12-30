@@ -56,7 +56,7 @@
 body {
   color: var(--default-color);
   background-color: var(--background-color);
-  font-family: var(--default-font);
+  font-family: Georgia, serif;
   
   
 }
@@ -139,6 +139,17 @@ h6 {
     transform: rotate(360deg);
   }
 }
+
+
+
+.stats-item .purecounter.inline-plus {
+  display: inline; /* keep number inline */
+}
+
+.stats-item .purecounter.inline-plus::after {
+  content: ' +';   /* automatically append + after the number */
+}
+
 
 /* Pulsating Play Button
 ------------------------------*/
@@ -521,16 +532,30 @@ h6 {
   }
 }
 
+
 /*--------------------------------------------------------------
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
   color: var(--default-color);
-  background-color: var(--background-color);
+  background-color: rgb(59 130 246 / .5);
   font-size: 14px;
-  padding-bottom: 50px;
+  padding-bottom: 1px;
   position: relative;
 }
+
+.footer .copyright {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background-color: #198754;
+  margin-bottom: 0;
+}
+
+.footer .copyright p {
+  margin-bottom: 0;
+}
+
+
 
 .footer .footer-top {
   padding-top: 50px;
@@ -667,15 +692,6 @@ h6 {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
 
-.footer .copyright {
-  padding-top: 25px;
-  padding-bottom: 25px;
-  background-color: color-mix(in srgb, var(--default-color), transparent 95%);
-}
-
-.footer .copyright p {
-  margin-bottom: 0;
-}
 
 .footer .credits {
   margin-top: 6px;

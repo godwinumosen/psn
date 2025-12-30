@@ -25,3 +25,8 @@ def index (request):
         
         context['bash_ps'] = BashPicture.objects.all()  
         return context    '''
+        
+    
+def news_events (request):
+    return render (request, 'psnrivers/news_events.html')
+    
