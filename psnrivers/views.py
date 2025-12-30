@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.urls import reverse
 from django.urls import reverse_lazy
-from .models import PsnRiversPost
+from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin  
@@ -20,11 +20,10 @@ class HomeView(ListView):
     model = PsnRiversPost 
     template_name = 'psnrivers/home.html'
     
-    #def get_context_data(self, **kwargs):  
-     #   context = super().get_context_data(**kwargs)
-        
-        #context['bash_ps'] = BashPicture.objects.all()  
-        #return context    
+    def get_context_data(self, **kwargs):  
+        context = super().get_context_data(**kwargs)
+        context['about_psnrivers'] = AboutPsnRivers.objects.all()  
+        return context    
         
 
 #The first ArticleDetailView page down
@@ -35,12 +34,15 @@ class ArticleDetailView(DetailView):
         object = get_object_or_404(PsnRiversPost, pk=pk)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
         return render(request, 'article_detail.html', {'detail': object})
 
-        
-        
-        
-def news_events (request):
-    return render (request, 'psnrivers/news_events.html')
+
+# This is for the news and events pae
+class NewsAndEventsView(ListView): 
+    model = NewsAndEventsPsnRivers 
+    template_name = 'psnrivers/news_events.html'
 
 def contact (request):
     return render (request, 'psnrivers/contact.html')
+
+def about (request):
+    return render (request, 'psnrivers/about.html')
     

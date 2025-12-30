@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} About Us  {% endblock %}
+{% block content %}
+
+
+<div class="container py-5">
+  <div class="row g-4">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="col-lg-3">
+      <div class="border rounded p-3">
+        <h6 class="fw-bold mb-3">About PSN Rivers</h6>
+
+        <div class="nav flex-column nav-pills gap-2" id="about-tabs" role="tablist">
+          <button class="nav-link active text-start"
+                  data-bs-toggle="pill"
+                  data-bs-target="#who-we-are"
+                  type="button">
+            › Who We Are
+          </button>
+
+          <button class="nav-link text-start"
+                  data-bs-toggle="pill"
+                  data-bs-target="#aims">
+            › Aims & Objectives
+          </button>
+
+          <button class="nav-link text-start"
+                  data-bs-toggle="pill"
+                  data-bs-target="#ethics">
+            › Code of Ethics
+          </button>
+
+          <button class="nav-link text-start"
+                  data-bs-toggle="pill"
+                  data-bs-target="#constitution">
+            › Constitution
+          </button>
+
+          <button class="nav-link text-start"
+                  data-bs-toggle="pill"
+                  data-bs-target="#executive">
+            › Executive Council
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="col-lg-9">
+      <div class="tab-content">
+
+        <!-- WHO WE ARE -->
+        <div class="tab-pane fade show active" id="who-we-are">
+          <p class="text-muted">
+            The Pharmaceutical Society of Nigeria (PSN), Rivers State Branch,
+            is the umbrella body representing all registered pharmacists
+            practicing within Rivers State.
+          </p>
+
+          <h4 class="fw-bold mt-4">Our Mission</h4>
+          <p class="text-muted">
+            To promote and maintain the highest standards of pharmaceutical
+            practice in Rivers State and ensure optimal pharmaceutical care.
+          </p>
+
+          <h4 class="fw-bold mt-4">Our Vision</h4>
+          <p class="text-muted">
+            To be the foremost professional body advancing pharmaceutical
+            excellence and innovation in Rivers State.
+          </p>
+
+          <!-- VALUES -->
+          <div class="row g-4 mt-4">
+            <div class="col-md-6">
+              <div class="border rounded p-3 h-100">
+                <span class="badge bg-success-subtle text-success mb-2">🎯</span>
+                <h6 class="fw-bold">Professional Excellence</h6>
+                <p class="text-muted mb-0">
+                  Upholding the highest standards in pharmaceutical practice.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="border rounded p-3 h-100">
+                <span class="badge bg-warning-subtle text-warning mb-2">🛡️</span>
+                <h6 class="fw-bold">Public Health</h6>
+                <p class="text-muted mb-0">
+                  Protecting and promoting the health of Rivers State communities.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="border rounded p-3 h-100">
+                <span class="badge bg-warning-subtle text-warning mb-2">👥</span>
+                <h6 class="fw-bold">Member Welfare</h6>
+                <p class="text-muted mb-0">
+                  Supporting and advocating for our members.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="border rounded p-3 h-100">
+                <span class="badge bg-success-subtle text-success mb-2">📘</span>
+                <h6 class="fw-bold">Continuous Learning</h6>
+                <p class="text-muted mb-0">
+                  Promoting ongoing professional development.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AIMS -->
+        <div class="tab-pane fade" id="aims">
+          <h4 class="fw-bold">Aims & Objectives</h4>
+          <p class="text-muted">
+            Our objectives include advancing pharmaceutical practice,
+            protecting public health, and fostering professional unity.
+          </p>
+        </div>
+
+        <!-- ETHICS -->
+        <div class="tab-pane fade" id="ethics">
+          <h4 class="fw-bold">Code of Ethics</h4>
+          <p class="text-muted">
+            Members are expected to uphold integrity, professionalism,
+            and ethical responsibility in all practices.
+          </p>
+        </div>
+
+        <!-- CONSTITUTION -->
+        <div class="tab-pane fade" id="constitution">
+          <h4 class="fw-bold">Constitution</h4>
+          <p class="text-muted">
+            The constitution governs the structure and operations
+            of the Rivers State Branch.
+          </p>
+        </div>
+
+        <!-- EXECUTIVE -->
+        <div class="tab-pane fade" id="executive">
+          <h4 class="fw-bold">Executive Council</h4>
+          <p class="text-muted">
+            The executive council oversees leadership and governance
+            of the association.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

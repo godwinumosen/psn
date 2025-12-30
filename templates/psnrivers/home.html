@@ -62,20 +62,16 @@
     <section id="about" class="about section">
       <div class="container">
         <div class="row gy-4">
-
+          {% for about_psnriver in about_psnrivers %}
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
-            <img src="{% static 'assets/img/about.jpg'%}" class="img-fluid" alt="">
+            <img src="{{ about_psnriver.about_psnriver_img.url }}" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
-
              <h5 style="color: #ffbb2c;">About PSN Rivers</h5>
-            <h1>Championing Excellence in Pharmaceutical Practice</h1>
-            <p class="fst-sarif"> The Pharmaceutical Society of Nigeria (PSN), Rivers State Branch, is the representative body for all pharmacists 
-              practicing in Rivers State. We are committed to promoting the highest standards of pharmaceutical practice, ensuring the welfare 
-              of our members, and advocating for policies that protect public health</p>
+            <h1>{{ about_psnriver.about_psnriver_title }}</h1>
+            <p class="fst-sarif">{{ about_psnriver.about_psnriver_description }}</p>
 
-            <p class="fst-sarif"> Established over four decades ago, our branch has grown to become one of the most vibrant 
-              chapters of the PSN, driving initiatives that impact both the profession and the communities we serve.</p>
+            <p class="fst-sarif"> {{ about_psnriver.about_psnriver_description2 }}</p>
       
             <div class="about-actions">
               <a href="#" class="btn btn-success about-btn">
@@ -86,8 +82,8 @@
                 Meet Our Executive Council
               </a>
             </div>
-
           </div>
+          {% endfor %}
         </div>
       </div>
     </section><!-- /About Section -->
@@ -205,24 +201,23 @@
 
     <!-- Cards -->
     <div class="row g-4">
-
-      <!-- Card 1 -->
+       {% for post in object_list %}
       <div class="col-lg-4">
         <div class="card h-100 border-0 rounded-4 shadow-sm news-card position-relative">
           <span class="badge bg-warning text-dark position-absolute news-badge rounded-pill px-3 py-2">
             Events
           </span>
-          <img src="https://images.unsplash.com/photo-1580281657527-47f249e8f7d3" class="card-img-top rounded-top-4 news-img" alt="">
+          <img src="{{ post.psnriver_img.url }}" class="card-img-top rounded-top-4 news-img" alt="">
           <div class="card-body p-4">
             <div class="d-flex align-items-center text-muted mb-2">
               <i class="bi bi-calendar-event me-2"></i>
-              <small>December 10, 2024</small>
+              <small>{{ post.psnriver_publish_date }}</small>
             </div>
             <h5 class="fw-bold">
-              PSN Rivers Hosts Annual Pharmacy Week 2024
+             {{ post.psnriver_title }}
             </h5>
             <p class="text-muted">
-              The Rivers State branch successfully concluded its annual pharmacy week celebration.
+               {{ post.psnriver_description }}
             </p>
             <a href="#" class="text-success fw-semibold text-decoration-none">
               Read more <i class="bi bi-arrow-right"></i>
@@ -230,57 +225,7 @@
           </div>
         </div>
       </div>
-
-      <!-- Card 2 -->
-      <div class="col-lg-4">
-        <div class="card h-100 border-0 rounded-4 shadow-sm news-card position-relative">
-          <span class="badge bg-warning text-dark position-absolute news-badge rounded-pill px-3 py-2">
-            Guidelines
-          </span>
-          <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae" class="card-img-top rounded-top-4 news-img" alt="">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center text-muted mb-2">
-              <i class="bi bi-calendar-event me-2"></i>
-              <small>December 5, 2024</small>
-            </div>
-            <h5 class="fw-bold">
-              New Guidelines for Community Pharmacy Practice
-            </h5>
-            <p class="text-muted">
-              Updated guidelines released for community pharmacy practice in alignment with standards.
-            </p>
-            <a href="#" class="text-success fw-semibold text-decoration-none">
-              Read more <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="col-lg-4">
-        <div class="card h-100 border-0 rounded-4 shadow-sm news-card position-relative">
-          <span class="badge bg-warning text-dark position-absolute news-badge rounded-pill px-3 py-2">
-            CPD
-          </span>
-          <img src="https://images.unsplash.com/photo-1581091215367-59ab6c02c6c1" class="card-img-top rounded-top-4 news-img" alt="">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center text-muted mb-2">
-              <i class="bi bi-calendar-event me-2"></i>
-              <small>December 1, 2024</small>
-            </div>
-            <h5 class="fw-bold">
-              CPD Workshop: Pharmaceutical Care in Chronic Diseases
-            </h5>
-            <p class="text-muted">
-              Register for our upcoming continuing professional development workshop.
-            </p>
-            <a href="#" class="text-success fw-semibold text-decoration-none">
-              Read more <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
+      {% endfor %}
     </div>
   </div>
 </section>

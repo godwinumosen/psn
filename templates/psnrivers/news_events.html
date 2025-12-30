@@ -42,24 +42,23 @@
 
     <!-- Cards -->
     <div class="row g-4">
-
-      <!-- Card 1 -->
+      {% for post in object_list %}
       <div class="col-lg-4">
         <div class="card h-100 border-0 rounded-4 shadow-sm news-card position-relative">
           <span class="badge bg-warning text-dark position-absolute news-badge rounded-pill px-3 py-2">
-            Events
+            {{ post.newsandevents_psnriver_status }}
           </span>
-          <img src="https://images.unsplash.com/photo-1580281657527-47f249e8f7d3" class="card-img-top rounded-top-4 news-img" alt="">
+          <img src="{{ post.newsandevents_psnriver_img.url }}" class="card-img-top rounded-top-4 news-img" alt="">
           <div class="card-body p-4">
             <div class="d-flex align-items-center text-muted mb-2">
               <i class="bi bi-calendar-event me-2"></i>
-              <small>December 10, 2024</small>
+              <small>{{ post.newsandevents_psnriver_publish_date }}</small>
             </div>
             <h5 class="fw-bold">
-              PSN Rivers Hosts Annual Pharmacy Week 2024
+             {{ post.newsandevents_psnriver_titl }}
             </h5>
             <p class="text-muted">
-              The Rivers State branch successfully concluded its annual pharmacy week celebration.
+              {{ post.newsandevents_psnriver_description }}
             </p>
             <a href="#" class="text-success fw-semibold text-decoration-none">
               Read more <i class="bi bi-arrow-right"></i>
@@ -67,59 +66,15 @@
           </div>
         </div>
       </div>
-
-      <!-- Card 2 -->
-      <div class="col-lg-4">
-        <div class="card h-100 border-0 rounded-4 shadow-sm news-card position-relative">
-          <span class="badge bg-warning text-dark position-absolute news-badge rounded-pill px-3 py-2">
-            Guidelines
-          </span>
-          <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae" class="card-img-top rounded-top-4 news-img" alt="">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center text-muted mb-2">
-              <i class="bi bi-calendar-event me-2"></i>
-              <small>December 5, 2024</small>
-            </div>
-            <h5 class="fw-bold">
-              New Guidelines for Community Pharmacy Practice
-            </h5>
-            <p class="text-muted">
-              Updated guidelines released for community pharmacy practice in alignment with standards.
-            </p>
-            <a href="#" class="text-success fw-semibold text-decoration-none">
-              Read more <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="col-lg-4">
-        <div class="card h-100 border-0 rounded-4 shadow-sm news-card position-relative">
-          <span class="badge bg-warning text-dark position-absolute news-badge rounded-pill px-3 py-2">
-            CPD
-          </span>
-          <img src="https://images.unsplash.com/photo-1581091215367-59ab6c02c6c1" class="card-img-top rounded-top-4 news-img" alt="">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center text-muted mb-2">
-              <i class="bi bi-calendar-event me-2"></i>
-              <small>December 1, 2024</small>
-            </div>
-            <h5 class="fw-bold">
-              CPD Workshop: Pharmaceutical Care in Chronic Diseases
-            </h5>
-            <p class="text-muted">
-              Register for our upcoming continuing professional development workshop.
-            </p>
-            <a href="#" class="text-success fw-semibold text-decoration-none">
-              Read more <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
+      {% endfor %}
   </div>
+  <center><br><br>
+    <div class="about-actions justify-content-center">
+      <a href="#" class="btn btn-outline-success about-btn">
+        Load More Articlesl
+      </a>
+    </div>
+  </center>
 </section>
 
 
