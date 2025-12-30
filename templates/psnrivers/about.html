@@ -1,27 +1,18 @@
 {% extends "base.html" %}
-
 {% load static %}
 {% block content %}
 
-<!-- Page Title -->
-<div class="page-title" data-aos="fade">
-  <div class="heading">
-    <div class="container">
-      <div class="row d-flex">
-        <div class="col-lg-8">
-          <p><a href="index.html" class="text-white"> Home</a> About</p>
-          <h1>{% block page_title %}Who We Are{% endblock %}</h1>
-        </div>
-      </div>
-    </div>
+
+<div class="page-title py-5 bg-success mb-5">
+  <div class="container text-white">
+    <p><a href="/" class="text-white-50 text-decoration-none">Home</a> <span class="mx-2">></span> About</p>
+    <h1 class="display-4 fw-bold">{% block page_title %}Who We Are{% endblock %}</h1>
   </div>
 </div>
-<br><br>
-<!-- End Page Title -->
+
 
 <div class="container py-5">
   <div class="row g-4">
-
     <!-- SIDEBAR -->
     <div class="col-lg-3">
       <div class="border rounded p-3">
