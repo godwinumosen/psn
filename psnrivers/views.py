@@ -29,4 +29,7 @@ def index (request):
     
 def news_events (request):
     return render (request, 'psnrivers/news_events.html')
+
+def contact (request):
+    return render (request, 'psnrivers/contact.html')
     
