@@ -87,6 +87,19 @@ h6 {
   font-family: var(--heading-font);
 }
 
+
+/* Hover effect for content boxes */
+.border.rounded.p-3.h-100 {
+  transition: all 0.3s ease;
+}
+
+.border.rounded.p-3.h-100:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: #198754; /* Bootstrap green */
+}
+
+
 /* PHP Email Form Messages
 ------------------------------*/
 .php-email-form .error-message {

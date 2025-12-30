@@ -45,4 +45,20 @@ def contact (request):
 
 def about (request):
     return render (request, 'psnrivers/about.html')
+
+def who_we_are (request):
+    return render(request, "psnrivers/who_we_are.html")
+
+def aims (request):
+    return render(request, "psnrivers/aims.html")
+
+def code (request):
+    return render(request, "psnrivers/code.html")
+
+def constitution (request):
+    return render(request, "psnrivers/constitution.html")
+
+def executive (request):
+    return render(request, "psnrivers/executive.html")
+
     

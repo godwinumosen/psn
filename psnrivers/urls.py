@@ -10,5 +10,10 @@ urlpatterns = [
     path('news_events/', NewsAndEventsView.as_view(), name='news_events'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
+    path("about/who_we_are/", views.who_we_are, name="who_we_are"),
+    path("about/aims/", views.aims, name="aims"),
+    path("about/code/", views.code, name="code"),
+    path("about/constitution/", views.constitution, name="constitution"),
+    path("about/executive/", views.executive, name="executive"),
     
 ]

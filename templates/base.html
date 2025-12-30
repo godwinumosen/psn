@@ -66,37 +66,61 @@
     </div>
   </div>
 
-  <!-- Header -->
-  <header id="header" class="header sticky-top">
-    <div class="container-xl d-flex align-items-center">
+<!-- Header -->
+<header id="header" class="header sticky-top">
+  <div class="container-xl d-flex align-items-center">
 
-      <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
-        <img src="{% static 'assets/img/psn-logo.png' %}" alt="">
-        <h5 class="sitename ms-2">
-          Pharmaceutical Society of Nigeria,<br>
-          Rivers State Branch
-        </h5>
-      </a>
+    <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
+      <img src="{% static 'assets/img/psn-logo.png' %}" alt="">
+      <h5 class="sitename ms-2">
+        Pharmaceutical Society of Nigeria,<br>
+        Rivers State Branch
+      </h5>
+    </a>
 
-      <!-- Navigation -->
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="{% url 'home' %}" class="active">Home</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
-          <li><a href="{% url 'news_events' %}">News & Events</a></li>
-          <li><a href="trainers.html">Directory</a></li>
-          <li><a href="{% url 'contact' %}">Contact</a></li>
-        </ul>
+    <!-- Navigation -->
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li>
+          <a href="{% url 'home' %}"
+             class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+            Home
+          </a>
+        </li>
 
-        <!-- Mobile Toggle -->
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
+        <li>
+          <a href="{% url 'about' %}"
+             class="{% if request.path|slice:':6' == '/about' %}active{% endif %}">
+            About
+          </a>
+        </li>
 
-      <a class="btn-getstarted ms-3" href="courses.html">Sign In</a>
-      <a class="btn-getstarted ms-2" href="courses.html">Join PSN</a>
+        <li>
+          <a href="{% url 'news_events' %}"
+             class="{% if request.resolver_match.url_name == 'news_events' %}active{% endif %}">
+            News & Events
+          </a>
+        </li>
 
-    </div>
-  </header>
+        <li><a href="trainers.html">Directory</a></li>
+
+        <li>
+          <a href="{% url 'contact' %}"
+             class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+            Contact
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile Toggle -->
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+    <a class="btn-getstarted ms-3" href="courses.html">Sign In</a>
+    <a class="btn-getstarted ms-2" href="courses.html">Join PSN</a>
+
+  </div>
+</header>
+
 
 
         {% block content %}
