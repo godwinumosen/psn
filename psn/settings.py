@@ -33,15 +33,19 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    # Django default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'psnrivers',
-    'accounts',
+
+    # Your apps
+    'members',      # << must be here
+    'psnrivers',    # other app
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -146,3 +150,5 @@ LOGIN_URL = 'login'          # redirects non-authenticated users
 LOGIN_REDIRECT_URL = 'shop'  # where to go after login
 LOGOUT_REDIRECT_URL = 'login'
   
+
+AUTH_USER_MODEL = 'members.User'
