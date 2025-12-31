@@ -67,4 +67,14 @@ def directory (request):
 def member_portal (request):
     return render(request, "psnrivers/member_portal.html")
 
+def clearance (request):
+    return render(request, "psnrivers/clearance.html")
+
+def track_status (request):
+    return render(request, "psnrivers/track_status.html")
+
+
+def review_applications (request):
+    return render(request, "psnrivers/review_applications.html")
+
     

@@ -20,6 +20,7 @@ ROLE_CHOICES = [
 
 class User(AbstractUser):
     # Additional fields
+    email = models.EmailField(unique=True)  # added email as unique field for login
     phone = models.CharField(max_length=20, blank=True, null=True)
     pcn_number = models.CharField(max_length=50, blank=True, null=True)
     year_qualified = models.IntegerField(blank=True, null=True)
@@ -32,5 +33,9 @@ class User(AbstractUser):
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='member')
     payment_status = models.BooleanField(default=False)
 
+    # Make email the login field
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+
     def __str__(self):
-        return self.username
+        return self.email  # optional: display email instead of username

@@ -6,6 +6,40 @@ from .forms import RegistrationForm
 from .models import User
 from django.db.models import Count
 from django.utils.timezone import now
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import User
+
+
+
+def login_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email').lower()
+        password = request.POST.get('password')
+
+        try:
+            # Find the user by email
+            user_obj = User.objects.get(email__iexact=email)
+            # Authenticate using username internally
+            user = authenticate(request, username=user_obj.username, password=password)
+        except User.DoesNotExist:
+            user = None
+
+        if user is not None:
+            if user.is_active and user.status == 'approved':
+                login(request, user)
+                return redirect('dashboard')  # replace with your dashboard URL
+            elif user.status != 'approved':
+                messages.error(request, "Account pending approval.")
+            else:
+                messages.error(request, "Your account is inactive.")
+        else:
+            messages.error(request, "Invalid email or password.")
+
+    return render(request, 'members/login.html')
+
+
 
 def register(request):
     if request.method == 'POST':
@@ -22,20 +56,9 @@ def register(request):
         form = RegistrationForm()
     return render(request, 'members/register.html', {'form': form})
 
-def login_view(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(username=email, password=password)
-        if user:
-            if user.status == 'approved':
-                login(request, user)
-                return redirect('dashboard')
-            else:
-                messages.error(request, "Account pending approval.")
-        else:
-            messages.error(request, "Invalid login details.")
-    return render(request, 'members/login.html')
+
+
+
 
 @login_required
 def admin_dashboard(request):
