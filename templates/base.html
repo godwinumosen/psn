@@ -45,19 +45,23 @@
       <div class="d-flex justify-content-between align-items-center">
 
         <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 gap-md-4">
-          <div class="text-nowrap">
+          <a href="mailto:info@psnrivers.org"target="_blank" >
+          <div class="text-nowrap text-white">
             <i class="bi bi-envelope-fill me-2"></i> info@psnrivers.org
           </div>
-          <div class="text-nowrap">
+        </a>
+        <a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?"target="_blank" >
+          <div class="text-nowrap text-white">
             <i class="bi bi-telephone-fill me-2"></i> +234 801 234 5678
           </div>
+        </a>
         </div>
 
         <div>
           <a href="{% url 'member_portal' %}" class="text-white fw-semibold text-decoration-none d-none d-md-inline">
             Members Portal
           </a>
-          <a href="#" class="text-white text-decoration-none d-inline d-md-none">
+          <a href="{% url 'member_portal' %}" class="text-white text-decoration-none d-inline d-md-none">
             <i class="bi bi-person-circle fs-5"></i>
           </a>
         </div>
@@ -139,9 +143,9 @@
       <!-- About Section -->
       <div class="col-lg-4 col-md-6 footer-about">
         <a href="index.html" class="logo d-flex align-items-center">
-          <span class="sitename">PSN Rivers <h4>State Branch</h4></span>
+          <span class="sitename text-white">PSN Rivers <h4 class=" text-white">State Branch</h4></span>
         </a>
-        <p>The Pharmaceutical Society of Nigeria, Rivers State Branch is committed to advancing pharmacy practice and promoting public health in Rivers State.</p>
+        <p  class=" text-white">The Pharmaceutical Society of Nigeria, Rivers State Branch is committed to advancing pharmacy practice and promoting public health in Rivers State.</p>
         <div class="social-links d-flex mt-4">
           <a href="#"><i class="bi bi-twitter-x"></i></a>
           <a href="#"><i class="bi bi-facebook"></i></a>
@@ -151,10 +155,10 @@
       </div>
 
       <!-- Quick Links -->
-      <div class="col-lg-2 col-md-3 footer-links">
-        <h5>Quick Links</h5>
-        <ul>
-          <li><a href="#">About PSN Rivers</a></li>
+      <div class="col-lg-2 col-md-3 footer-links ">
+        <h5  class=" text-white">Quick Links</h5>
+        <ul >
+          <li class=" text-white"><a href="#">About PSN Rivers</a></li>
           <li><a href="#">Executive Council</a></li>
           <li><a href="#">Membership</a></li>
           <li><a href="#">Find a Pharmacist</a></li>
@@ -165,7 +169,7 @@
 
       <!-- Resources -->
       <div class="col-lg-2 col-md-3 footer-links">
-        <h5>Resources</h5>
+        <h5  class=" text-white">Resources</h5>
         <ul>
           <li><a href="#">Constitution</a></li>
           <li><a href="#">Code of Ethics</a></li>
@@ -176,10 +180,10 @@
 
       <!-- Newsletter -->
       <div class="col-lg-4 col-md-12 footer-newsletter">
-        <h4>Stay Updated</h4>
-        <p>Subscribe to our newsletter for the latest news, events, and updates from PSN Rivers.</p>
+        <h4  class=" text-white">Stay Updated</h4>
+        <p  class=" text-white">Subscribe to our newsletter for the latest news, events, and updates from PSN Rivers.</p>
         <form action="forms/newsletter.php" method="post" class="php-email-form">
-          <div class="newsletter-form">
+          <div class="newsletter-form ">
             <input type="email" name="email" placeholder="Your Email">
             <input type="submit" value="Subscribe">
           </div>
@@ -191,7 +195,7 @@
 
       <!-- Contact -->
       <div class="col-lg-2 col-md-3 footer-links">
-        <h5>Contact</h5>
+        <h5  class=" text-white">Contact</h5>
         <ul>
           <li><a href="#">PSN Secretariat, Port Harcourt, Rivers State, Nigeria</a></li>
           <li><a href="#">info@psnrivers.org</a></li>
@@ -203,7 +207,7 @@
   </div>
 
   <!-- Full-width copyright -->
-<div class="container-fluid copyright text-center">
+<div class="container-fluid copyright text-center  text-white">
   <p>© <strong class="px-1 sitename">2025</strong> <span>Pharmaceutical Society of Nigeria, Rivers State Branch. All rights reserved.</span></p>
 </div>
 
