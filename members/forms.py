@@ -107,3 +107,14 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError("Passwords do not match")
 
         return cleaned_data
+
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+
+        if User.objects.filter(email__iexact=email).exists():
+            raise forms.ValidationError(
+                "Email already been used. Try a new email."
+            )
+
+        return email

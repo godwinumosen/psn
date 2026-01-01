@@ -17,24 +17,40 @@
           <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
+            <!-- 🔴 NON-FIELD ERRORS (e.g. password mismatch) -->
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+              </div>
+            {% endif %}
+
             <!-- PERSONAL INFORMATION -->
             <h6 class="fw-bold mb-3">Personal Information</h6>
             <div class="row g-3">
               <div class="col-md-6">
                 {{ form.first_name.label_tag }}
                 {{ form.first_name }}
+                {{ form.first_name.errors }}
               </div>
               <div class="col-md-6">
                 {{ form.last_name.label_tag }}
                 {{ form.last_name }}
+                {{ form.last_name.errors }}
               </div>
               <div class="col-md-6">
                 {{ form.email.label_tag }}
                 {{ form.email }}
+                <!-- 🔴 EMAIL ERROR -->
+                {% if form.email.errors %}
+                  <small class="text-danger">
+                    {{ form.email.errors|striptags }}
+                  </small>
+                {% endif %}
               </div>
               <div class="col-md-6">
                 {{ form.phone.label_tag }}
                 {{ form.phone }}
+                {{ form.phone.errors }}
               </div>
             </div>
 
@@ -44,25 +60,30 @@
               <div class="col-md-6">
                 {{ form.pcn_number.label_tag }}
                 {{ form.pcn_number }}
+                {{ form.pcn_number.errors }}
               </div>
               <div class="col-md-6">
                 {{ form.year_qualified.label_tag }}
                 {{ form.year_qualified }}
+                {{ form.year_qualified.errors }}
               </div>
 
               <div class="col-12">
                 {{ form.area_of_practice.label_tag }}
                 {{ form.area_of_practice }}
+                {{ form.area_of_practice.errors }}
               </div>
 
               <div class="col-12">
                 {{ form.workplace_name.label_tag }}
                 {{ form.workplace_name }}
+                {{ form.workplace_name.errors }}
               </div>
 
               <div class="col-12">
                 {{ form.workplace_address.label_tag }}
                 {{ form.workplace_address }}
+                {{ form.workplace_address.errors }}
               </div>
             </div>
 
@@ -72,10 +93,12 @@
               <div class="col-md-6">
                 {{ form.password1.label_tag }}
                 {{ form.password1 }}
+                {{ form.password1.errors }}
               </div>
               <div class="col-md-6">
                 {{ form.password2.label_tag }}
                 {{ form.password2 }}
+                {{ form.password2.errors }}
               </div>
             </div>
 
@@ -86,12 +109,14 @@
               <p class="fw-semibold mb-1">PCN Certificate (PDF or Image)</p>
               <small class="text-muted d-block mb-2">PNG, JPG, PDF up to 5MB</small>
               {{ form.pcn_certificate }}
+              {{ form.pcn_certificate.errors }}
             </div>
 
             <div class="border border-2 border-dashed rounded p-3 mb-3 text-center">
               <p class="fw-semibold mb-1">Passport Photograph</p>
               <small class="text-muted d-block mb-2">PNG, JPG up to 2MB</small>
               {{ form.passport_photo }}
+              {{ form.passport_photo.errors }}
             </div>
 
             <!-- TERMS -->

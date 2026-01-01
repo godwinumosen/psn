@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RegistrationForm
@@ -19,7 +19,7 @@ def login_view(request):
         password = request.POST.get('password')
 
         try:
-            # Find the user by email
+            # Find the user by email (case-insensitive)
             user_obj = User.objects.get(email__iexact=email)
             # Authenticate using username internally
             user = authenticate(request, username=user_obj.username, password=password)
@@ -29,7 +29,11 @@ def login_view(request):
         if user is not None:
             if user.is_active and user.status == 'approved':
                 login(request, user)
-                return redirect('dashboard')  # replace with your dashboard URL
+                
+                # ✅ Add success message
+                messages.success(request, "Login successful.")
+                
+                return redirect('home')  # replace with your dashboard URL
             elif user.status != 'approved':
                 messages.error(request, "Account pending approval.")
             else:
@@ -41,21 +45,37 @@ def login_view(request):
 
 
 
+
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
+            
+            # ✅ Ensure email is lowercase
+            user.email = user.email.lower()
+            
+            # ✅ Set username to lowercase email
             user.username = user.email
+            
+            # ✅ Hash password correctly
             user.set_password(form.cleaned_data['password1'])
-            user.is_active = False
+            
+            # ✅ Keep admin approval system
+            user.is_active = True
+            user.status = 'approved'
             user.save()
+            
             messages.success(request, "Registration successful. Await approval.")
             return redirect('login')
     else:
         form = RegistrationForm()
     return render(request, 'members/register.html', {'form': form})
 
+
+def logout_view(request):
+    logout(request)
+    return redirect('home') 
 
 
 

@@ -74,11 +74,11 @@
             <p class="fst-sarif"> {{ about_psnriver.about_psnriver_description2 }}</p>
       
             <div class="about-actions">
-              <a href="#" class="btn btn-success about-btn">
+              <a href="{% url 'about' %}" class="btn btn-success about-btn">
                 Read More <i class="bi bi-arrow-right"></i>
               </a>
 
-              <a href="#" class="btn btn-outline-success about-btn">
+              <a href="{% url 'executive' %}" class="btn btn-outline-success about-btn">
                 Meet Our Executive Council
               </a>
             </div>
@@ -117,7 +117,7 @@
             <p class="text-muted">
               Join PSN Rivers and access exclusive benefits, resources, and networking opportunities.
             </p>
-            <a href="#" class="stretched-link fw-semibold text-decoration-none">
+            <a href="{% url 'register'%}" class="stretched-link fw-semibold text-decoration-none">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -135,7 +135,7 @@
             <p class="text-muted">
               Find registered pharmacists and licensed pharmacies across Rivers State.
             </p>
-            <a href="#" class="stretched-link fw-semibold text-decoration-none">
+            <a href="{% url 'directory'%}" class="stretched-link fw-semibold text-decoration-none">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -153,7 +153,7 @@
             <p class="text-muted">
               Stay informed with the latest news, announcements, and publications.
             </p>
-            <a href="#" class="stretched-link fw-semibold text-decoration-none">
+            <a href="{% url 'news_events'%}" class="stretched-link fw-semibold text-decoration-none">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -171,7 +171,7 @@
             <p class="text-muted">
               Discover upcoming conferences, seminars, workshops, and CPD programs.
             </p>
-            <a href="#" class="stretched-link fw-semibold text-decoration-none">
+            <a href="{% url 'news_events'%}" class="stretched-link fw-semibold text-decoration-none">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
