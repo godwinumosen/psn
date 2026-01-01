@@ -20,5 +20,8 @@ urlpatterns = [
     path('clearance/', views.apply_clearance, name='clearance'),
     path('track_status/', views.track_status, name='track_status'),
     path('review_applications/', views.review_applications, name='review_applications'),
+    path('review_applications/<int:app_id>/', views.application_detail, name='application_detail'),
+    path('approve/<int:app_id>/', views.approve_application, name='approve_application'),
+    path('decline/<int:app_id>/', views.decline_application, name='decline_application'),
     
 ]

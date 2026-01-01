@@ -10,6 +10,8 @@ from django.urls import reverse_lazy
 from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers
 from django.contrib import messages
 from .forms import ClearanceApplicationForm 
+from django.utils import timezone
+from django.views.decorators.http import require_POST
 from .models import ClearanceApplication
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin  
@@ -103,16 +105,34 @@ def apply_clearance(request):
 
 
 
+
+
 @login_required
 def review_applications(request):
-    # Get all clearance applications
-    applications = ClearanceApplication.objects.all().order_by('-submitted_at')
+    # ✅ Handle approve/decline actions
+    action = request.GET.get('action')
+    app_id = request.GET.get('id')
+    if action in ['approve', 'decline'] and app_id:
+        app = get_object_or_404(ClearanceApplication, id=app_id)
+        if action == 'approve':
+            app.approved = True
+            app.declined = False
+            app.approved_at = timezone.now()
+        elif action == 'decline':
+            app.approved = False
+            app.declined = True
+            app.approved_at = None
+        app.save()
+        return redirect('review_applications')  # Reload page after action
 
-    # Calculate stats dynamically
+    # ✅ Fetch applications for listing
+    applications = ClearanceApplication.objects.all()
+
+    # ✅ Stats cards
     total_applications = applications.count()
-    pending_count = applications.filter(status='Pending').count()
-    approved_count = applications.filter(status='Approved').count()
-    declined_count = applications.filter(status='Declined').count()
+    pending_count = applications.filter(approved=False, declined=False).count()
+    approved_count = applications.filter(approved=True).count()
+    declined_count = applications.filter(declined=True).count()
 
     context = {
         'applications': applications,
@@ -121,5 +141,31 @@ def review_applications(request):
         'approved_count': approved_count,
         'declined_count': declined_count,
     }
-
     return render(request, 'psnrivers/review_applications.html', context)
+
+
+@login_required
+@require_POST
+def approve_application(request, app_id):
+    app = get_object_or_404(ClearanceApplication, id=app_id)
+    if request.user.is_staff:
+        app.approved = True
+        app.approved_at = timezone.now()
+        app.save()
+    return redirect('review_applications')
+
+@login_required
+@require_POST
+def decline_application(request, app_id):
+    app = get_object_or_404(ClearanceApplication, id=app_id)
+    if request.user.is_staff:
+        app.approved = False
+        app.approved_at = timezone.now()
+        app.save()
+    return redirect('review_applications')
+
+
+@login_required
+def application_detail(request, app_id):
+    app = get_object_or_404(ClearanceApplication, id=app_id)
+    return render(request, 'psnrivers/application_detail.html', {'app': app})

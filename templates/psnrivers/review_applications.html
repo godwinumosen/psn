@@ -13,25 +13,6 @@
 
 <div class="container-fluid px-4 py-4">
 
-  <!-- Breadcrumb -->
-  <nav class="mb-3" aria-label="breadcrumb">
-    <ol class="breadcrumb small mb-1">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Members</a></li>
-      <li class="breadcrumb-item active">Clearance Review</li>
-    </ol>
-  </nav>
-
-  <!-- Page Title -->
-  <div class="mb-4">
-    <h3 class="fw-bold mb-0">
-      <i class="bi bi-clipboard-check me-2"></i> Clearance Review
-    </h3>
-    <p class="text-muted small">
-      Review and approve clearance applications
-    </p>
-  </div>
-
   <!-- Stats Cards -->
   <div class="row g-3 mb-4">
     <div class="col-md-3">
@@ -71,31 +52,6 @@
     </div>
   </div>
 
-  <!-- Search & Filter -->
-  <div class="card mb-4">
-    <div class="card-body">
-      <div class="row g-3 align-items-center">
-        <div class="col-md-9">
-          <div class="input-group">
-            <span class="input-group-text bg-light">
-              <i class="bi bi-search"></i>
-            </span>
-            <input type="text" class="form-control"
-              placeholder="Search by name, PSN number, or pharmacy...">
-          </div>
-        </div>
-        <div class="col-md-3">
-          <select class="form-select">
-            <option selected>All Status</option>
-            <option>Pending Review</option>
-            <option>Approved</option>
-            <option>Declined</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Application List -->
   {% for app in applications %}
     <div class="card mb-3">
@@ -109,19 +65,13 @@
           <div>
             <div class="fw-semibold">
               {{ app.full_name }}
-              {% if app.status == "Pending" %}
-                <span class="badge bg-warning-subtle text-warning border border-warning ms-2">
-                  Pending Review
-                </span>
-              {% elif app.status == "Approved" %}
-                <span class="badge bg-success-subtle text-success border border-success ms-2">
-                  Approved
-                </span>
-              {% elif app.status == "Declined" %}
-                <span class="badge bg-danger-subtle text-danger border border-danger ms-2">
-                  Declined
-                </span>
-              {% endif %}
+              <span class="badge 
+                {% if app.status == "Pending" %}bg-warning-subtle text-warning border border-warning{% endif %}
+                {% if app.status == "Approved" %}bg-success-subtle text-success border border-success{% endif %}
+                {% if app.status == "Declined" %}bg-danger-subtle text-danger border border-danger{% endif %}
+                ms-2">
+                {{ app.status }}
+              </span>
             </div>
             <div class="small text-muted">
               {{ app.membership_number }} · {{ app.technical_group }}
@@ -133,16 +83,19 @@
         </div>
 
         <div class="d-flex gap-2">
-          <button class="btn btn-outline-secondary btn-sm">
+          <!-- Always show view details -->
+           <a href="{% url 'application_detail' app.id %}" class="btn btn-outline-secondary btn-sm">
             <i class="bi bi-eye"></i> View Details
-          </button>
+            </a>
+
+          <!-- Approve / Decline buttons only for pending -->
           {% if app.status == "Pending" %}
-            <button class="btn btn-success btn-sm">
-              <i class="bi bi-check-circle"></i> Approve
-            </button>
-            <button class="btn btn-danger btn-sm">
-              <i class="bi bi-x-circle"></i> Decline
-            </button>
+              <a href="?action=approve&id={{ app.id }}" class="btn btn-success btn-sm">
+                  <i class="bi bi-check-circle"></i> Approve
+              </a>
+              <a href="?action=decline&id={{ app.id }}" class="btn btn-danger btn-sm">
+                  <i class="bi bi-x-circle"></i> Decline
+              </a>
           {% endif %}
         </div>
       </div>

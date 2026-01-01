@@ -35,10 +35,10 @@ class ClearanceApplicationAdmin(admin.ModelAdmin):
         'full_name',
         'technical_group',
         'clearance_year',
-        'status',          # shows Pending / Approved / Declined
+        'status',  # ✅ property works here
         'submitted_at',
     )
-    list_filter = ('status', 'technical_group', 'clearance_year')
-    list_editable = ('status',)  # ✅ make status editable in list view
+    list_filter = ('technical_group', 'clearance_year')  # remove 'status' from filter
     search_fields = ('user__email', 'membership_number', 'full_name')
     ordering = ('-submitted_at',)
+

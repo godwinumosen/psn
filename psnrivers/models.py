@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
+from django.utils import timezone  # ✅ important
 
 class PsnRiversPost(models.Model):
     psnriver_title = models.CharField(max_length=255, blank=True, null=True)
@@ -63,7 +64,6 @@ class NewsAndEventsPsnRivers(models.Model):
 
 
 
-
 CLEARANCE_YEAR_CHOICES = [
     ('2024', '2024'),
     ('2025', '2025'),
@@ -79,12 +79,6 @@ TECHNICAL_GROUP_CHOICES = [
     ('Regulatory Pharmacy', 'Regulatory Pharmacy'),
 ]
 
-STATUS_CHOICES = [
-    ('pending', 'Pending'),
-    ('approved', 'Approved'),
-    ('declined', 'Declined'),
-]
-
 class ClearanceApplication(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     membership_number = models.CharField(max_length=50)
@@ -93,15 +87,26 @@ class ClearanceApplication(models.Model):
     clearance_year = models.CharField(max_length=4, choices=CLEARANCE_YEAR_CHOICES)
     proof_of_payment = models.FileField(upload_to='clearance/payments/')
     supporting_document = models.FileField(upload_to='clearance/supporting/', blank=True, null=True)
-    declaration_confirmed = models.BooleanField(default=False)
+    declaration_confirmed = models.BooleanField(default=False)  
     submitted_at = models.DateTimeField(auto_now_add=True)
+
+    # ✅ Status fields
+    approved = models.BooleanField(default=False)
+    declined = models.BooleanField(default=False)
     approved_at = models.DateTimeField(blank=True, null=True)
-    
-    # ✅ New field for status
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
 
     class Meta:
         ordering = ['-submitted_at']
 
     def __str__(self):
         return f"{self.user.email} | {self.clearance_year} | {self.technical_group}"
+
+    # ✅ Computed status property
+    @property
+    def status(self):
+        if self.approved:
+            return "Approved"
+        elif self.declined:
+            return "Declined"
+        else:
+            return "Pending"
