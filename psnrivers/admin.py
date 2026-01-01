@@ -24,8 +24,21 @@ admin.site.register(NewsAndEventsPsnRivers, NewsAndEventsPsnRiverslAdmin)
 
 
 
+
+
+
 @admin.register(ClearanceApplication)
 class ClearanceApplicationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'membership_number', 'technical_group', 'clearance_year', 'submitted_at', 'approved')
-    list_filter = ('approved', 'technical_group', 'clearance_year')
+    list_display = (
+        'user',
+        'membership_number',
+        'full_name',
+        'technical_group',
+        'clearance_year',
+        'status',          # shows Pending / Approved / Declined
+        'submitted_at',
+    )
+    list_filter = ('status', 'technical_group', 'clearance_year')
+    list_editable = ('status',)  # ✅ make status editable in list view
     search_fields = ('user__email', 'membership_number', 'full_name')
+    ordering = ('-submitted_at',)

@@ -3,6 +3,16 @@
 {% block title %} Track Status {% endblock %}
 {% block content %}
 
+
+<div class="page-title py-5 bg-success mb-5">
+  <div class="container text-white">
+    <p><a href="/" class="text-white-50 text-decoration-none">Home</a> <span class="mx-2">></span> Application Status</p>
+    <h1 class="display-4 fw-bold">Application Status</h1>
+    <p class="lead mb-0">Track your clearance application progress.</p>
+  </div>
+</div>
+
+
 <div class="container my-5" style="max-width: 900px;">
 
 {% if latest_application %}
@@ -11,9 +21,13 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="fw-semibold mb-0">Latest Application</h4>
 
-    {% if latest_application.approved %}
+    {% if latest_application.status == 'approved' %}
       <span class="badge rounded-pill bg-success px-3 py-2">
         <i class="bi bi-check-circle me-1"></i> Approved
+      </span>
+    {% elif latest_application.status == 'declined' %}
+      <span class="badge rounded-pill bg-danger px-3 py-2">
+        <i class="bi bi-x-circle me-1"></i> Declined
       </span>
     {% else %}
       <span class="badge rounded-pill bg-warning text-dark px-3 py-2">
@@ -23,6 +37,7 @@
   </div>
 
   <!-- Status Alert -->
+  {% if latest_application.status == 'pending' %}
   <div class="alert alert-warning d-flex align-items-start mb-4">
     <div class="me-3 fs-4">
       <i class="bi bi-clock-fill"></i>
@@ -34,9 +49,22 @@
       </p>
     </div>
   </div>
+  {% elif latest_application.status == 'declined' %}
+  <div class="alert alert-danger d-flex align-items-start mb-4">
+    <div class="me-3 fs-4">
+      <i class="bi bi-x-circle-fill"></i>
+    </div>
+    <div>
+      <h6 class="fw-semibold mb-1">Application Declined</h6>
+      <p class="mb-0 small">
+        Your clearance application has been declined by the PSN Rivers officials.
+      </p>
+    </div>
+  </div>
+  {% endif %}
 
-  <!-- Latest Application Details -->
-  <div class="card mb-5 shadow-sm border border-primary bg-light">
+  <!-- Application Details -->
+  <div class="card mb-5">
     <div class="card-body">
       <h6 class="fw-semibold mb-1">Application Details</h6>
       <p class="text-muted small mb-4">
@@ -84,11 +112,11 @@
           </div>
         </div>
 
-        {% if app.approved %}
+        {% if app.status == 'approved' %}
           <span class="badge bg-success-subtle text-success border border-success">
             <i class="bi bi-check-circle me-1"></i> Approved
           </span>
-        {% elif app.declaration_confirmed == False %}
+        {% elif app.status == 'declined' %}
           <span class="badge bg-danger-subtle text-danger border border-danger">
             <i class="bi bi-x-circle me-1"></i> Declined
           </span>
@@ -102,8 +130,6 @@
   {% endfor %}
 
 {% else %}
-
-  <!-- No Application -->
   <div class="alert alert-info text-center">
     <h6 class="fw-semibold mb-1">No Clearance Application Found</h6>
     <p class="small mb-3">
@@ -113,8 +139,8 @@
       Apply for Clearance
     </a>
   </div>
-
 {% endif %}
+
 
   <!-- Action -->
   <div class="mt-4">

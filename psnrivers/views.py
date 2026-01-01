@@ -72,19 +72,17 @@ def member_portal (request):
     return render(request, "psnrivers/member_portal.html")
 
 
-def review_applications (request):
-    return render(request, "psnrivers/review_applications.html")
-
-
 
 @login_required
 def track_status(request):
     applications = ClearanceApplication.objects.filter(user=request.user).order_by('-submitted_at')
     latest_application = applications.first()
-    return render(request, 'psnrivers/track_status.html', {
+
+    context = {
         'applications': applications,
         'latest_application': latest_application,
-    })
+    }
+    return render(request, 'psnrivers/track_status.html', context)
 
 
 
@@ -102,3 +100,26 @@ def apply_clearance(request):
         form = ClearanceApplicationForm(user=request.user)  # 👈 pass user here too
 
     return render(request, 'psnrivers/apply_clearance.html', {'form': form})
+
+
+
+@login_required
+def review_applications(request):
+    # Get all clearance applications
+    applications = ClearanceApplication.objects.all().order_by('-submitted_at')
+
+    # Calculate stats dynamically
+    total_applications = applications.count()
+    pending_count = applications.filter(status='Pending').count()
+    approved_count = applications.filter(status='Approved').count()
+    declined_count = applications.filter(status='Declined').count()
+
+    context = {
+        'applications': applications,
+        'total_applications': total_applications,
+        'pending_count': pending_count,
+        'approved_count': approved_count,
+        'declined_count': declined_count,
+    }
+
+    return render(request, 'psnrivers/review_applications.html', context)
