@@ -21,27 +21,27 @@ def login_view(request):
         try:
             # Find the user by email (case-insensitive)
             user_obj = User.objects.get(email__iexact=email)
-            # Authenticate using username internally
-            user = authenticate(request, username=user_obj.username, password=password)
+
+            # Authenticate using email directly (works for your custom User model)
+            user = authenticate(request, email=email, password=password)
         except User.DoesNotExist:
             user = None
 
         if user is not None:
-            if user.is_active and user.status == 'approved':
+            if user.is_active:  # Allow login immediately, no 'approved' check
                 login(request, user)
                 
                 # ✅ Add success message
                 messages.success(request, "Login successful.")
                 
                 return redirect('home')  # replace with your dashboard URL
-            elif user.status != 'approved':
-                messages.error(request, "Account pending approval.")
             else:
                 messages.error(request, "Your account is inactive.")
         else:
             messages.error(request, "Invalid email or password.")
 
     return render(request, 'members/login.html')
+
 
 
 

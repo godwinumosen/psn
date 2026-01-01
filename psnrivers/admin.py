@@ -1,6 +1,7 @@
 from django.contrib import admin
 # Register your models here.
 from . import models
+from .models import ClearanceApplication
 from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers
 
 #The main post model admin
@@ -20,3 +21,11 @@ class NewsAndEventsPsnRiverslAdmin (admin.ModelAdmin):
     prepopulated_fields = {'newsandevents_psnriver_slug': ('newsandevents_psnriver_title',)}
     list_display = ['newsandevents_psnriver_title','newsandevents_psnriver_description','newsandevents_psnriver_author']
 admin.site.register(NewsAndEventsPsnRivers, NewsAndEventsPsnRiverslAdmin)
+
+
+
+@admin.register(ClearanceApplication)
+class ClearanceApplicationAdmin(admin.ModelAdmin):
+    list_display = ('user', 'membership_number', 'technical_group', 'clearance_year', 'submitted_at', 'approved')
+    list_filter = ('approved', 'technical_group', 'clearance_year')
+    search_fields = ('user__email', 'membership_number', 'full_name')

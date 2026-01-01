@@ -9,8 +9,10 @@ from django.urls import reverse
 from django.urls import reverse_lazy
 from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers
 from django.contrib import messages
+from .forms import ClearanceApplicationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin  
+
 
 
 def index (request):
@@ -68,8 +70,7 @@ def directory (request):
 def member_portal (request):
     return render(request, "psnrivers/member_portal.html")
 
-def clearance (request):
-    return render(request, "psnrivers/clearance.html")
+
 
 def track_status (request):
     return render(request, "psnrivers/track_status.html")
@@ -78,4 +79,22 @@ def track_status (request):
 def review_applications (request):
     return render(request, "psnrivers/review_applications.html")
 
-    
+
+@login_required
+def apply_clearance(request):
+    if request.method == 'POST':
+        form = ClearanceApplicationForm(
+            request.POST,
+            request.FILES,
+            user=request.user   # 👈 ADD
+        )
+        if form.is_valid():
+            clearance = form.save(commit=False)
+            clearance.user = request.user
+            clearance.save()
+            messages.success(request, "Your clearance application has been submitted successfully!")
+            return redirect('home')
+    else:
+        form = ClearanceApplicationForm(user=request.user)  # 👈 ADD
+
+    return render(request, 'psnrivers/apply_clearance.html', {'form': form})

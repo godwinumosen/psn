@@ -58,3 +58,41 @@ class NewsAndEventsPsnRivers(models.Model):
 
     def get_absolute_url(self):
         return reverse('home')
+
+
+
+
+CLEARANCE_YEAR_CHOICES = [
+    ('2024', '2024'),
+    ('2025', '2025'),
+    ('2026', '2026'),
+]
+
+TECHNICAL_GROUP_CHOICES = [
+    ('Community Pharmacy', 'Community Pharmacy'),
+    ('Hospital Pharmacy', 'Hospital Pharmacy'),
+    ('Industrial Pharmacy', 'Industrial Pharmacy'),
+    ('Administrative Pharmacy', 'Administrative Pharmacy'),
+    ('Academic Pharmacy', 'Academic Pharmacy'),
+    ('Regulatory Pharmacy', 'Regulatory Pharmacy'),
+]
+
+class ClearanceApplication(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    membership_number = models.CharField(max_length=50)
+    full_name = models.CharField(max_length=255)
+    technical_group = models.CharField(max_length=50, choices=TECHNICAL_GROUP_CHOICES)
+    clearance_year = models.CharField(max_length=4, choices=CLEARANCE_YEAR_CHOICES)
+    proof_of_payment = models.FileField(upload_to='clearance/payments/')
+    supporting_document = models.FileField(upload_to='clearance/supporting/', blank=True, null=True)
+    declaration_confirmed = models.BooleanField(default=False)  
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+    approved_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['-submitted_at']
+
+    def __str__(self):
+        return f"{self.user.email} | {self.clearance_year} | {self.technical_group}"
+    

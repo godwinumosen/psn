@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Apply For Clearance{% endblock %}
+{% block content %}
+
+
+<div class="page-title py-5 bg-success mb-5">
+  <div class="container text-white">
+    <p><a href="/" class="text-white-50 text-decoration-none">Home</a> <span class="mx-2">></span> Clearance Application</p>
+    <h1 class="display-4 fw-bold">Clearance Application</h1>
+    <p class="lead mb-0"> Submit your annual clearance application.</p>
+  </div>
+</div>
+
+
+<div class="container my-5" style="max-width: 900px;">
+
+  <!-- Routing Alert -->
+  <div class="alert alert-warning small">
+    <strong>Routing:</strong> All applications are submitted to the PSN Chairman for final approval.
+    Your selected Technical Group is for classification and records.
+  </div>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- 1. Member Identification -->
+    <div class="card mb-4">
+      <div class="card-header bg-light fw-semibold">
+        <span class="badge bg-success rounded-circle me-2">1</span>
+        Member Identification
+      </div>
+      <div class="card-body">
+        <p class="text-muted small">Enter your membership number to retrieve your details</p>
+
+        <div class="mb-3">
+          <label class="form-label">Membership Number <span class="text-danger">*</span></label>
+          {{ form.membership_number }}
+        </div>
+
+        <div class="mb-0">
+          <label class="form-label">Full Name</label>
+          {{ form.full_name }}
+          <div class="form-text">
+            Name is auto-filled from your registration record and cannot be edited here.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Technical Group -->
+    <div class="card mb-4">
+      <div class="card-header bg-light fw-semibold">
+        <span class="badge bg-success rounded-circle me-2">2</span>
+        Technical Group
+      </div>
+      <div class="card-body">
+        <p class="text-muted small">Select your PSN Technical Group (for classification)</p>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Technical Group <span class="text-danger">*</span></label>
+            {{ form.technical_group }}
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Clearance Year <span class="text-danger">*</span></label>
+            {{ form.clearance_year }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Document Upload -->
+    <div class="card mb-4">
+      <div class="card-header bg-light fw-semibold">
+        <span class="badge bg-success rounded-circle me-2">3</span>
+        Document Upload
+      </div>
+      <div class="card-body">
+        <p class="text-muted small">Upload required clearance documents</p>
+
+        <!-- Proof of Payment -->
+        <div class="border rounded p-4 text-center mb-4">
+          <div class="mb-2 fs-3 text-success">
+            <i class="bi bi-cloud-arrow-up"></i>
+          </div>
+          <h6 class="fw-semibold">Proof of Payment <span class="text-danger">*</span></h6>
+          <p class="text-muted small mb-2">
+            Upload proof of payment (bank transfer, receipt, etc.)
+          </p>
+          {{ form.proof_of_payment }}
+        </div>
+
+        <!-- Supporting Document -->
+        <div class="border rounded p-4 text-center">
+          <div class="mb-2 fs-3 text-success">
+            <i class="bi bi-cloud-arrow-up"></i>
+          </div>
+          <h6 class="fw-semibold">Supporting Document (Optional)</h6>
+          <p class="text-muted small mb-2">
+            Any additional supporting documents
+          </p>
+          {{ form.supporting_document }}
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Declaration -->
+    <div class="card mb-4">
+      <div class="card-header bg-light fw-semibold">
+        <span class="badge bg-success rounded-circle me-2">4</span>
+        Declaration
+      </div>
+      <div class="card-body">
+        <div class="form-check">
+          {{ form.declaration_confirmed }}
+          <label class="form-check-label">
+            I confirm that all submitted information is accurate and true to the best of my knowledge.
+            I understand that providing false information may result in the rejection of my application
+            and possible disciplinary action.
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="d-flex justify-content-end gap-2">
+      <button type="button" class="btn btn-outline-secondary">Cancel</button>
+      <button type="submit" class="btn btn-success">
+        <i class="bi bi-check-circle me-1"></i> Submit Application
+      </button>
+    </div>
+
+  </form>
+</div>
+
+{% endblock %}
