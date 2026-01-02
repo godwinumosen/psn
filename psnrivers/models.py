@@ -71,12 +71,11 @@ CLEARANCE_YEAR_CHOICES = [
 ]
 
 TECHNICAL_GROUP_CHOICES = [
-    ('Community Pharmacy', 'Community Pharmacy'),
-    ('Hospital Pharmacy', 'Hospital Pharmacy'),
-    ('Industrial Pharmacy', 'Industrial Pharmacy'),
-    ('Administrative Pharmacy', 'Administrative Pharmacy'),
-    ('Academic Pharmacy', 'Academic Pharmacy'),
-    ('Regulatory Pharmacy', 'Regulatory Pharmacy'),
+    ('Community Pharmacy', 'Association of Community Pharmacists of Nigeria (ACPN)'),
+    ('Hospital Pharmacy', 'Association of Hospital & Administrative Pharmacists of Nigeria (AHAPN)'),
+    ('Industrial Pharmacy', 'National Association of Industrial Pharmacists of Nigeria (NAIP)'),
+    ('Administrative Pharmacy', 'Nigerian Association of Pharmacists in Academia (NAPA)'),
+    ('Regulatory Pharmacy', 'Other / Non-traditional Practice'),
 ]
 
 class ClearanceApplication(models.Model):
@@ -110,3 +109,18 @@ class ClearanceApplication(models.Model):
             return "Declined"
         else:
             return "Pending"
+        
+
+class Notification(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE,
+        related_name='notifications'  # <-- add this
+    )
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.get_full_name()} - {self.title}"

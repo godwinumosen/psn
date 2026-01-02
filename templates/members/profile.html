@@ -14,112 +14,183 @@
   </div>
 </div>
 
-<div class="container mb-5" style="max-width: 900px;">
+<div class="container my-5">
+  <div class="row g-4">
 
-  <!-- Profile Info Card -->
-  <div class="card shadow-sm mb-4">
-    <div class="card-body">
-      <h5 class="fw-semibold mb-3">
-        <i class="bi bi-person-circle me-2 text-success"></i>
-        Profile Information
-      </h5>
+    <!-- LEFT COLUMN -->
+    <div class="col-lg-8">
 
-      <div class="row g-3">
-        <div class="col-md-4">
-          <div class="text-muted small">FULL NAME</div>
-          <div class="fw-semibold">{{ request.user.get_full_name }}</div>
-        </div>
+      <!-- Member Profile -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h6 class="fw-semibold mb-4">
+            <i class="bi bi-person me-2"></i> Member Profile
+          </h6>
 
-        <div class="col-md-4">
-          <div class="text-muted small">EMAIL ADDRESS</div>
-          <div class="fw-semibold">{{ request.user.email }}</div>
-        </div>
+          <div class="row align-items-center g-4">
+            <div class="col-md-3 text-center">
+              {% if user.passport_photo %}
+                <img src="{{ user.passport_photo.url }}" class="rounded" style="height:90px;width:90px;">
+              {% else %}
+                <div class="bg-light rounded d-flex align-items-center justify-content-center"
+                     style="height:90px;width:90px;">
+                  <i class="bi bi-person fs-1 text-muted"></i>
+                </div>
+              {% endif %}
+            </div>
 
-        <div class="col-md-4">
-          <div class="text-muted small">MEMBERSHIP NUMBER</div>
-          <div class="fw-semibold">{{ request.user.pcn_number }}</div>
+            <div class="col-md-9">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <small class="text-muted">Full Name</small>
+                  <div class="fw-semibold">{{ user.get_full_name }}</div>
+                </div>
+
+                <div class="col-md-6">
+                  <small class="text-muted">PSN Number</small>
+                  <div class="fw-semibold">{{ user.pcn_number }}</div>
+                </div>
+
+                <div class="col-md-6">
+                  <small class="text-muted">PCN Number</small>
+                  <div class="fw-semibold">{{ user.pcn_number }}</div>
+                </div>
+
+                <div class="col-md-6">
+                  <small class="text-muted">Email</small>
+                  <div class="fw-semibold">{{ user.email }}</div>
+                </div>
+
+                <div class="col-md-6">
+                  <small class="text-muted">Area of Practice</small>
+                  <div class="fw-semibold">{{ user.area_of_practice }}</div>
+                </div>
+
+                <div class="col-md-6">
+                  <small class="text-muted">Technical Group</small>
+                  <div class="fw-semibold">
+                    {% if user.area_of_practice == "hospital" %}
+                      AHPAN - Hospital & Administrative Pharmacists
+                    {% elif user.area_of_practice == "community" %}
+                      Community Pharmacists Group
+                    {% else %}
+                      Other Technical Group
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Clearance Status Card -->
-  <div class="card shadow-sm mb-4">
-    <div class="card-body">
-      <h5 class="fw-semibold mb-3">
-        <i class="bi bi-shield-check me-2 text-success"></i>
-        Clearance Status
-      </h5>
+      <!-- Clearance Status -->
+      <div class="card">
+        <div class="card-body">
+          <h6 class="fw-semibold mb-1">
+            <i class="bi bi-shield-check me-2"></i> Clearance Status
+          </h6>
+          <p class="text-muted small mb-3">
+            Your current clearance application status
+          </p>
 
-      {% if clearance %}
-        <div class="row g-3 align-items-center">
-          <div class="col-md-6">
-            <div class="text-muted small">STATUS</div>
+          {% if clearance %}
+            <div class="alert 
+                        {% if clearance.status == 'Pending' %}alert-warning
+                        {% elif clearance.status == 'Approved' %}alert-success
+                        {% else %}alert-danger{% endif %} 
+                        d-flex align-items-start">
+              <i class="bi bi-clock fs-4 me-3"></i>
+              <div>
+                <h6 class="fw-semibold mb-1">
+                  {% if clearance.status == 'Pending' %} Pending Review
+                  {% elif clearance.status == 'Approved' %} Approved
+                  {% else %} Declined{% endif %}
+                </h6>
+                <p class="mb-0 small">{{ clearance.comments|default:"Your application is being reviewed." }}</p>
+              </div>
+            </div>
+          {% else %}
+            <p class="text-muted mb-0">
+              You have not submitted any clearance application yet.
+            </p>
+          {% endif %}
 
-            {% if clearance.status == "Pending" %}
-              <span class="badge bg-warning-subtle text-warning border border-warning px-3 py-2">
-                <i class="bi bi-hourglass-split me-1"></i> Pending Review
-              </span>
-            {% elif clearance.status == "Approved" %}
-              <span class="badge bg-success-subtle text-success border border-success px-3 py-2">
-                <i class="bi bi-check-circle me-1"></i> Approved
-              </span>
-            {% elif clearance.status == "Declined" %}
-              <span class="badge bg-danger-subtle text-danger border border-danger px-3 py-2">
-                <i class="bi bi-x-circle me-1"></i> Declined
-              </span>
-            {% endif %}
-          </div>
-
-          <div class="col-md-6">
-            <div class="text-muted small">CLEARANCE YEAR</div>
-            <div class="fw-semibold">{{ clearance.clearance_year }}</div>
-          </div>
-        </div>
-      {% else %}
-        <p class="text-muted mb-0">
-          You have not submitted any clearance application yet.
-        </p>
-      {% endif %}
-    </div>
-  </div>
-
-  <!-- Account Actions -->
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <h5 class="fw-semibold mb-3">
-        <i class="bi bi-gear me-2 text-success"></i>
-        Account Actions
-      </h5>
-
-      <div class="d-flex flex-wrap gap-2">
-
-        {% if not clearance or clearance.status == "Declined" %}
-          <a href="{% url 'clearance' %}" class="btn btn-success">
-            <i class="bi bi-file-earmark-text me-1"></i>
-            Apply for Clearance
+          <a href="{% url 'track_status' %}" class="btn btn-outline-secondary btn-sm">
+            View Full Status
           </a>
-        {% endif %}
-
-        <a href="{% url 'track_status' %}" class="btn btn-outline-primary">
-          <i class="bi bi-clock-history me-1"></i>
-          Track Clearance Status
-        </a>
-
-        <a href="#" class="btn btn-outline-secondary disabled">
-          <i class="bi bi-person-gear me-1"></i>
-          Edit Profile (Coming Soon)
-        </a>
-
-        <a href="{% url 'logout' %}" class="btn btn-outline-danger ms-auto">
-          <i class="bi bi-box-arrow-right me-1"></i>
-          Logout
-        </a>
-
+        </div>
       </div>
-    </div>
-  </div>
 
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-lg-4">
+
+      <!-- Notifications -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="fw-semibold mb-0">
+              <i class="bi bi-bell me-2"></i> Notifications
+            </h6>
+            <span class="badge bg-danger rounded-pill">{{ notifications|length }}</span>
+          </div>
+
+          {% for note in notifications %}
+            <div class="border rounded p-3 mb-3">
+              <div class="fw-semibold small 
+                  {% if note.level == 'danger' %}text-danger
+                  {% elif note.level == 'warning' %}text-warning
+                  {% else %}text-success{% endif %}">
+                ● {{ note.title }}
+              </div>
+              <div class="small text-muted">{{ note.description }}</div>
+              <small class="text-muted">{{ note.created_at|timesince }} ago</small>
+            </div>
+          {% empty %}
+            <p class="text-muted small mb-0">No notifications found.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h6 class="fw-semibold mb-3">Quick Actions</h6>
+
+          <div class="d-grid gap-2">
+            <a href="{% url 'clearance' %}" class="btn btn-outline-secondary text-start">
+              <i class="bi bi-file-earmark-text me-2"></i> Apply for Clearance
+            </a>
+            <a href="{% url 'track_status' %}" class="btn btn-outline-secondary text-start">
+              <i class="bi bi-search me-2"></i> Track Application
+            </a>
+            <a href="#" class="btn btn-outline-secondary text-start">
+              <i class="bi bi-people me-2"></i> Find Pharmacist
+            </a>
+            <a href="#" class="btn btn-outline-secondary text-start">
+              <i class="bi bi-calendar-event me-2"></i> News & Events
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Member Since -->
+      <div class="card text-center">
+        <div class="card-body">
+          <i class="bi bi-award fs-1 text-warning"></i>
+          <div class="small text-muted mt-2">Member Since</div>
+          <h4 class="fw-bold mb-0">{{ user.date_joined|date:"Y" }}</h4>
+          <small class="text-muted">
+            {{ user.date_joined|timesince }} of membership
+          </small>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 </div>
 
 {% endblock %}

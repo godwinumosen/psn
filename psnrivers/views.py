@@ -11,6 +11,7 @@ from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers
 from django.contrib import messages
 from .forms import ClearanceApplicationForm 
 from django.utils import timezone
+from .models import Notification
 from django.views.decorators.http import require_POST
 from .models import ClearanceApplication
 from django.contrib.auth.models import User
@@ -142,17 +143,7 @@ def apply_clearance(request):
             clearance.save()
 
             # ✅ EMAIL SENT ONLY AFTER SUCCESSFUL SUBMISSION
-            send_mail(
-                subject="Clearance Application Submitted",
-                message=(
-                    f"Dear {request.user.get_full_name()},\n\n"
-                    "Your clearance application has been submitted successfully.\n"
-                    "Status: Pending Review.\n\n"
-                    "You will be notified once it is reviewed."
-                ),
-                from_email=None,
-                recipient_list=[request.user.email],
-            )
+
 
             messages.success(
                 request,
@@ -227,12 +218,38 @@ def application_detail(request, app_id):
     return render(request, 'psnrivers/application_detail.html', {'app': app})
 
 
+
+def profile(request):
+    # Get the logged-in user
+    user = request.user
+
+    # Get latest clearance application
+    latest_clearance = ClearanceApplication.objects.filter(
+        user=user
+    ).order_by('-submitted_at').first()
+
+    # Get latest 5 notifications for the user
+    notifications = Notification.objects.filter(user=user).order_by('-created_at')[:5]
+    context = {
+        "user": user,
+        "clearance": latest_clearance,
+        "notifications": notifications,
+    }
+
+    return render(request, "members/profile.html", context)
+    
+    
+
+    
 @login_required
 def profile(request):
     latest_clearance = ClearanceApplication.objects.filter(
         user=request.user
     ).order_by('-submitted_at').first()
 
+    notifications = request.user.notifications.order_by('-created_at')[:5]
+
     return render(request, "members/profile.html", {
-        "clearance": latest_clearance
+        "clearance": latest_clearance,
+        "notifications": notifications
     })

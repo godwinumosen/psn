@@ -1,18 +1,14 @@
 from django import forms
 from .models import User
 
-
+# ✅ Use the same name that the form will use
 PRACTICE_AREAS = [
-    ("", "Select practice area"),
     ("community", "Community Pharmacy"),
-    ("hospital", "Hospital Pharmacy"),
-    ("industry", "Pharmaceutical Industry"),
-    ("academia", "Academia"),
-    ("regulatory", "Regulatory / Administration"),
-    ("ngo", "NGO / Public Health"),
-    ("others", "Others"),
+    ("hospital", "Hospital and Administrative Pharmacy"),
+    ("industry", "Industry Pharmacy"),
+    ("academia", "Academia and Research"),
+    ("regulatory", "Others"),
 ]
-
 
 class RegistrationForm(forms.ModelForm):
     password1 = forms.CharField(
@@ -31,6 +27,7 @@ class RegistrationForm(forms.ModelForm):
         })
     )
 
+    # ✅ Add / replace this field here
     area_of_practice = forms.ChoiceField(
         label="Area of Practice",
         choices=PRACTICE_AREAS,
@@ -55,6 +52,7 @@ class RegistrationForm(forms.ModelForm):
             "placeholder": "Enter workplace address"
         })
     )
+
 
     class Meta:
         model = User
@@ -108,7 +106,6 @@ class RegistrationForm(forms.ModelForm):
 
         return cleaned_data
 
-
     def clean_email(self):
         email = self.cleaned_data.get("email")
 
@@ -118,3 +115,17 @@ class RegistrationForm(forms.ModelForm):
             )
 
         return email
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+
+        # set password
+        user.set_password(self.cleaned_data["password1"])
+
+        # save area of practice explicitly
+        user.area_of_practice = self.cleaned_data.get("area_of_practice")
+
+        if commit:
+            user.save()
+
+        return user

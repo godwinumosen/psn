@@ -24,5 +24,6 @@ urlpatterns = [
     path('approve/<int:app_id>/', views.approve_application, name='approve_application'),
     path('decline/<int:app_id>/', views.decline_application, name='decline_application'),
     path("profile/", views.profile, name="profile"),
+    #path("success/", views.success, name="success"),
     
 ]

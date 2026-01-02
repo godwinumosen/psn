@@ -45,6 +45,9 @@ def login_view(request):
 
 
 
+def success (request):
+    return render (request, 'members/success.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -52,25 +55,33 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
             
-            # ✅ Ensure email is lowercase
+            # Ensure email is lowercase
             user.email = user.email.lower()
             
-            # ✅ Set username to lowercase email
+            # Set username to lowercase email
             user.username = user.email
             
-            # ✅ Hash password correctly
+            # Hash password correctly
             user.set_password(form.cleaned_data['password1'])
             
-            # ✅ Keep admin approval system
+            # Keep admin approval system
             user.is_active = True
-            user.status = 'approved'
+            user.status = 'pending'  # or 'approved' if you auto-approve
+            
+            # Save area_of_practice explicitly from form
+            user.area_of_practice = form.cleaned_data.get('area_of_practice')
+            
             user.save()
             
             messages.success(request, "Registration successful. Await approval.")
-            return redirect('login')
+            
+            # Render success page with user info
+            return render(request, 'members/success.html', {'user': user})
     else:
         form = RegistrationForm()
+    
     return render(request, 'members/register.html', {'form': form})
+
 
 
 def logout_view(request):
@@ -117,3 +128,5 @@ def admin_dashboard(request):
         'monthly_data': monthly_data,
     }
     return render(request, 'members/admin_dashboard.html', context)
+
+

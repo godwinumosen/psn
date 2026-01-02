@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+from django.conf import settings
+
 
 MEMBERSHIP_CHOICES = [
     ('regular', 'Regular'),
@@ -39,3 +41,5 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email  # optional: display email instead of username
+
+
