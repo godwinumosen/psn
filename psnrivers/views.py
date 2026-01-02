@@ -15,6 +15,7 @@ from .models import Notification
 from django.views.decorators.http import require_POST
 from .models import ClearanceApplication
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin  
 
 
@@ -240,14 +241,13 @@ def profile(request):
     
     
 
-    
 @login_required
 def profile(request):
     latest_clearance = ClearanceApplication.objects.filter(
         user=request.user
     ).order_by('-submitted_at').first()
 
-    notifications = request.user.notifications.order_by('-created_at')[:5]
+    notifications = Notification.objects.order_by('-created_at')[:10]
 
     return render(request, "members/profile.html", {
         "clearance": latest_clearance,

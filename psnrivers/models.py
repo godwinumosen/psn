@@ -112,15 +112,14 @@ class ClearanceApplication(models.Model):
         
 
 class Notification(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
-        on_delete=models.CASCADE,
-        related_name='notifications'  # <-- add this
-    )
     title = models.CharField(max_length=255)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
+    
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.user.get_full_name()} - {self.title}"
+        return self.title
+

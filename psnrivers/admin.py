@@ -45,6 +45,6 @@ class ClearanceApplicationAdmin(admin.ModelAdmin):
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user', 'created_at', 'is_read')
+    list_display = ('title', 'created_at', 'is_read')
     list_filter = ('is_read', 'created_at')
     search_fields = ('title', 'user__email')

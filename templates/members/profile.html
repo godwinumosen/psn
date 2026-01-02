@@ -127,32 +127,36 @@
     <!-- RIGHT COLUMN -->
     <div class="col-lg-4">
 
-      <!-- Notifications -->
-      <div class="card mb-4">
+            <!-- Notifications -->
+        <div class="card mb-4">
         <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="fw-semibold mb-0">
-              <i class="bi bi-bell me-2"></i> Notifications
+                <i class="bi bi-bell me-2"></i> Notifications
             </h6>
             <span class="badge bg-danger rounded-pill">{{ notifications|length }}</span>
-          </div>
-
-          {% for note in notifications %}
-            <div class="border rounded p-3 mb-3">
-              <div class="fw-semibold small 
-                  {% if note.level == 'danger' %}text-danger
-                  {% elif note.level == 'warning' %}text-warning
-                  {% else %}text-success{% endif %}">
-                ● {{ note.title }}
-              </div>
-              <div class="small text-muted">{{ note.description }}</div>
-              <small class="text-muted">{{ note.created_at|timesince }} ago</small>
             </div>
-          {% empty %}
+
+            {% for note in notifications %}
+            <div class="border rounded p-3 mb-3">
+                <div class="fw-semibold small {% if not note.is_read %}text-danger{% else %}text-muted{% endif %}">
+                ● {{ note.title }}
+                </div>
+
+                <div class="small text-muted">
+                {{ note.description }}
+                </div>
+
+                <small class="text-muted">
+                {{ note.created_at|timesince }} ago
+                </small>
+            </div>
+            {% empty %}
             <p class="text-muted small mb-0">No notifications found.</p>
-          {% endfor %}
+            {% endfor %}
         </div>
-      </div>
+        </div>
+
 
       <!-- Quick Actions -->
       <div class="card mb-4">
