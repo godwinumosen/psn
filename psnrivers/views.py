@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.core.mail import send_mail
 # Create your views here.
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView,ListView
@@ -88,24 +88,6 @@ def track_status(request):
 
 
 
-@login_required
-def apply_clearance(request):
-    if request.method == 'POST':
-        form = ClearanceApplicationForm(request.POST, request.FILES, user=request.user)  # 👈 pass user here
-        if form.is_valid():
-            clearance = form.save(commit=False)
-            clearance.user = request.user
-            clearance.save()
-            messages.success(request, "Your clearance application has been submitted successfully!")
-            return redirect('home')  # or any page you want
-    else:
-        form = ClearanceApplicationForm(user=request.user)  # 👈 pass user here too
-
-    return render(request, 'psnrivers/apply_clearance.html', {'form': form})
-
-
-
-
 
 @login_required
 def review_applications(request):
@@ -144,28 +126,113 @@ def review_applications(request):
     return render(request, 'psnrivers/review_applications.html', context)
 
 
+
+@login_required
+def apply_clearance(request):
+    if request.method == 'POST':
+        form = ClearanceApplicationForm(
+            request.POST,
+            request.FILES,
+            user=request.user
+        )
+
+        if form.is_valid():
+            clearance = form.save(commit=False)
+            clearance.user = request.user
+            clearance.save()
+
+            # ✅ EMAIL SENT ONLY AFTER SUCCESSFUL SUBMISSION
+            send_mail(
+                subject="Clearance Application Submitted",
+                message=(
+                    f"Dear {request.user.get_full_name()},\n\n"
+                    "Your clearance application has been submitted successfully.\n"
+                    "Status: Pending Review.\n\n"
+                    "You will be notified once it is reviewed."
+                ),
+                from_email=None,
+                recipient_list=[request.user.email],
+            )
+
+            messages.success(
+                request,
+                "Your clearance application has been submitted successfully!"
+            )
+            return redirect('home')
+
+    else:
+        form = ClearanceApplicationForm(user=request.user)
+
+    return render(
+        request,
+        'psnrivers/apply_clearance.html',
+        {'form': form}
+    )
+
+
+
+
+
 @login_required
 @require_POST
 def approve_application(request, app_id):
     app = get_object_or_404(ClearanceApplication, id=app_id)
+
     if request.user.is_staff:
-        app.approved = True
+        app.status = "Approved"
         app.approved_at = timezone.now()
         app.save()
+
+        send_mail(
+            "Clearance Approved",
+            f"Congratulations {app.full_name},\n\n"
+            f"Your clearance for {app.clearance_year} has been APPROVED.",
+            None,
+            [app.user.email],
+        )
+
     return redirect('review_applications')
+
+
 
 @login_required
 @require_POST
 def decline_application(request, app_id):
     app = get_object_or_404(ClearanceApplication, id=app_id)
+
     if request.user.is_staff:
-        app.approved = False
-        app.approved_at = timezone.now()
+        app.status = "Declined"
         app.save()
+
+        send_mail(
+            "Clearance Declined",
+            f"Dear {app.full_name},\n\n"
+            "Unfortunately, your clearance application has been declined.\n"
+            "Please contact support for more details.",
+            None,
+            [app.user.email],
+        )
+
     return redirect('review_applications')
+
+
+
+
+
 
 
 @login_required
 def application_detail(request, app_id):
     app = get_object_or_404(ClearanceApplication, id=app_id)
     return render(request, 'psnrivers/application_detail.html', {'app': app})
+
+
+@login_required
+def profile(request):
+    latest_clearance = ClearanceApplication.objects.filter(
+        user=request.user
+    ).order_by('-submitted_at').first()
+
+    return render(request, "members/profile.html", {
+        "clearance": latest_clearance
+    })

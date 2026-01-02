@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %} My Profile {% endblock %}
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-title py-5 bg-success mb-5">
+  <div class="container text-white">
+    <p>
+      <a href="/" class="text-white-50 text-decoration-none">Home</a>
+      <span class="mx-2">›</span> My Profile
+    </p>
+    <h1 class="display-5 fw-bold mb-1">My Profile</h1>
+    <p class="lead mb-0">Manage your account and clearance information</p>
+  </div>
+</div>
+
+<div class="container mb-5" style="max-width: 900px;">
+
+  <!-- Profile Info Card -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h5 class="fw-semibold mb-3">
+        <i class="bi bi-person-circle me-2 text-success"></i>
+        Profile Information
+      </h5>
+
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="text-muted small">FULL NAME</div>
+          <div class="fw-semibold">{{ request.user.get_full_name }}</div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="text-muted small">EMAIL ADDRESS</div>
+          <div class="fw-semibold">{{ request.user.email }}</div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="text-muted small">MEMBERSHIP NUMBER</div>
+          <div class="fw-semibold">{{ request.user.pcn_number }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clearance Status Card -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h5 class="fw-semibold mb-3">
+        <i class="bi bi-shield-check me-2 text-success"></i>
+        Clearance Status
+      </h5>
+
+      {% if clearance %}
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <div class="text-muted small">STATUS</div>
+
+            {% if clearance.status == "Pending" %}
+              <span class="badge bg-warning-subtle text-warning border border-warning px-3 py-2">
+                <i class="bi bi-hourglass-split me-1"></i> Pending Review
+              </span>
+            {% elif clearance.status == "Approved" %}
+              <span class="badge bg-success-subtle text-success border border-success px-3 py-2">
+                <i class="bi bi-check-circle me-1"></i> Approved
+              </span>
+            {% elif clearance.status == "Declined" %}
+              <span class="badge bg-danger-subtle text-danger border border-danger px-3 py-2">
+                <i class="bi bi-x-circle me-1"></i> Declined
+              </span>
+            {% endif %}
+          </div>
+
+          <div class="col-md-6">
+            <div class="text-muted small">CLEARANCE YEAR</div>
+            <div class="fw-semibold">{{ clearance.clearance_year }}</div>
+          </div>
+        </div>
+      {% else %}
+        <p class="text-muted mb-0">
+          You have not submitted any clearance application yet.
+        </p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Account Actions -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="fw-semibold mb-3">
+        <i class="bi bi-gear me-2 text-success"></i>
+        Account Actions
+      </h5>
+
+      <div class="d-flex flex-wrap gap-2">
+
+        {% if not clearance or clearance.status == "Declined" %}
+          <a href="{% url 'clearance' %}" class="btn btn-success">
+            <i class="bi bi-file-earmark-text me-1"></i>
+            Apply for Clearance
+          </a>
+        {% endif %}
+
+        <a href="{% url 'track_status' %}" class="btn btn-outline-primary">
+          <i class="bi bi-clock-history me-1"></i>
+          Track Clearance Status
+        </a>
+
+        <a href="#" class="btn btn-outline-secondary disabled">
+          <i class="bi bi-person-gear me-1"></i>
+          Edit Profile (Coming Soon)
+        </a>
+
+        <a href="{% url 'logout' %}" class="btn btn-outline-danger ms-auto">
+          <i class="bi bi-box-arrow-right me-1"></i>
+          Logout
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
