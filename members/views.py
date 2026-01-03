@@ -15,20 +15,6 @@ from django.contrib import messages
 from .models import User
 
 
-def resend_verification_email_view(request):
-    if request.method == "POST":
-        email = request.POST.get("email").lower()
-        try:
-            user = User.objects.get(email__iexact=email)
-            if user.email_verified:
-                messages.info(request, "Your email is already verified. You can log in.")
-            else:
-                send_verification_email(user, request)
-                messages.success(request, "Verification email resent. Check your inbox.")
-        except User.DoesNotExist:
-            messages.error(request, "No account found with this email.")
-    return redirect("login")
-
 
 
 def login_view(request):
@@ -46,14 +32,14 @@ def login_view(request):
             user = None
 
         if user is not None:
-            if not user.email_verified:
-                # ✅ Just show a warning, don't resend automatically
-                messages.warning(
-                    request, 
-                    "Please verify your email before logging in. "
-                    "Check the email we sent you after registration."
-                )
-                return redirect('login')
+            # Commented out for now to skip email verification
+            # if not user.email_verified:
+            #     messages.warning(
+            #         request, 
+            #         "Please verify your email before logging in. "
+            #         "Check the email we sent you after registration."
+            #     )
+            #     return redirect('login')
 
             if user.is_active:
                 login(request, user)
@@ -65,36 +51,6 @@ def login_view(request):
             messages.error(request, "Invalid email or password.")
 
     return render(request, 'members/login.html')
-
-
-
-
-def verify_email(request, uidb64, token):
-    """
-    Verify the user's email using UID and token.
-    """
-    try:
-        # Decode UID from base64
-        uid = urlsafe_base64_decode(uidb64).decode()
-        user = User.objects.get(pk=uid)
-    except (User.DoesNotExist, ValueError, TypeError, OverflowError):
-        user = None
-
-    # Check token
-    if user is not None and default_token_generator.check_token(user, token):
-        # ✅ Mark email as verified
-        user.email_verified = True
-        user.save()
-
-        messages.success(request, "Email verified successfully! You can now log in.")
-        return redirect('login')
-    else:
-        messages.error(request, "Invalid or expired verification link.")
-        return redirect('login')
-
-
-def success (request):
-    return render (request, 'members/success.html')
 
 
 def register(request):
@@ -122,10 +78,11 @@ def register(request):
             # Save user
             user.save()
             
-            # Send verification email
-            send_verification_email(user, request)
+            # Commented out sending verification email for now
+            # send_verification_email(user, request)
             
-            messages.success(request, "Registration successful. Check your email to verify your account.")
+            # Update message for now
+            messages.success(request, "Registration successful. You can now log in.")
             
             return render(request, 'members/success.html', {'user': user})
     else:
@@ -135,11 +92,56 @@ def register(request):
 
 
 
+def success (request):
+    return render (request, 'members/success.html')
+
+
+
+
+def verify_email(request, uidb64, token):
+    """
+    Verify the user's email using UID and token.
+    """
+    try:
+        # Decode UID from base64
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (User.DoesNotExist, ValueError, TypeError, OverflowError):
+        user = None
+    # Check token
+    if user is not None and default_token_generator.check_token(user, token):
+        # ✅ Mark email as verified
+        user.email_verified = True
+        user.save()
+
+        messages.success(request, "Email verified successfully! You can now log in.")
+        return redirect('login')
+    else:
+        messages.error(request, "Invalid or expired verification link.")
+  
+        return redirect('login')
+
+
+
+def resend_verification_email_view(request):
+    if request.method == "POST":
+        email = request.POST.get("email").lower()
+        try:
+            user = User.objects.get(email__iexact=email)
+            if user.email_verified:
+                messages.info(request, "Your email is already verified. You can log in.")
+            else:
+                send_verification_email(user, request)
+                messages.success(request, "Verification email resent. Check your inbox.")
+        except User.DoesNotExist:
+            messages.error(request, "No account found with this email.")
+    return redirect("login")
+
+
+
 def logout_view(request):
     logout(request)
     return redirect('home') 
-
-
 
 
 @login_required
