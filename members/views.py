@@ -4,12 +4,30 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RegistrationForm
 from .models import User
+from django.utils.http import urlsafe_base64_decode
+from django.contrib.auth.tokens import default_token_generator
 from django.db.models import Count
 from django.utils.timezone import now
+from .utils import send_verification_email
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User
+
+
+def resend_verification_email_view(request):
+    if request.method == "POST":
+        email = request.POST.get("email").lower()
+        try:
+            user = User.objects.get(email__iexact=email)
+            if user.email_verified:
+                messages.info(request, "Your email is already verified. You can log in.")
+            else:
+                send_verification_email(user, request)
+                messages.success(request, "Verification email resent. Check your inbox.")
+        except User.DoesNotExist:
+            messages.error(request, "No account found with this email.")
+    return redirect("login")
 
 
 
@@ -22,18 +40,24 @@ def login_view(request):
             # Find the user by email (case-insensitive)
             user_obj = User.objects.get(email__iexact=email)
 
-            # Authenticate using email directly (works for your custom User model)
+            # Authenticate using email directly
             user = authenticate(request, email=email, password=password)
         except User.DoesNotExist:
             user = None
 
         if user is not None:
-            if user.is_active:  # Allow login immediately, no 'approved' check
+            if not user.email_verified:
+                # ✅ Just show a warning, don't resend automatically
+                messages.warning(
+                    request, 
+                    "Please verify your email before logging in. "
+                    "Check the email we sent you after registration."
+                )
+                return redirect('login')
+
+            if user.is_active:
                 login(request, user)
-                
-                # ✅ Add success message
                 messages.success(request, "Login successful.")
-                
                 return redirect('home')  # replace with your dashboard URL
             else:
                 messages.error(request, "Your account is inactive.")
@@ -43,6 +67,30 @@ def login_view(request):
     return render(request, 'members/login.html')
 
 
+
+
+def verify_email(request, uidb64, token):
+    """
+    Verify the user's email using UID and token.
+    """
+    try:
+        # Decode UID from base64
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (User.DoesNotExist, ValueError, TypeError, OverflowError):
+        user = None
+
+    # Check token
+    if user is not None and default_token_generator.check_token(user, token):
+        # ✅ Mark email as verified
+        user.email_verified = True
+        user.save()
+
+        messages.success(request, "Email verified successfully! You can now log in.")
+        return redirect('login')
+    else:
+        messages.error(request, "Invalid or expired verification link.")
+        return redirect('login')
 
 
 def success (request):
@@ -71,11 +119,14 @@ def register(request):
             # Save area_of_practice explicitly from form
             user.area_of_practice = form.cleaned_data.get('area_of_practice')
             
+            # Save user
             user.save()
             
-            messages.success(request, "Registration successful. Await approval.")
+            # Send verification email
+            send_verification_email(user, request)
             
-            # Render success page with user info
+            messages.success(request, "Registration successful. Check your email to verify your account.")
+            
             return render(request, 'members/success.html', {'user': user})
     else:
         form = RegistrationForm()

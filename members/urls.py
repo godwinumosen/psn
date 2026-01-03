@@ -7,5 +7,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('success/', views.success, name='success'),
+    path('verify-email/<uidb64>/<token>/', views.verify_email, name='verify_email'),
     path('dashboard/', admin_dashboard, name='dashboard'),
+    path('resend-verification/', views.resend_verification_email_view, name='resend_verification'),
 ]

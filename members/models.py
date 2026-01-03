@@ -23,6 +23,7 @@ ROLE_CHOICES = [
 class User(AbstractUser):
     # Additional fields
     email = models.EmailField(unique=True)  # added email as unique field for login
+    email_verified = models.BooleanField(default=False)
     phone = models.CharField(max_length=20, blank=True, null=True)
     pcn_number = models.CharField(max_length=50, blank=True, null=True)
     year_qualified = models.IntegerField(blank=True, null=True)
