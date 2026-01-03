@@ -2,16 +2,17 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 # Create your views here.
 from django.shortcuts import render,redirect,get_object_or_404
+from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView,ListView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.urls import reverse
 from django.urls import reverse_lazy
-from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers
+#from .models import PsnRiversPost,
 from django.contrib import messages
 from .forms import ClearanceApplicationForm 
 from django.utils import timezone
-from .models import Notification
+from .models import Notification,NewsAndEventsPsnRivers,AboutPsnRivers,UpcominEventsPsnRivers
 from django.views.decorators.http import require_POST
 from .models import ClearanceApplication
 from django.contrib.auth.models import User
@@ -23,29 +24,43 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def index (request):
     return render (request, 'psnrivers/home.html')
 
-class HomeView(ListView): 
-    model = PsnRiversPost 
+'''class HomeView(ListView): 
+    #model = PsnRiversPost 
     template_name = 'psnrivers/home.html'
     
     def get_context_data(self, **kwargs):  
         context = super().get_context_data(**kwargs)
         context['about_psnrivers'] = AboutPsnRivers.objects.all()  
-        return context    
-        
+        context['newsandevents'] = NewsAndEventsPsnRivers.objects.all()
+        return context    '''
+
+class HomeView(TemplateView):
+    template_name = 'psnrivers/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['newsandevents'] = NewsAndEventsPsnRivers.objects.all()
+        context['about_psnrivers'] = AboutPsnRivers.objects.all()
+        return context
 
 #The first ArticleDetailView page down
-class ArticleDetailView(DetailView):
+'''class ArticleDetailView(DetailView):
     model = PsnRiversPost
     template_name = 'psnrivers/article_detail.html'
     def ArticleDetailViewPsnRiversPost(request, pk): 
         object = get_object_or_404(PsnRiversPost, pk=pk)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-        return render(request, 'article_detail.html', {'detail': object})
+        return render(request, 'article_detail.html', {'detail': object})'''
 
 
 # This is for the news and events pae
 class NewsAndEventsView(ListView): 
     model = NewsAndEventsPsnRivers 
     template_name = 'psnrivers/news_events.html'
+    
+    
+class UpcomingNewsAndEventsView(ListView): 
+    model = UpcominEventsPsnRivers 
+    template_name = 'psnrivers/upcoming_news_events.html'
 
 def contact (request):
     return render (request, 'psnrivers/contact.html')

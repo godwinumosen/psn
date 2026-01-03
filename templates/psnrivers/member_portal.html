@@ -92,6 +92,7 @@
       </div>
     </div>
 
+
     {% if user.is_authenticated and user.is_superuser %}
     <div class="col-md-4 text-center">
       <div class="card h-100 border-0 shadow-sm p-3 rounded-4">
@@ -112,6 +113,24 @@
       </div>
     </div>
     {% endif %}
+
+       <div class="col-md-4 text-center">
+      <div class="card h-100 border-0 shadow-sm p-3 rounded-4">
+        <div class="card-body">
+          <div class="bg-light rounded p-2 d-inline-block mb-3 text-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-check" viewBox="0 0 16 16">
+              <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+              <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5V2a.5.5 0 0 1 .5-.5h5v2z"/>
+            </svg>
+          </div>
+          <h6 class="fw-bold">Dashboard</h6>
+          <p class="text-muted small">View your dashboard profile</p>
+          <div class="d-grid mt-3">
+            <a href="{% url 'profile'%}" class="btn btn-outline-secondary btn-sm py-2">View Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 <h3 class="text-center fw-bold mb-4">Member Benefits</h3>

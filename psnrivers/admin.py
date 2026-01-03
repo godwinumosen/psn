@@ -1,7 +1,7 @@
 from django.contrib import admin
 # Register your models here.
 from . import models
-from .models import ClearanceApplication,Notification
+from .models import ClearanceApplication,Notification,UpcominEventsPsnRivers
 from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers
 
 #The main post model admin
@@ -24,6 +24,11 @@ admin.site.register(NewsAndEventsPsnRivers, NewsAndEventsPsnRiverslAdmin)
 
 
 
+
+class UpcominEventsPsnRiversAdmin (admin.ModelAdmin):
+    prepopulated_fields = {'upcoming_newsandevents_psnriver_slug': ('upcoming_newsandevents_psnriver_title',)}
+    list_display = ['upcoming_newsandevents_psnriver_title','upcoming_newsandevents_psnriver_author']
+admin.site.register(UpcominEventsPsnRivers, UpcominEventsPsnRiversAdmin)
 
 
 
