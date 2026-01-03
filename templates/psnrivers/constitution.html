@@ -6,13 +6,15 @@
 
 {% block about_content %}
 
-<p class="text-muted">
-  The Constitution of the Pharmaceutical Society of Nigeria, Rivers State Branch, governs the operations, 
-  membership, and activities of our organization. It outlines the structure, duties of officers, and procedures for 
-  conducting the affairs of the society.
-</p>
 
-<div class="card border border-light-subtle rounded-3 mb-5">
+<div class="container py-4">
+
+    <p class="text-muted">
+  The Constitution of the Pharmaceutical Society of Nigeria, Rivers State Branch, governs the operations, 
+  membership, and activities of our organization.
+ </p>
+
+ <div class="card border border-light-subtle rounded-3 mb-5">
     <div class="card-body p-4">
         <div class="d-flex align-items-center">
             <div class="bg-light rounded p-3 me-3 text-success">
@@ -34,26 +36,149 @@
     </div>
 </div>
 
-<h4 class="fw-bold mb-4">Key Provisions</h4>
 
-<div class="mb-4">
-    <h6 class="fw-bold">Article 1: Name and Headquarters</h6>
-    <p class="text-muted">
-        The organization shall be known as the Pharmaceutical Society of Nigeria, Rivers State Branch, with headquarters in Port Harcourt.
-    </p>
+  <!-- Tabs -->
+  <ul class="nav nav-tabs mb-4 border-success">
+  <li class="nav-item">
+    <a class="nav-link active text-success border-success" href="#">
+      Key Provisions
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-success" href="#">
+      PSN Technical Groups
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-success" href="#">
+      Key Interest Groups
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-success" href="#">
+      Purpose of Groups
+    </a>
+  </li>
+</ul>
+
+
+  <!-- PSN Technical Groups -->
+  <h4 class="fw-bold mb-3">PSN Technical Groups (Arms)</h4>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h6 class="fw-bold">ACPN - Association of Community Pharmacists of Nigeria</h6>
+      <p class="text-muted mb-0">
+        For pharmacists in community practice (retail and distribution).
+      </p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h6 class="fw-bold">
+        AHAPN - Association of Hospital & Administrative Pharmacists
+      </h6>
+      <p class="text-muted mb-0">
+        For pharmacists in hospitals and healthcare administration.
+      </p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h6 class="fw-bold">
+        NAIP - National Association of Industrial Pharmacists
+      </h6>
+      <p class="text-muted mb-0">
+        For pharmacists in pharmaceutical manufacturing and industry.
+      </p>
+    </div>
+  </div>
+
+  <div class="card mb-5">
+    <div class="card-body">
+      <h6 class="fw-bold">
+        NAPA - Nigerian Association of Pharmacists in Academia
+      </h6>
+      <p class="text-muted mb-0">
+        For pharmacists in teaching and research.
+      </p>
+    </div>
+  </div>
+
+  <!-- Key Interest Groups -->
+  <h4 class="fw-bold mb-3">Key Interest Groups</h4>
+
+  <div class="row g-3 mb-5">
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          Association of Lady Pharmacists (ALPs)
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          Young Pharmacists Group (YPG)
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          Pharmaceutical Association of Nigerian Students (PANS)
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          PSN Board of Fellows
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Purpose of Groups -->
+  <h4 class="fw-bold mb-3">Purpose of the Groups</h4>
+
+  <ul class="list-unstyled">
+    <li class="d-flex mb-3">
+      <i class="bi bi-shield-check me-3 text-success"></i>
+      <span>
+        <strong>Standards & Ethics</strong> — Uphold professional and educational standards
+      </span>
+    </li>
+
+    <li class="d-flex mb-3">
+      <i class="bi bi-bullseye me-3 text-success"></i>
+      <span>
+        <strong>Advocacy</strong> — Influence health and pharmaceutical policy
+      </span>
+    </li>
+
+    <li class="d-flex mb-3">
+      <i class="bi bi-chat-dots me-3 text-success"></i>
+      <span>
+        <strong>Information Sharing</strong> — Disseminate scientific and professional knowledge
+      </span>
+    </li>
+
+    <li class="d-flex">
+      <i class="bi bi-people me-3 text-success"></i>
+      <span>
+        <strong>Welfare</strong> — Address labor conditions and member welfare
+      </span>
+    </li>
+  </ul>
+
 </div>
 
-<div class="mb-4">
-    <h6 class="fw-bold">Article 2: Membership</h6>
-    <p class="text-muted">
-        Membership is open to all pharmacists registered with the Pharmacists Council of Nigeria practicing or residing in Rivers State.
-    </p>
-</div>
 
-<div class="mb-4">
-    <h6 class="fw-bold">Article 3: Governance</h6>
-    <p class="text-muted">
-        The Branch shall be governed by an Executive Council elected by members at the Annual General Meeting for a tenure of two years.
-    </p>
-</div>
+
 {% endblock %}
