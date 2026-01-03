@@ -4,9 +4,9 @@
 {% block content %}
 
 
-  <main class="main">
+  <main class="main" style="margin-top:100px; z-index:9;">
     <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background"style="z-index:9;top:112px;">
+    <section id="hero" class="hero section dark-background">
       <img src="{% static 'assets/img/hero-bg.jpg'%}" alt="" data-aos="fade-in">
       <div class="container">
         <h2 data-aos="fade-up" data-aos-delay="100">Pharmaceutical Society <br>of Nigeria</h2>
@@ -14,10 +14,10 @@
 
         <p data-aos="fade-up" data-aos-delay="200" style="color: #fff;">Uniting pharmacists across Rivers State to promote excellence in<br> pharmaceutical practice, protect public health, and advance the <br>pharmacy profession.</p>
      <div class="d-flex mt-4 gap-3" data-aos="fade-up" data-aos-delay="300">
-        <a href="courses.html" class="btn-get-started btn-green">
+        <a href="{% url 'member_portal' %}" class="btn-get-started btn-green">
           Become a Member
         </a> 
-        <a href="courses.html" class="btn-get-started">
+        <a href="{% url 'about' %}" class="btn-get-started">
           Learn About Us
         </a>
       </div>
