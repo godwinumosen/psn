@@ -76,10 +76,10 @@
 
     <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
       <img src="{% static 'assets/img/psn-logo.png' %}" alt="">
-      <h5 class="sitename ms-2">
+      <h6 class="sitename ms-2">
         Pharmaceutical Society of Nigeria,<br>
-        Rivers State Branch
-      </h5>
+       <span style ="color:green">Rivers State Branch</span>
+      </h6>
     </a>
 
     <!-- Navigation -->
@@ -107,7 +107,7 @@
         </li>
 
         <li><a href="{% url 'directory' %}">Directory</a></li>
-        <li><a href="{% url 'profile' %}">Dashboard</a></li>
+        
 
         <li>
           <a href="{% url 'contact' %}"
@@ -166,11 +166,10 @@
         <h5  class=" text-white">Quick Links</h5>
         <ul >
           <li class=" text-white"><a href="#">About PSN Rivers</a></li>
-          <li><a href="#">Executive Council</a></li>
-          <li><a href="#">Membership</a></li>
-          <li><a href="#">Find a Pharmacist</a></li>
-          <li><a href="#">News & Events</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="{% url 'member_portal' %}">Membership</a></li>
+          <li><a href="{% url 'directory' %}">Find a Pharmacist</a></li>
+          <li><a href="{% url 'news_events' %}">News & Events</a></li>
+          <li><a href="{% url 'contact' %}">Contact Us</a></li>
         </ul>
       </div>
 
@@ -178,10 +177,11 @@
       <div class="col-lg-2 col-md-3 footer-links">
         <h5  class=" text-white">Resources</h5>
         <ul>
-          <li><a href="#">Constitution</a></li>
-          <li><a href="#">Code of Ethics</a></li>
-          <li><a href="#">Member Directory</a></li>
-          <li><a href="#">Publications</a></li>
+          <li><a href="{% url 'constitution' %}">Constitution</a></li>
+          <li><a href="{% url 'code' %}">Code of Ethics</a></li>
+          <li><a href="{% url 'member_portal' %}">Member Directory</a></li>
+          <li><a href="{% url 'executive' %}">Executive Council</a></li>
+          
         </ul>
       </div>
 
@@ -204,9 +204,9 @@
       <div class="col-lg-2 col-md-3 footer-links">
         <h5  class=" text-white">Contact</h5>
         <ul>
-          <li><a href="#">PSN Secretariat, Port Harcourt, Rivers State, Nigeria</a></li>
-          <li><a href="#">info@psnrivers.org</a></li>
-          <li><a href="#">+234 801 234 5678</a></li>
+          <li><a href="https://maps.app.goo.gl/kdfNHAz5x9kMmgbcA"target="_blank">PSN Secretariat, Port Harcourt, Rivers State, Nigeria</a></li>
+          <li><a href="mailto:info@psnrivers.org"target="_blank">info@psnrivers.org</a></li>
+          <li><a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?"target="_blank">+234 801 234 5678</a></li> 
         </ul>
       </div>
 

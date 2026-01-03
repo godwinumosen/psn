@@ -214,7 +214,7 @@
               <small>{{ news.newsandevents_psnriver_publish_date }}</small>
             </div>
             <h5 class="fw-bold">
-             {{ news.newsandevents_psnriver_titl }}
+             {{ news.newsandevents_psnriver_title }}
             </h5>
             <p class="text-muted">
               {{ news.newsandevents_psnriver_description }}
@@ -255,11 +255,11 @@
     </p>
 
     <div class="d-flex justify-content-center gap-3 flex-wrap">
-      <a href="#" class="btn btn-success btn-lg px-4">
+      <a href="{% url 'register' %}" class="btn btn-success btn-lg px-4">
         Register Now →
       </a>
 
-      <a href="#" class="btn btn-outline-light btn-lg px-4">
+      <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg px-4">
         Contact Us
       </a>
     </div>
