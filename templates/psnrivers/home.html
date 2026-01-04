@@ -5,29 +5,62 @@
 
 
   <main class="main">
-    <section id="hero" class="hero section dark-background">
-  <img src="{% static 'assets/img/hero-bg.jpg'%}" alt="" data-aos="fade-in">
-  <div class="container">
-          <h2 data-aos="fade-up" data-aos-delay="100" 
-            style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; color: #ffffff; line-height:1.2; margin-bottom:0.5rem; font-size: clamp(1.5rem, 5vw, 2.5rem);">
-                Pharmaceutical Society of Nigeria<span class="d-none d-lg-inline"><br></span>
-          <span style="color: #ffbb2c;">Rivers State Branch</span>
-        </h2>
+  <section id="hero" class="hero section dark-background">
+    <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in">
 
+    <div class="container" style="max-width: 900px;">
 
+      <!-- Heading -->
+      <h2 data-aos="fade-up" data-aos-delay="100"
+          style="font-family: 'Playfair Display', Georgia, serif;
+                 font-weight: 700;
+                 color: #ffffff;
+                 line-height: 1.2;
+                 margin-bottom: 0.5rem;
+                 font-size: clamp(1.5rem, 5vw, 2.5rem);">
+        Pharmaceutical Society of Nigeria
+        <span class="d-none d-lg-inline"><br></span>
+        <span style="color: #ffbb2c;">Rivers State Branch</span>
+      </h2>
+
+      <!-- Paragraph -->
       <p data-aos="fade-up" data-aos-delay="200"
-        style="color: #fff; font-size: clamp(0.9rem, 2.5vw, 1.2rem); line-height: 1.5; max-width: 700px;">
-        Uniting pharmacists across Rivers State to promote excellence in pharmaceutical practice, 
+         style="color: #fff;
+                font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+                line-height: 1.5;
+                max-width: 700px;">
+        Uniting pharmacists across Rivers State to promote excellence in pharmaceutical practice,
         protect public health, and advance the pharmacy profession.
       </p>
 
+      <!-- ================= MOBILE BUTTONS ONLY ================= -->
+      <div class="d-block d-md-none mt-4">
+        <div class="d-flex flex-column gap-3">
+          <a href="{% url 'member_portal' %}"
+             class="btn-get-started btn-green d-flex align-items-center justify-content-center gap-2 w-100">
+            Become a Member <i class="bi bi-arrow-right"></i>
+          </a>
 
-    <div class="d-flex mt-4 gap-3" data-aos="fade-up" data-aos-delay="300">
-      <a href="{% url 'member_portal' %}" class="btn-get-started btn-green">Become a Member</a> 
-      <a href="{% url 'about' %}" class="btn-get-started">Learn About Us</a>
+          <a href="{% url 'about' %}"
+             class="btn-get-started w-100 text-center">
+            Learn About Us
+          </a>
+        </div>
+      </div>
+
+      <!-- ================= DESKTOP BUTTONS ONLY ================= -->
+      <div class="d-none d-md-flex mt-4 gap-3" data-aos="fade-up" data-aos-delay="300">
+        <a href="{% url 'member_portal' %}" class="btn-get-started btn-green">
+          Become a Member
+        </a>
+
+        <a href="{% url 'about' %}" class="btn-get-started">
+          Learn About Us
+        </a>
+      </div>
+
     </div>
-  </div>
-</section>
+  </section>
 
 
     
@@ -96,11 +129,9 @@
     
 
 
-
-
-
 <section class="py-5">
   <div class="container">
+
     <!-- Header -->
     <div class="text-center mb-5">
       <small class="text-warning fw-semibold text-uppercase">Quick Access</small>
@@ -110,20 +141,26 @@
         pharmaceutical excellence in Rivers State.
       </p>
     </div>
+
     <!-- ONE ROW -->
     <div class="row g-4">
+
       <!-- Card 1 -->
       <div class="col-xl-3 col-lg-4 col-md-6">
-        <div class="card h-100 border-0 rounded-4 service-card position-relative">
+        <div
+          class="card h-100 border-0 rounded-4 bg-white shadow-sm position-relative"
+          onmouseover="this.classList.add('bg-success','text-white')"
+          onmouseout="this.classList.remove('bg-success','text-white')"
+        >
           <div class="card-body p-4">
-            <div class="icon-box rounded-3 d-inline-flex p-3 mb-3">
-              <i class="bi bi-people fs-4"></i>
+            <div class="bg-light rounded-3 d-inline-flex p-3 mb-3">
+              <i class="bi bi-people fs-4 text-success"></i>
             </div>
             <h5 class="fw-bold">Membership</h5>
             <p class="text-muted">
               Join PSN Rivers and access exclusive benefits, resources, and networking opportunities.
             </p>
-            <a href="{% url 'register'%}" class="stretched-link fw-semibold text-decoration-none">
+            <a href="{% url 'register' %}" class="stretched-link fw-semibold text-decoration-none text-success">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -132,16 +169,20 @@
 
       <!-- Card 2 -->
       <div class="col-xl-3 col-lg-4 col-md-6">
-        <div class="card h-100 border-0 rounded-4 service-card position-relative">
+        <div
+          class="card h-100 border-0 rounded-4 bg-white shadow-sm position-relative"
+          onmouseover="this.classList.add('bg-success','text-white')"
+          onmouseout="this.classList.remove('bg-success','text-white')"
+        >
           <div class="card-body p-4">
-            <div class="icon-box rounded-3 d-inline-flex p-3 mb-3">
-              <i class="bi bi-search fs-4"></i>
+            <div class="bg-light rounded-3 d-inline-flex p-3 mb-3">
+              <i class="bi bi-search fs-4 text-success"></i>
             </div>
             <h5 class="fw-bold">Directory</h5>
             <p class="text-muted">
               Find registered pharmacists and licensed pharmacies across Rivers State.
             </p>
-            <a href="{% url 'directory'%}" class="stretched-link fw-semibold text-decoration-none">
+            <a href="{% url 'directory' %}" class="stretched-link fw-semibold text-decoration-none text-success">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -150,16 +191,20 @@
 
       <!-- Card 3 -->
       <div class="col-xl-3 col-lg-4 col-md-6">
-        <div class="card h-100 border-0 rounded-4 service-card position-relative">
+        <div
+          class="card h-100 border-0 rounded-4 bg-white shadow-sm position-relative"
+          onmouseover="this.classList.add('bg-success','text-white')"
+          onmouseout="this.classList.remove('bg-success','text-white')"
+        >
           <div class="card-body p-4">
-            <div class="icon-box rounded-3 d-inline-flex p-3 mb-3">
-              <i class="bi bi-book fs-4"></i>
+            <div class="bg-light rounded-3 d-inline-flex p-3 mb-3">
+              <i class="bi bi-book fs-4 text-success"></i>
             </div>
             <h5 class="fw-bold">News & Updates</h5>
             <p class="text-muted">
               Stay informed with the latest news, announcements, and publications.
             </p>
-            <a href="{% url 'news_events'%}" class="stretched-link fw-semibold text-decoration-none">
+            <a href="{% url 'news_events' %}" class="stretched-link fw-semibold text-decoration-none text-success">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -168,16 +213,20 @@
 
       <!-- Card 4 -->
       <div class="col-xl-3 col-lg-4 col-md-6">
-        <div class="card h-100 border-0 rounded-4 service-card position-relative">
+        <div
+          class="card h-100 border-0 rounded-4 bg-white shadow-sm position-relative"
+          onmouseover="this.classList.add('bg-success','text-white')"
+          onmouseout="this.classList.remove('bg-success','text-white')"
+        >
           <div class="card-body p-4">
-            <div class="icon-box rounded-3 d-inline-flex p-3 mb-3">
-              <i class="bi bi-calendar-event fs-4"></i>
+            <div class="bg-light rounded-3 d-inline-flex p-3 mb-3">
+              <i class="bi bi-calendar-event fs-4 text-success"></i>
             </div>
             <h5 class="fw-bold">Events</h5>
             <p class="text-muted">
               Discover upcoming conferences, seminars, workshops, and CPD programs.
             </p>
-            <a href="{% url 'news_events'%}" class="stretched-link fw-semibold text-decoration-none">
+            <a href="{% url 'news_events' %}" class="stretched-link fw-semibold text-decoration-none text-success">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -187,7 +236,6 @@
     </div>
   </div>
 </section>
-
 
 
 

@@ -57,7 +57,15 @@
     }
   }
 
+@media (min-width: 768px) {
+  .btn-get-started:hover {
+    transform: translateX(5px); /* Slight move to the right */
+    transition: transform 0.3s ease;
+  }
+}
 
+
+  
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
