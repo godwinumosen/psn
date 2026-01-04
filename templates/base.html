@@ -8,7 +8,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Psn Rivers</title>
+  <title>PsnRivers</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -40,32 +40,38 @@
 <body class="index-page">
 
   <!-- Top Bar -->
-  <!-- Fixed Top Bar -->
+  
 <div class="bg-success text-white py-1 py-md-1">
-    <div class="container-fluid px-3 px-md-4 pe-md-5">
-      <div class="d-flex justify-content-between align-items-center">
+  <div class="container-fluid px-3 px-md-4 pe-md-5">
+    <div class="d-flex justify-content-between align-items-center">
 
-        <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 gap-md-4">
-          <a href="mailto:info@psnrivers.org"target="_blank" >
-          <div class="text-nowrap text-white">
-            <i class="bi bi-envelope-fill me-2"></i> info@psnrivers.org
-          </div>
+      <!-- Left: Email & Phone (always horizontal) -->
+      <div class="d-flex align-items-center gap-3">
+        
+        <!-- Email -->
+        <a href="mailto:info@psnrivers.org" target="_blank" class="d-flex align-items-center text-white text-decoration-none">
+          <i class="bi bi-envelope-fill me-2"></i>
+          <span class="d-none d-md-inline">info@psnrivers.org</span>
         </a>
-        <a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?"target="_blank" >
-          <div class="text-nowrap text-white">
-            <i class="bi bi-telephone-fill me-2"></i> +234 801 234 5678
-          </div>
-        </a>
-        </div>
 
-        <div>
-          <a href="{% url 'member_portal' %}" class="text-white fw-semibold text-decoration-none">
-            Members Portal
-          </a>
-        </div>
+        <!-- Phone -->
+        <a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?" target="_blank" class="d-flex align-items-center text-white text-decoration-none">
+          <i class="bi bi-telephone-fill me-2"></i>
+          <span class="d-none d-md-inline">+234 801 234 5678</span>
+        </a>
+
       </div>
+
+      <!-- Right: Members Portal -->
+      <div>
+        <a href="{% url 'member_portal' %}" class="text-white fw-semibold text-decoration-none">
+          Members Portal
+        </a>
+      </div>
+
     </div>
   </div>
+</div>
 
 
 
