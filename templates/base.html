@@ -45,14 +45,14 @@
   <div class="container-fluid px-3 px-md-4 pe-md-5">
     <div class="d-flex justify-content-between align-items-center">
 
-      <!-- Icons + text (hide text on mobile) -->
+      <!-- Icons + text (hide text on mobile, bigger icons on mobile) -->
       <div class="d-flex align-items-center gap-3">
         <a href="mailto:info@psnrivers.org" target="_blank" class="d-flex align-items-center gap-1 text-white text-decoration-none">
-          <i class="bi bi-envelope-fill text-white"></i>
+          <i class="bi bi-envelope-fill text-white fs-4 fs-md-6"></i>
           <span class="d-none d-md-inline">info@psnrivers.org</span>
         </a>
         <a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?" target="_blank" class="d-flex align-items-center gap-1 text-white text-decoration-none">
-          <i class="bi bi-telephone-fill text-white"></i>
+          <i class="bi bi-telephone-fill text-white fs-4 fs-md-6"></i>
           <span class="d-none d-md-inline">+234 801 234 5678</span>
         </a>
       </div>
@@ -78,14 +78,15 @@
 
 
 
-
 <!-- Header -->
 <header id="header" class="header sticky-top">
   <div class="container-xl d-flex align-items-center">
 
+    <!-- Logo -->
     <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
       <img src="{% static 'assets/img/psn-logo.png' %}" alt="">
-      <h6 class="sitename ms-2">
+      <!-- Hide this text on mobile -->
+      <h6 class="sitename ms-2 d-none d-md-block">
         Pharmaceutical Society of Nigeria,<br>
         <span style="color:green">Rivers State Branch</span>
       </h6>
@@ -95,34 +96,17 @@
     <nav id="navmenu" class="navmenu">
       <ul>
         <li>
-          <a href="{% url 'home' %}"
-             class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-            Home
-          </a>
+          <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
         </li>
-
         <li>
-          <a href="{% url 'about' %}"
-             class="{% if request.path|slice:':6' == '/about' %}active{% endif %}">
-            About
-          </a>
+          <a href="{% url 'about' %}" class="{% if request.path|slice:':6' == '/about' %}active{% endif %}">About</a>
         </li>
-
         <li>
-          <a href="{% url 'news_events' %}"
-             class="{% if request.resolver_match.url_name == 'news_events' %}active{% endif %}">
-            News & Events
-          </a>
+          <a href="{% url 'news_events' %}" class="{% if request.resolver_match.url_name == 'news_events' %}active{% endif %}">News & Events</a>
         </li>
-
         <li><a href="{% url 'directory' %}">Directory</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
-
-        <li>
-          <a href="{% url 'member_portal' %}">
-            Members Portal
-          </a>
-        </li>
+        <li><a href="{% url 'member_portal' %}">Members Portal</a></li>
       </ul>
 
       <!-- Mobile Toggle -->
@@ -139,6 +123,7 @@
 
   </div>
 </header>
+
 
 
 
