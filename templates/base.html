@@ -18,7 +18,7 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -69,15 +69,7 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
+<!-- Header -->
 <!-- Header -->
 <header id="header" class="header sticky-top">
   <div class="container-xl d-flex align-items-center">
@@ -85,7 +77,6 @@
     <!-- Logo -->
     <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
       <img src="{% static 'assets/img/psn-logo.png' %}" alt="">
-      <!-- Hide this text on mobile -->
       <h6 class="sitename ms-2 d-none d-md-block">
         Pharmaceutical Society of Nigeria,<br>
         <span style="color:green">Rivers State Branch</span>
@@ -95,34 +86,46 @@
     <!-- Navigation -->
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li>
-          <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
-        </li>
-        <li>
-          <a href="{% url 'about' %}" class="{% if request.path|slice:':6' == '/about' %}active{% endif %}">About</a>
-        </li>
-        <li>
-          <a href="{% url 'news_events' %}" class="{% if request.resolver_match.url_name == 'news_events' %}active{% endif %}">News & Events</a>
-        </li>
+        <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
+        <li><a href="{% url 'about' %}" class="{% if request.path|slice:':6' == '/about' %}active{% endif %}">About</a></li>
+        <li><a href="{% url 'news_events' %}" class="{% if request.resolver_match.url_name == 'news_events' %}active{% endif %}">News & Events</a></li>
         <li><a href="{% url 'directory' %}">Directory</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
         <li><a href="{% url 'member_portal' %}">Members Portal</a></li>
+
+        <!-- Mobile-only Sign In / Join buttons -->
+        {% if not user.is_authenticated %}
+          <li class="d-md-none mt-2">
+            <a class="btn-getstarted w-100 mb-1" href="{% url 'login' %}">Sign In</a>
+            <a class="btn-getstarted w-100" href="{% url 'register' %}">Join PSN</a>
+          </li>
+        {% endif %}
+        {% if user.is_authenticated %}
+          <li class="d-md-none mt-2">
+            <a class="btn-getstarted w-100" href="{% url 'logout' %}">Logout</a>
+          </li>
+        {% endif %}
       </ul>
 
       <!-- Mobile Toggle -->
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
 
-    <!-- Login / Logout buttons -->
-    {% if user.is_authenticated %}
-      <a class="btn-getstarted ms-3" href="{% url 'logout' %}">Logout</a>
+    <!-- Desktop Sign In / Join buttons -->
+    {% if not user.is_authenticated %}
+      <div class="d-none d-md-flex ms-3">
+        <a class="btn-getstarted me-2" href="{% url 'login' %}">Sign In</a>
+        <a class="btn-getstarted" href="{% url 'register' %}">Join PSN</a>
+      </div>
     {% else %}
-      <a class="btn-getstarted ms-3" href="{% url 'login' %}">Sign In</a>
-      <a class="btn-getstarted ms-2" href="{% url 'register' %}">Join PSN</a>
+      <div class="d-none d-md-flex ms-3">
+        <a class="btn-getstarted" href="{% url 'logout' %}">Logout</a>
+      </div>
     {% endif %}
 
   </div>
 </header>
+
 
 
 

@@ -5,23 +5,30 @@
 
 
   <main class="main">
-    <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
-      <img src="{% static 'assets/img/hero-bg.jpg'%}" alt="" data-aos="fade-in">
-      <div class="container">
-        <h2 data-aos="fade-up" data-aos-delay="100">Pharmaceutical Society <br>of Nigeria</h2>
-        <h2 data-aos="fade-up" data-aos-delay="100" style="color: #d4af37;">Rivers State Branch</h2>
+  <img src="{% static 'assets/img/hero-bg.jpg'%}" alt="" data-aos="fade-in">
+  <div class="container">
+          <h2 data-aos="fade-up" data-aos-delay="100" 
+            style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; color: #ffffff; line-height:1.2; margin-bottom:0.5rem; font-size: clamp(1.5rem, 5vw, 2.5rem);">
+                Pharmaceutical Society of Nigeria<span class="d-none d-lg-inline"><br></span>
+          <span style="color: #ffbb2c;">Rivers State Branch</span>
+        </h2>
 
-        <p data-aos="fade-up" data-aos-delay="200" style="color: #fff;">Uniting pharmacists across Rivers State to promote excellence in<br> pharmaceutical practice, protect public health, and advance the <br>pharmacy profession.</p>
-     <div class="d-flex mt-4 gap-3" data-aos="fade-up" data-aos-delay="300">
-        <a href="{% url 'member_portal' %}" class="btn-get-started btn-green">
-          Become a Member
-        </a> 
-        <a href="{% url 'about' %}" class="btn-get-started">
-          Learn About Us
-        </a>
-      </div>
-    </section><!-- /Hero Section -->
+
+      <p data-aos="fade-up" data-aos-delay="200"
+        style="color: #fff; font-size: clamp(0.9rem, 2.5vw, 1.2rem); line-height: 1.5; max-width: 700px;">
+        Uniting pharmacists across Rivers State to promote excellence in pharmaceutical practice, 
+        protect public health, and advance the pharmacy profession.
+      </p>
+
+
+    <div class="d-flex mt-4 gap-3" data-aos="fade-up" data-aos-delay="300">
+      <a href="{% url 'member_portal' %}" class="btn-get-started btn-green">Become a Member</a> 
+      <a href="{% url 'about' %}" class="btn-get-started">Learn About Us</a>
+    </div>
+  </div>
+</section>
+
 
     
 <!-- Counts Section -->
