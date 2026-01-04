@@ -45,24 +45,19 @@
   <div class="container-fluid px-3 px-md-4 pe-md-5">
     <div class="d-flex justify-content-between align-items-center">
 
-      <!-- Left: Email & Phone (always horizontal) -->
+      <!-- Icons + text (hide text on mobile) -->
       <div class="d-flex align-items-center gap-3">
-        
-        <!-- Email -->
-        <a href="mailto:info@psnrivers.org" target="_blank" class="d-flex align-items-center text-white text-decoration-none">
-          <i class="bi bi-envelope-fill me-2"></i>
+        <a href="mailto:info@psnrivers.org" target="_blank" class="d-flex align-items-center gap-1 text-white text-decoration-none">
+          <i class="bi bi-envelope-fill text-white"></i>
           <span class="d-none d-md-inline">info@psnrivers.org</span>
         </a>
-
-        <!-- Phone -->
-        <a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?" target="_blank" class="d-flex align-items-center text-white text-decoration-none">
-          <i class="bi bi-telephone-fill me-2"></i>
+        <a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?" target="_blank" class="d-flex align-items-center gap-1 text-white text-decoration-none">
+          <i class="bi bi-telephone-fill text-white"></i>
           <span class="d-none d-md-inline">+234 801 234 5678</span>
         </a>
-
       </div>
 
-      <!-- Right: Members Portal -->
+      <!-- Members Portal link -->
       <div>
         <a href="{% url 'member_portal' %}" class="text-white fw-semibold text-decoration-none">
           Members Portal
@@ -72,6 +67,15 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
 
 
 
