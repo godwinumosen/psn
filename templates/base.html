@@ -45,25 +45,30 @@
   <div class="container-fluid px-3 px-md-4 pe-md-5">
     <div class="d-flex justify-content-between align-items-center">
 
-      <!-- Icons + text (hide text on mobile, bigger icons on mobile) -->
-      <div class="d-flex align-items-center gap-3">
-        <a href="mailto:info@psnrivers.org" target="_blank" class="d-flex align-items-center gap-1 text-white text-decoration-none">
-          <i class="bi bi-envelope-fill text-white fs-4 fs-md-6"></i>
-          <span class="d-none d-md-inline">info@psnrivers.org</span>
-        </a>
-        <a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?" target="_blank" class="d-flex align-items-center gap-1 text-white text-decoration-none">
-          <i class="bi bi-telephone-fill text-white fs-4 fs-md-6"></i>
-          <span class="d-none d-md-inline">+234 801 234 5678</span>
-        </a>
-      </div>
+    <!-- Icons + text (hide text on mobile, bigger icons on mobile) -->
+    <div class="d-flex align-items-center gap-3">
+      <a href="mailto:info@psnrivers.org"
+        target="_blank"
+        class="d-flex align-items-center gap-1 text-white text-decoration-none font-sans-serif">
+        <i class="bi bi-envelope-fill text-white fs-4 fs-md-6"></i>
+        <span class="d-none d-md-inline">info@psnrivers.org</span>
+      </a>
+
+      <a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?"
+        target="_blank"
+        class="d-flex align-items-center gap-1 text-white text-decoration-none font-sans-serif">
+        <i class="bi bi-telephone-fill text-white fs-4 fs-md-6"></i>
+        <span class="d-none d-md-inline">+234 801 234 5678</span>
+      </a>
+    </div>
 
       <!-- Members Portal link -->
       <div>
-        <a href="{% url 'member_portal' %}" class="text-white fw-semibold text-decoration-none">
-          Members Portal
+        <a href="{% url 'member_portal' %}"
+          class="text-white fw-semibold text-decoration-none font-sans-serif">
+          Members Portal 
         </a>
       </div>
-
     </div>
   </div>
 </div>
@@ -77,21 +82,23 @@
     <!-- Logo -->
     <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
       <img src="{% static 'assets/img/psn-logo.png' %}" alt="">
-      <h6 class="sitename ms-2 d-none d-md-block">
+      <h6 class="sitename ms-2 d-none d-md-block"
+          style="font-family: 'Playfair Display', serif;">
         Pharmaceutical Society of Nigeria,<br>
-        <span style="color:green">Rivers State Branch</span>
+        <span style="color:green;">Rivers State Branch</span>
       </h6>
     </a>
 
+
     <!-- Navigation -->
-    <nav id="navmenu" class="navmenu">
+    <nav id="navmenu" class="navmenu"style="font-family: 'san-serif';">
       <ul>
         <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
         <li><a href="{% url 'about' %}" class="{% if request.path|slice:':6' == '/about' %}active{% endif %}">About</a></li>
-        <li><a href="{% url 'news_events' %}" class="{% if request.resolver_match.url_name == 'news_events' %}active{% endif %}">News & Events</a></li>
+        <li><a href="{% url 'news_events' %}" class="{% if request.resolver_match.url_name == 'news_events' %}active{% endif %}">News & Updates</a></li>
         <li><a href="{% url 'directory' %}">Directory</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
-        <li><a href="{% url 'member_portal' %}">Members Portal</a></li>
+        <!--<li><a href="{% url 'member_portal' %}">Members Portal</a></li>-->
 
         <!-- Mobile-only Sign In / Join buttons -->
         {% if not user.is_authenticated %}
@@ -145,7 +152,7 @@
       
       <!-- About Section -->
       <div class="col-lg-4 col-md-6 footer-about">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="{% url 'home' %}" class="logo d-flex align-items-center">
           <span class="sitename text-white">PSN Rivers <h4 class=" text-white">State Branch</h4></span>
         </a>
         <p  class=" text-white">The Pharmaceutical Society of Nigeria, Rivers State Branch is committed to advancing pharmacy practice and promoting public health in Rivers State.</p>
@@ -183,7 +190,7 @@
 
       <!-- Newsletter -->
       <div class="col-lg-4 col-md-12 footer-newsletter">
-        <h4  class=" text-white">Stay Updated</h4>
+        <h5  class=" text-white">Stay Updated</h5>
         <p  class=" text-white">Subscribe to our newsletter for the latest news, events, and updates from PSN Rivers.</p>
         <form action="forms/newsletter.php" method="post" class="php-email-form">
           <div class="newsletter-form ">

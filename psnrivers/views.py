@@ -24,16 +24,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def index (request):
     return render (request, 'psnrivers/home.html')
 
-'''class HomeView(ListView): 
-    #model = PsnRiversPost 
-    template_name = 'psnrivers/home.html'
-    
-    def get_context_data(self, **kwargs):  
-        context = super().get_context_data(**kwargs)
-        context['about_psnrivers'] = AboutPsnRivers.objects.all()  
-        context['newsandevents'] = NewsAndEventsPsnRivers.objects.all()
-        return context    '''
-
 class HomeView(TemplateView):
     template_name = 'psnrivers/home.html'
 
@@ -43,20 +33,21 @@ class HomeView(TemplateView):
         context['about_psnrivers'] = AboutPsnRivers.objects.all()
         return context
 
-#The first ArticleDetailView page down
-'''class ArticleDetailView(DetailView):
-    model = PsnRiversPost
-    template_name = 'psnrivers/article_detail.html'
-    def ArticleDetailViewPsnRiversPost(request, pk): 
-        object = get_object_or_404(PsnRiversPost, pk=pk)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-        return render(request, 'article_detail.html', {'detail': object})'''
-
 
 # This is for the news and events pae
-class NewsAndEventsView(ListView): 
-    model = NewsAndEventsPsnRivers 
+class NewsAndEventsView(ListView):
+    model = NewsAndEventsPsnRivers
     template_name = 'psnrivers/news_events.html'
-    
+    context_object_name = 'articles'
+
+
+
+#The first ArticleDetailView page for news and events
+class ArticleDetailView(DetailView):
+    model = NewsAndEventsPsnRivers
+    template_name = 'psnrivers/article_detail.html'
+    context_object_name = 'article'
+
     
 class UpcomingNewsAndEventsView(ListView): 
     model = UpcominEventsPsnRivers 

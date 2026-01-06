@@ -18,10 +18,14 @@
   <!-- Top Bar -->
   <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
     <div class="btn-group">
-      <button class="btn btn-light text-success">News</button>
-      <button class="btn btn-outline-success ">Upcoming Events</button>
+      <a href="{% url 'news_events' %}" class="btn btn-outline-success ">
+        News </i>
+      </a>
+        <a href="{% url 'upcoming_news_events' %}" class="btn btn-outline-success ">
+       Upcoming Events </i>
+      </a>
     </div>
-
+  
     <form class="d-flex mt-3 mt-md-0" role="search">
       <input class="form-control" type="search" placeholder="Search news..." aria-label="Search">
     </form>

@@ -987,10 +987,10 @@ section,
   letter-spacing: 1px;
   display: inline-block;
   padding: 8px 35px 10px 35px;
-  border-radius: 50px;
+  border-radius: 10px;
   transition: 0.4s;
   margin-top: 30px;
-  border: 2px solid var(--default-color);
+  border: 1px solid var(--default-color);
   color: var(--default-color);
 }
 
