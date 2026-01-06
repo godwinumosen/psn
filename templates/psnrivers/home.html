@@ -138,7 +138,7 @@
     <div class="text-center mb-5">
       <small class="text-warning fw-semibold text-uppercase">Quick Access</small>
       <h2 class="fw-bold mt-2"style="font-family:Playfair Display;">Explore Our Services</h2>
-      <p class="text-muted mx-auto mt-3" style="max-width: 600px;font-family: sans-serif;">
+      <p class="text-muted mx-auto mt-3"style="max-width: 600px;font-family: sans-serif;">
         Access key resources and services designed to support pharmacists and promote
         pharmaceutical excellence in Rivers State.
       </p>
@@ -158,11 +158,11 @@
             <div class="bg-light rounded-3 d-inline-flex p-3 mb-3">
               <i class="bi bi-people fs-4 text-success"></i>
             </div>
-            <h5 class="fw-bold">Membership</h5>
-            <p class="text-muted">
+            <h5 class="fw-bold"style="font-family:Playfair Display;">Membership</h5>
+            <p class="text-muted"style="font-family: sans-serif;">
               Join PSN Rivers and access exclusive benefits, resources, and networking opportunities.
             </p>
-            <a href="{% url 'register' %}" class="stretched-link fw-semibold text-decoration-none text-success">
+            <a href="{% url 'register' %}" class="stretched-link fw-semibold text-decoration-none text-success"style="font-family: sans-serif;">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -180,11 +180,11 @@
             <div class="bg-light rounded-3 d-inline-flex p-3 mb-3">
               <i class="bi bi-search fs-4 text-success"></i>
             </div>
-            <h5 class="fw-bold">Directory</h5>
-            <p class="text-muted">
+            <h5 class="fw-bold"style="font-family:Playfair Display;">Directory</h5>
+            <p class="text-muted"style="font-family: sans-serif;">
               Find registered pharmacists and licensed pharmacies across Rivers State.
             </p>
-            <a href="{% url 'directory' %}" class="stretched-link fw-semibold text-decoration-none text-success">
+            <a href="{% url 'directory' %}" class="stretched-link fw-semibold text-decoration-none text-success"style="font-family: sans-serif;">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -202,11 +202,11 @@
             <div class="bg-light rounded-3 d-inline-flex p-3 mb-3">
               <i class="bi bi-book fs-4 text-success"></i>
             </div>
-            <h5 class="fw-bold">News & Updates</h5>
-            <p class="text-muted">
+            <h5 class="fw-bold"style="font-family:Playfair Display;">News & Updates</h5>
+            <p class="text-muted"style="font-family: sans-serif;">
               Stay informed with the latest news, announcements, and publications.
             </p>
-            <a href="{% url 'news_events' %}" class="stretched-link fw-semibold text-decoration-none text-success">
+            <a href="{% url 'news_events' %}" class="stretched-link fw-semibold text-decoration-none text-success"style="font-family: sans-serif;">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -224,11 +224,11 @@
             <div class="bg-light rounded-3 d-inline-flex p-3 mb-3">
               <i class="bi bi-calendar-event fs-4 text-success"></i>
             </div>
-            <h5 class="fw-bold">Events</h5>
-            <p class="text-muted">
+            <h5 class="fw-bold"style="font-family:Playfair Display;">Events</h5>
+            <p class="text-muted"style="font-family: sans-serif;">
               Discover upcoming conferences, seminars, workshops, and CPD programs.
             </p>
-            <a href="{% url 'news_events' %}" class="stretched-link fw-semibold text-decoration-none text-success">
+            <a href="{% url 'news_events' %}" class="stretched-link fw-semibold text-decoration-none text-success"style="font-family: sans-serif;">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -260,22 +260,22 @@
       {% for news in newsandevents %}
       <div class="col-lg-4">
         <div class="card h-100 border-0 rounded-4 shadow-sm news-card position-relative">
-          <span class="badge bg-warning text-dark position-absolute news-badge rounded-pill px-3 py-2">
+          <span class="badge bg-warning text-dark position-absolute news-badge rounded-pill px-3 py-2"style="font-family: sans-serif;">
             {{ news.newsandevents_psnriver_status }}
           </span>
           <img src="{{ news.newsandevents_psnriver_img.url }}" class="card-img-top rounded-top-4 news-img" alt="">
           <div class="card-body p-4">
             <div class="d-flex align-items-center text-muted mb-2">
               <i class="bi bi-calendar-event me-2"></i>
-              <small>{{ news.newsandevents_psnriver_publish_date }}</small>
+              <small style="font-family: sans-serif;">{{ news.newsandevents_psnriver_publish_date }}</small>
             </div>
-            <h5 class="fw-bold">
+            <h5 class="fw-bold" style="font-family:Playfair Display;">
              {{ news.newsandevents_psnriver_title }}
             </h5>
-            <p class="text-muted">
+            <p class="text-muted"style="font-family: sans-serif;">
               {{ news.newsandevents_psnriver_description }}
             </p>
-            <a href="{% url 'detail' news.pk %}" class="text-success fw-semibold text-decoration-none">
+            <a href="{% url 'detail' news.pk %}" class="text-success fw-semibold text-decoration-none"style="font-family: sans-serif;">
               Read more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -299,23 +299,23 @@
   "
 >
   <div class="container">
-    <h1 class="display-4 fw-bold mb-4 text-white">
+    <h1 class="display-4 fw-bold mb-4 text-white"style="font-family: Playfair Display;">
       Ready to Join the Leading<br>
       Pharmacy Association in<br>
       Rivers State?
     </h1>
 
-    <p class="lead mb-4">
+    <p class="lead mb-4"style="font-family: sans-serif;">
       Become part of a community dedicated to advancing pharmaceutical practice,<br>
       protecting public health, and supporting pharmacists across Rivers State.
     </p>
 
     <div class="d-flex justify-content-center gap-3 flex-wrap">
-      <a href="{% url 'register' %}" class="btn btn-success btn-lg px-4">
+      <a href="{% url 'register' %}" class="btn btn-success btn-lg px-4"style="font-family: sans-serif;">
         Register Now →
       </a>
 
-      <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg px-4">
+      <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg px-4"style="font-family: sans-serif;">
         Contact Us
       </a>
     </div>
