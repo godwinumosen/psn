@@ -26,7 +26,6 @@
         alert-dismissible fade show" role="alert">
 
         {{ message }}
-
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
     {% endfor %}
@@ -43,7 +42,6 @@
         </div>
       </div>
     </div>
-
     <div class="col-md-3">
       <div class="card border-start border-warning border-4 h-100">
         <div class="card-body">
@@ -52,7 +50,6 @@
         </div>
       </div>
     </div>
-
     <div class="col-md-3">
       <div class="card border-start border-success border-4 h-100">
         <div class="card-body">
@@ -61,7 +58,6 @@
         </div>
       </div>
     </div>
-
     <div class="col-md-3">
       <div class="card border-start border-danger border-4 h-100">
         <div class="card-body">
@@ -77,9 +73,7 @@
     <div class="card mb-3">
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="d-flex gap-3">
-          <div class="rounded-circle bg-success-subtle text-success
-                      d-flex align-items-center justify-content-center"
-               style="width:40px;height:40px;">
+          <div class="rounded-circle bg-success-subtle text-success d-flex align-items-center justify-content-center" style="width:40px;height:40px;">
             {{ app.full_name|slice:":1" }}
           </div>
           <div>
@@ -107,27 +101,24 @@
             <i class="bi bi-eye"></i> View Details
           </a>
 
-          <!-- Approve / Decline buttons only for pending -->
+          <!-- Approve button for pending applications -->
           {% if not app.approved and not app.declined %}
-          <!-- Approve form -->
-          <form method="post" class="d-inline">
-            {% csrf_token %}
-            <input type="hidden" name="application_id" value="{{ app.id }}">
-            <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">
-              <i class="bi bi-check-circle"></i> Approve
-            </button>
-          </form>
+            <form method="post" class="d-inline">
+              {% csrf_token %}
+              <input type="hidden" name="application_id" value="{{ app.id }}">
+              <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">
+                <i class="bi bi-check-circle"></i> Approve
+              </button>
+            </form>
 
-          <!-- Trigger Decline Modal -->
-          <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#declineModal"
-              data-app-id="{{ app.id }}"
-              data-app-name="{{ app.full_name }}">
+            <!-- Trigger Decline Modal -->
+            <button type="button" class="btn btn-danger btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#declineModal"
+                    data-app-id="{{ app.id }}"
+                    data-app-name="{{ app.full_name }}">
               <i class="bi bi-x-circle"></i> Decline
-          </button>
+            </button>
           {% endif %}
         </div>
       </div>
@@ -182,11 +173,7 @@
             Cancel
           </button>
 
-          <button
-            type="submit"
-            name="action"
-            value="decline"
-            class="btn btn-danger">
+          <button type="submit" name="action" value="decline" class="btn btn-danger">
             Confirm Decline
           </button>
         </div>
