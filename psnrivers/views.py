@@ -83,8 +83,27 @@ def member_portal (request):
 
 
 
+
 @login_required
 def track_status(request):
+    if request.method == 'POST':
+        app_id = request.POST.get('application_id')
+        action = request.POST.get('action')
+        application = get_object_or_404(ClearanceApplication, id=app_id, user=request.user)
+
+        if action == 'approve':
+            application.status = 'approved'
+            messages.success(request, f"{application.full_name}'s application has been approved.")
+        elif action == 'decline':
+            application.status = 'declined'
+            decline_reason = request.POST.get('decline_reason', '')
+            application.decline_reason = decline_reason
+            messages.error(request, f"{application.full_name}'s application has been declined.")
+        
+        application.save()
+        return redirect('track_status')  # reload page to show updated status
+
+    # GET request
     applications = ClearanceApplication.objects.filter(user=request.user).order_by('-submitted_at')
     latest_application = applications.first()
 
@@ -93,6 +112,7 @@ def track_status(request):
         'latest_application': latest_application,
     }
     return render(request, 'psnrivers/track_status.html', context)
+
 
 
 

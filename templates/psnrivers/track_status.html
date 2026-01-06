@@ -21,11 +21,11 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="fw-semibold mb-0">Latest Application</h4>
 
-    {% if latest_application.status == 'approved' %}
+    {% if latest_application.approved %}
       <span class="badge rounded-pill bg-success px-3 py-2">
         <i class="bi bi-check-circle me-1"></i> Approved
       </span>
-    {% elif latest_application.status == 'declined' %}
+    {% elif latest_application.declined %}
       <span class="badge rounded-pill bg-danger px-3 py-2">
         <i class="bi bi-x-circle me-1"></i> Declined
       </span>
@@ -37,19 +37,19 @@
   </div>
 
   <!-- Status Alert -->
-  {% if latest_application.status == 'pending' %}
-  <div class="alert alert-warning d-flex align-items-start mb-4">
+  {% if latest_application.approved %}
+  <div class="alert alert-success d-flex align-items-start mb-4">
     <div class="me-3 fs-4">
-      <i class="bi bi-clock-fill"></i>
+      <i class="bi bi-check-circle-fill"></i>
     </div>
     <div>
-      <h6 class="fw-semibold mb-1">Application Under Review</h6>
+      <h6 class="fw-semibold mb-1">Application Approved</h6>
       <p class="mb-0 small">
-        Your clearance application is being reviewed by PSN Rivers officials.
+        Your clearance application has been approved by the PSN Rivers officials.
       </p>
     </div>
   </div>
-  {% elif latest_application.status == 'declined' %}
+  {% elif latest_application.declined %}
   <div class="alert alert-danger d-flex align-items-start mb-4">
     <div class="me-3 fs-4">
       <i class="bi bi-x-circle-fill"></i>
@@ -58,6 +58,21 @@
       <h6 class="fw-semibold mb-1">Application Declined</h6>
       <p class="mb-0 small">
         Your clearance application has been declined by the PSN Rivers officials.
+        {% if latest_application.decline_reason %}
+          Reason: {{ latest_application.decline_reason }}
+        {% endif %}
+      </p>
+    </div>
+  </div>
+  {% else %}
+  <div class="alert alert-warning d-flex align-items-start mb-4">
+    <div class="me-3 fs-4">
+      <i class="bi bi-clock-fill"></i>
+    </div>
+    <div>
+      <h6 class="fw-semibold mb-1">Application Under Review</h6>
+      <p class="mb-0 small">
+        Your clearance application is being reviewed by PSN Rivers officials.
       </p>
     </div>
   </div>
@@ -112,11 +127,11 @@
           </div>
         </div>
 
-        {% if app.status == 'approved' %}
+        {% if app.approved %}
           <span class="badge bg-success-subtle text-success border border-success">
             <i class="bi bi-check-circle me-1"></i> Approved
           </span>
-        {% elif app.status == 'declined' %}
+        {% elif app.declined %}
           <span class="badge bg-danger-subtle text-danger border border-danger">
             <i class="bi bi-x-circle me-1"></i> Declined
           </span>
