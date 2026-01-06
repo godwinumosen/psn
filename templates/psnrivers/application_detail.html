@@ -2,33 +2,128 @@
 {% block title %} Application Details {% endblock %}
 {% block content %}
 
+<!-- Page Header -->
 <div class="page-title py-5 bg-success mb-5">
   <div class="container text-white">
-    <p><a href="/" class="text-white-50 text-decoration-none">Home</a> <span class="mx-2">></span> Application Details </p>
+    <p>
+      <a href="/" class="text-white-50 text-decoration-none">Home</a>
+      <span class="mx-2">></span>
+      Application Details
+    </p>
     <h1 class="display-4 fw-bold">Application Details</h1>
     <p class="lead mb-0">View application details</p>
   </div>
 </div>
 
+<!-- Content -->
+<div class="container mb-5">
+  <div class="card border-0 shadow-sm rounded-4">
+    <div class="card-body p-4">
 
-<div class="container my-5">
-    <h3 class="fw-bold mb-3">Application Details</h3>
-
-    <div class="card mb-3">
-        <div class="card-body">
-            <p><strong>Applicant Name:</strong> {{ app.full_name }}</p>
-            <p><strong>Membership Number:</strong> {{ app.membership_number }}</p>
-            <p><strong>Technical Group:</strong> {{ app.technical_group }}</p>
-            <p><strong>Clearance Year:</strong> {{ app.clearance_year }}</p>
-            <p><strong>Submitted At:</strong> {{ app.submitted_at|date:"F j, Y" }}</p>
-            <p><strong>Status:</strong> {{ app.status }}</p>
-            <p><strong>Proof of Payment:</strong> <a href="{{ app.proof_of_payment.url }}">View File</a></p>
-            {% if app.supporting_document %}
-            <p><strong>Supporting Document:</strong> <a href="{{ app.supporting_document.url }}">View File</a></p>
-            {% endif %}
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-start mb-4">
+        <div>
+          <h4 class="fw-bold mb-1">Application Details</h4>
+          <p class="text-muted mb-0">
+            Review the clearance application for {{ app.full_name }}
+          </p>
         </div>
-    </div>
+      </div>
 
-    <a href="{% url 'review_applications' %}" class="btn btn-secondary">Back to Review</a>
+      <!-- Status + Date -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <span class="badge rounded-pill 
+          {% if app.status == 'Pending' %}bg-warning text-dark
+          {% elif app.status == 'Approved' %}bg-success
+          {% elif app.status == 'Declined' %}bg-danger
+          {% else %}bg-secondary{% endif %}
+          px-3 py-2">
+          {{ app.status }}
+        </span>
+
+        <small class="text-muted">
+          Submitted: {{ app.submitted_at|date:"F j, Y" }}
+        </small>
+      </div>
+
+      <!-- Details -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-6">
+          <small class="text-muted">Full Name</small>
+          <p class="fw-semibold mb-0">{{ app.full_name }}</p>
+        </div>
+
+        <div class="col-md-6">
+          <small class="text-muted">Membership Number</small>
+          <p class="fw-semibold mb-0">{{ app.membership_number }}</p>
+        </div>
+
+        <div class="col-md-6">
+          <small class="text-muted">Technical Group</small>
+          <p class="fw-semibold mb-0">{{ app.technical_group }}</p>
+        </div>
+
+        <div class="col-md-6">
+          <small class="text-muted">Clearance Year</small>
+          <p class="fw-semibold mb-0">{{ app.clearance_year }}</p>
+        </div>
+      </div>
+
+      <!-- Submitted Documents -->
+      <div class="mb-4">
+        <h6 class="fw-semibold mb-3">Submitted Documents</h6>
+
+        <div class="row g-3">
+
+          <!-- Proof of Payment -->
+          <div class="col-md-4">
+            <div class="card h-100 text-center border rounded-4">
+              <div class="card-body">
+                <div class="fs-3 mb-2">📄</div>
+                <p class="fw-semibold mb-1">Proof of Payment</p>
+                <a href="{{ app.proof_of_payment.url }}" class="btn btn-sm btn-outline-success">
+                  View File
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Supporting Document -->
+          {% if app.supporting_document %}
+          <div class="col-md-4">
+            <div class="card h-100 text-center border rounded-4">
+              <div class="card-body">
+                <div class="fs-3 mb-2">📄</div>
+                <p class="fw-semibold mb-1">Supporting Document</p>
+                <a href="{{ app.supporting_document.url }}" class="btn btn-sm btn-outline-success">
+                  View File
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="d-flex justify-content-end gap-2">
+        <a href="{% url 'review_applications' %}" class="btn btn-outline-secondary px-4">
+          Back
+        </a>
+
+        {% if app.status == 'Pending' %}
+        <a href="{% url 'approve_application' app.id %}" class="btn btn-success px-4">
+          ✔ Approve
+        </a>
+        <a href="{% url 'decline_application' app.id %}" class="btn btn-danger px-4">
+          ✖ Decline
+        </a>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
 </div>
+
 {% endblock %}
