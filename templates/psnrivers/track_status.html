@@ -128,13 +128,13 @@
         </div>
 
         {% if app.approved %}
-          <span class="badge bg-success-subtle text-success border border-success">
+          <a href="{% url 'application_detail' app.id %}" class="badge bg-success-subtle text-success border border-success text-decoration-none">
             <i class="bi bi-check-circle me-1"></i> Approved
-          </span>
+          </a>
         {% elif app.declined %}
-          <span class="badge bg-danger-subtle text-danger border border-danger">
+          <a href="{% url 'application_detail' app.id %}" class="badge bg-danger-subtle text-danger border border-danger text-decoration-none">
             <i class="bi bi-x-circle me-1"></i> Declined
-          </span>
+          </a>
         {% else %}
           <span class="badge bg-warning-subtle text-warning border border-warning">
             <i class="bi bi-hourglass-split me-1"></i> Pending
