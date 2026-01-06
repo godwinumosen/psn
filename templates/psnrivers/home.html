@@ -25,24 +25,26 @@
 
       <!-- Paragraph -->
       <p data-aos="fade-up" data-aos-delay="200"
-         style="color: #fff;
+        style="color: #fff;
                 font-size: clamp(0.9rem, 2.5vw, 1.2rem);
                 line-height: 1.5;
-                max-width: 700px;">
+                max-width: 700px;
+                font-family: sans-serif;">
         Uniting pharmacists across Rivers State to promote excellence in pharmaceutical practice,
         protect public health, and advance the pharmacy profession.
       </p>
+
 
       <!-- ================= MOBILE BUTTONS ONLY ================= -->
       <div class="d-block d-md-none mt-4">
         <div class="d-flex flex-column gap-3">
           <a href="{% url 'member_portal' %}"
-             class="btn-get-started btn-green d-flex align-items-center justify-content-center gap-2 w-100">
+             class="btn-get-started btn-green d-flex align-items-center justify-content-center gap-2 w-100"style="font-family: sans-serif;">
             Become a Member <i class="bi bi-arrow-right"></i>
           </a>
 
           <a href="{% url 'about' %}"
-             class="btn-get-started w-100 text-center">
+             class="btn-get-started w-100 text-center"style="font-family: sans-serif;">
             Learn About Us
           </a>
         </div>
@@ -50,11 +52,11 @@
 
       <!-- ================= DESKTOP BUTTONS ONLY ================= -->
       <div class="d-none d-md-flex mt-4 gap-3" data-aos="fade-up" data-aos-delay="300">
-        <a href="{% url 'member_portal' %}" class="btn-get-started btn-green">
+        <a href="{% url 'member_portal' %}" class="btn-get-started btn-green"style="font-family: sans-serif;">
           Become a Member
         </a>
 
-        <a href="{% url 'about' %}" class="btn-get-started">
+        <a href="{% url 'about' %}" class="btn-get-started"style="font-family: sans-serif;">
           Learn About Us
         </a>
       </div>
@@ -72,21 +74,21 @@
       <div class="col-lg-3 col-md-6">
         <div class="stats-item stats-box text-center">
           <span data-purecounter-start="0" data-purecounter-end="2500" data-purecounter-duration="1" class="purecounter inline-plus"></span>
-          <p>Registered Members</p>
+          <p style="font-family:sans-serif;">Registered Members</p>
         </div>
       </div><!-- End Stats Item -->
 
       <div class="col-lg-3 col-md-6">
         <div class="stats-item stats-box text-center">
           <span data-purecounter-start="0" data-purecounter-end="500" data-purecounter-duration="1" class="purecounter inline-plus"></span>
-          <p>Licensed Pharmacies</p>
+          <p style="font-family:sans-serif;">Licensed Pharmacies</p>
         </div>
       </div><!-- End Stats Item -->
 
       <div class="col-lg-3 col-md-6">
         <div class="stats-item stats-box text-center">
           <span data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="1" class="purecounter inline-plus"></span>
-          <p>Years of Service</p>
+          <p style="font-family:sans-serif;">Years of Service</p>
         </div>
       </div><!-- End Stats Item -->
 
@@ -107,17 +109,17 @@
           </div>
           <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
              <h5 style="color: #ffbb2c;">About PSN Rivers</h5>
-            <h1>{{ about_psnriver.about_psnriver_title }}</h1>
-            <p class="fst-sarif">{{ about_psnriver.about_psnriver_description }}</p>
+            <h1 style="font-family: 'Playfair Display', serif;">{{ about_psnriver.about_psnriver_title }}</h1>
+            <p class="fst-sarif"style="font-family:sans-serif;">{{ about_psnriver.about_psnriver_description }}</p>
 
-            <p class="fst-sarif"> {{ about_psnriver.about_psnriver_description2 }}</p>
+            <p class="fst-sarif"style="font-family:sans-serif;"> {{ about_psnriver.about_psnriver_description2 }}</p>
       
             <div class="about-actions">
-              <a href="{% url 'about' %}" class="btn btn-success about-btn">
+              <a href="{% url 'about' %}" class="btn btn-success about-btn"style="font-family:sans-serif;">
                 Read More <i class="bi bi-arrow-right"></i>
               </a>
 
-              <a href="{% url 'executive' %}" class="btn btn-outline-success about-btn">
+              <a href="{% url 'executive' %}" class="btn btn-outline-success about-btn"style="font-family:sans-serif;">
                 Meet Our Executive Council
               </a>
             </div>
@@ -135,8 +137,8 @@
     <!-- Header -->
     <div class="text-center mb-5">
       <small class="text-warning fw-semibold text-uppercase">Quick Access</small>
-      <h2 class="fw-bold mt-2">Explore Our Services</h2>
-      <p class="text-muted mx-auto mt-3" style="max-width: 600px;">
+      <h2 class="fw-bold mt-2"style="font-family:Playfair Display;">Explore Our Services</h2>
+      <p class="text-muted mx-auto mt-3" style="max-width: 600px;font-family: sans-serif;">
         Access key resources and services designed to support pharmacists and promote
         pharmaceutical excellence in Rivers State.
       </p>

@@ -8,7 +8,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>PsnRivers</title>
+  <title style="font-family: sans-serif;">PsnRivers</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -51,21 +51,21 @@
         target="_blank"
         class="d-flex align-items-center gap-1 text-white text-decoration-none font-sans-serif">
         <i class="bi bi-envelope-fill text-white fs-4 fs-md-6"></i>
-        <span class="d-none d-md-inline">info@psnrivers.org</span>
+        <span class="d-none d-md-inline"style="font-family: sans-serif;">info@psnrivers.org</span>
       </a>
 
       <a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?"
         target="_blank"
         class="d-flex align-items-center gap-1 text-white text-decoration-none font-sans-serif">
         <i class="bi bi-telephone-fill text-white fs-4 fs-md-6"></i>
-        <span class="d-none d-md-inline">+234 801 234 5678</span>
+        <span class="d-none d-md-inline"style="font-family: sans-serif;">+234 801 234 5678</span>
       </a>
     </div>
 
       <!-- Members Portal link -->
       <div>
         <a href="{% url 'member_portal' %}"
-          class="text-white fw-semibold text-decoration-none font-sans-serif">
+          class="text-white fw-semibold text-decoration-none"style="font-family: sans-serif;">
           Members Portal 
         </a>
       </div>
@@ -85,13 +85,13 @@
       <h6 class="sitename ms-2 d-none d-md-block"
           style="font-family: 'Playfair Display', serif;">
         Pharmaceutical Society of Nigeria,<br>
-        <span style="color:green;">Rivers State Branch</span>
+        <span style="color: #198754;">Rivers State Branch</span>
       </h6>
     </a>
 
 
     <!-- Navigation -->
-    <nav id="navmenu" class="navmenu"style="font-family: 'san-serif';">
+    <nav id="navmenu" class="navmenu"style="font-family:sans-serif;">
       <ul>
         <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
         <li><a href="{% url 'about' %}" class="{% if request.path|slice:':6' == '/about' %}active{% endif %}">About</a></li>
@@ -121,12 +121,12 @@
     <!-- Desktop Sign In / Join buttons -->
     {% if not user.is_authenticated %}
       <div class="d-none d-md-flex ms-3">
-        <a class="btn-getstarted me-2" href="{% url 'login' %}">Sign In</a>
-        <a class="btn-getstarted" href="{% url 'register' %}">Join PSN</a>
+        <a class="btn-getstarted me-2" href="{% url 'login' %}"style="font-family:sans-serif;">Sign In</a>
+        <a class="btn-getstarted" href="{% url 'register' %}"style="font-family:sans-serif;">Join PSN</a>
       </div>
     {% else %}
       <div class="d-none d-md-flex ms-3">
-        <a class="btn-getstarted" href="{% url 'logout' %}">Logout</a>
+        <a class="btn-getstarted" href="{% url 'logout' %}"style="font-family:sans-serif;">Logout</a>
       </div>
     {% endif %}
 
@@ -153,21 +153,22 @@
       <!-- About Section -->
       <div class="col-lg-4 col-md-6 footer-about">
         <a href="{% url 'home' %}" class="logo d-flex align-items-center">
-          <span class="sitename text-white">PSN Rivers <h4 class=" text-white">State Branch</h4></span>
+          <span class="sitename text-white"style="font-family: Playfair Display;">PSN Rivers <h4 class=" text-white"style="font-family: Playfair Display;">State Branch</h4></span>
         </a>
-        <p  class=" text-white">The Pharmaceutical Society of Nigeria, Rivers State Branch is committed to advancing pharmacy practice and promoting public health in Rivers State.</p>
-        <div class="social-links d-flex mt-4">
-          <a href="#"><i class="bi bi-twitter-x"></i></a>
-          <a href="#"><i class="bi bi-facebook"></i></a>
-          <a href="#"><i class="bi bi-instagram"></i></a>
-          <a href="#"><i class="bi bi-linkedin"></i></a>
-        </div>
+        <p  class=" text-white"style="font-family: sans-serif;">The Pharmaceutical Society of Nigeria, Rivers State Branch is committed to advancing pharmacy practice and promoting public health in Rivers State.</p>
+     <div class="social-links d-flex mt-4">
+        <a href="#"><i class="bi bi-twitter-x" style="color: white;"></i></a>
+        <a href="#"><i class="bi bi-facebook" style="color: white;"></i></a>
+        <a href="#"><i class="bi bi-instagram" style="color: white;"></i></a>
+        <a href="#"><i class="bi bi-linkedin" style="color: white;"></i></a>
+      </div>
+
       </div>
 
       <!-- Quick Links -->
       <div class="col-lg-2 col-md-3 footer-links ">
-        <h5  class=" text-white">Quick Links</h5>
-        <ul >
+        <h5  class=" text-white"style="font-family: Playfair Display;">Quick Links</h5>
+        <ul style="font-family: sans-serif;">
           <li class=" text-white"><a href="#">About PSN Rivers</a></li>
           <li><a href="{% url 'member_portal' %}">Membership</a></li>
           <li><a href="{% url 'directory' %}">Find a Pharmacist</a></li>
@@ -178,8 +179,8 @@
 
       <!-- Resources -->
       <div class="col-lg-2 col-md-3 footer-links">
-        <h5  class=" text-white">Resources</h5>
-        <ul>
+        <h5  class=" text-white"style="font-family: Playfair Display;">Resources</h5>
+        <ul style="font-family: sans-serif;">
           <li><a href="{% url 'constitution' %}">Constitution</a></li>
           <li><a href="{% url 'code' %}">Code of Ethics</a></li>
           <li><a href="{% url 'member_portal' %}">Member Directory</a></li>
@@ -190,23 +191,23 @@
 
       <!-- Newsletter -->
       <div class="col-lg-4 col-md-12 footer-newsletter">
-        <h5  class=" text-white">Stay Updated</h5>
-        <p  class=" text-white">Subscribe to our newsletter for the latest news, events, and updates from PSN Rivers.</p>
+        <h5  class=" text-white"style="font-family: Playfair Display;">Stay Updated</h5>
+        <p  class=" text-white"style="font-family: sans-serif;">Subscribe to our newsletter for the latest news, events, and updates from PSN Rivers.</p>
         <form action="forms/newsletter.php" method="post" class="php-email-form">
           <div class="newsletter-form ">
             <input type="email" name="email" placeholder="Your Email">
-            <input type="submit" value="Subscribe">
+            <input style="font-family: sans-serif;"type="submit" value="Subscribe">
           </div>
-          <div class="loading">Loading</div>
+          <div class="loading"style="font-family: sans-serif;">Loading</div>
           <div class="error-message"></div>
-          <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+          <div class="sent-message"style="font-family: sans-serif;">Your subscription request has been sent. Thank you!</div>
         </form>
       </div>
 
       <!-- Contact -->
       <div class="col-lg-2 col-md-3 footer-links">
-        <h5  class=" text-white">Contact</h5>
-        <ul>
+        <h5  class=" text-white"style="font-family: Playfair Display;">Contact</h5>
+        <ul style="font-family: sans-serif;">
           <li><a href="https://maps.app.goo.gl/kdfNHAz5x9kMmgbcA"target="_blank">PSN Secretariat, Port Harcourt, Rivers State, Nigeria</a></li>
           <li><a href="mailto:info@psnrivers.org"target="_blank">info@psnrivers.org</a></li>
           <li><a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?"target="_blank">+234 801 234 5678</a></li> 
@@ -218,7 +219,7 @@
 
   <!-- Full-width copyright -->
 <div class="container-fluid copyright text-center  text-white">
-  <p>© <strong class="px-1 sitename">2026</strong> <span>Pharmaceutical Society of Nigeria, Rivers State Branch. All rights reserved.</span></p>
+  <p>© <strong class="px-1 sitename"style="font-family: sans-serif;">2026</strong> <span style="font-family: sans-serif;">Pharmaceutical Society of Nigeria, Rivers State Branch. All rights reserved.</span></p>
 </div>
 
 
