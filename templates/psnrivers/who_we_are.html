@@ -14,29 +14,39 @@
 <div class="container py-5">
   <div class="row g-4">
     <!-- SIDEBAR -->
-    <div class="col-lg-3">
-      <div class="border rounded p-3">
-        <h6 class="fw-bold mb-3">About PSN Rivers</h6>
+   <div class="col-lg-3">
+  <div class="border rounded p-3">
+    <h6 class="fw-bold mb-3">About PSN Rivers</h6>
 
-        <div class="nav flex-column nav-pills gap-2">
-          <a href="{% url 'who_we_are' %}" class="nav-link {% block who %}{% endblock %}">
-            › Who We Are
-          </a>
-          <a href="{% url 'aims' %}" class="nav-link {% block aims %}{% endblock %}">
-            › Aims & Objectives
-          </a>
-          <a href="{% url 'code' %}" class="nav-link {% block code %}{% endblock %}">
-            › Code of Ethics
-          </a>
-          <a href="{% url 'constitution' %}" class="nav-link {% block constitution %}{% endblock %}">
-            › Constitution
-          </a>
-          <a href="{% url 'executive' %}" class="nav-link {% block executive %}{% endblock %}">
-            › Executive Council
-          </a>
-        </div>
-      </div>
+    <div class="nav flex-column gap-2">
+      <a href="{% url 'who_we_are' %}"
+         class="nav-link btn btn-outline-success text-dark text-start {% block who %}{% endblock %}">
+        › Who We Are
+      </a>
+
+      <a href="{% url 'aims' %}"
+         class="nav-link btn btn-outline-success text-dark text-start {% block aims %}{% endblock %}">
+        › Aims & Objectives
+      </a>
+
+      <a href="{% url 'code' %}"
+         class="nav-link btn btn-outline-success text-dark text-start {% block code %}{% endblock %}">
+        › Code of Ethics
+      </a>
+
+      <a href="{% url 'constitution' %}"
+         class="nav-link btn btn-outline-success text-dark text-start {% block constitution %}{% endblock %}">
+        › Constitution
+      </a>
+
+      <a href="{% url 'executive' %}"
+         class="nav-link btn btn-outline-success text-dark text-start {% block executive %}{% endblock %}">
+        › Executive Council
+      </a>
     </div>
+  </div>
+</div>
+
 
     <!-- PAGE CONTENT -->
     <div class="col-lg-9">

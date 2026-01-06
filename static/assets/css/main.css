@@ -100,7 +100,6 @@ h4,
 h5,
 h6 {
   color: var(--heading-color);
-  font-family: var(--heading-font);
 }
 
 
@@ -577,6 +576,14 @@ h6 {
   .mobile-nav-active .navmenu>ul {
     display: block;
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif !important;
+}
+
+a, p {
+    font-family: sans-serif !important;
 }
 
 
