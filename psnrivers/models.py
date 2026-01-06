@@ -96,21 +96,39 @@ TECHNICAL_GROUP_CHOICES = [
     ('Regulatory Pharmacy', 'Other / Non-traditional Practice'),
 ]
 
+from django.conf import settings
+from django.db import models
+
 class ClearanceApplication(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     membership_number = models.CharField(max_length=50)
     full_name = models.CharField(max_length=255)
-    technical_group = models.CharField(max_length=50, choices=TECHNICAL_GROUP_CHOICES)
-    clearance_year = models.CharField(max_length=4, choices=CLEARANCE_YEAR_CHOICES)
+    technical_group = models.CharField(
+        max_length=50,
+        choices=TECHNICAL_GROUP_CHOICES
+    )
+    clearance_year = models.CharField(
+        max_length=4,
+        choices=CLEARANCE_YEAR_CHOICES
+    )
+
     proof_of_payment = models.FileField(upload_to='clearance/payments/')
-    supporting_document = models.FileField(upload_to='clearance/supporting/', blank=True, null=True)
-    declaration_confirmed = models.BooleanField(default=False)  
+    supporting_document = models.FileField(
+        upload_to='clearance/supporting/',
+        blank=True,
+        null=True
+    )
+
+    declaration_confirmed = models.BooleanField(default=False)
     submitted_at = models.DateTimeField(auto_now_add=True)
 
-    # ✅ Status fields
+    # ✅ Review Status
     approved = models.BooleanField(default=False)
     declined = models.BooleanField(default=False)
     approved_at = models.DateTimeField(blank=True, null=True)
+
+    # ✅ NEW: Decline reason
+    decline_reason = models.TextField(blank=True, null=True)
 
     class Meta:
         ordering = ['-submitted_at']
@@ -118,16 +136,16 @@ class ClearanceApplication(models.Model):
     def __str__(self):
         return f"{self.user.email} | {self.clearance_year} | {self.technical_group}"
 
-    # ✅ Computed status property
+    # ✅ Computed status (USED IN TEMPLATE)
     @property
     def status(self):
         if self.approved:
             return "Approved"
         elif self.declined:
             return "Declined"
-        else:
-            return "Pending"
-        
+        return "Pending"
+
+
 
 class Notification(models.Model):
     title = models.CharField(max_length=255)

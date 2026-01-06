@@ -222,7 +222,43 @@ def decline_application(request, app_id):
 @login_required
 def application_detail(request, app_id):
     app = get_object_or_404(ClearanceApplication, id=app_id)
-    return render(request, 'psnrivers/application_detail.html', {'app': app})
+
+    # Handle approve/decline button clicks
+    if request.method == 'POST' and not app.approved and not app.declined:
+        action = request.POST.get('action')
+
+        if action == 'approve':
+            app.approved = True
+            app.declined = False
+            app.approved_at = timezone.now()
+            app.save()
+
+            messages.success(
+                request,
+                f"✅ Application for {app.full_name} has been approved successfully."
+            )
+
+        elif action == 'decline':
+            decline_reason = request.POST.get('decline_reason')
+
+            app.approved = False
+            app.declined = True
+            app.approved_at = None
+            app.decline_reason = decline_reason
+            app.save()
+
+            messages.error(
+                request,
+                f"❌ Application for {app.full_name} has been declined. Reason: {decline_reason}"
+            )
+
+        return redirect('application_detail', app_id=app.id)
+
+    return render(
+        request,
+        'psnrivers/application_detail.html',
+        {'app': app}
+    )
 
 
 

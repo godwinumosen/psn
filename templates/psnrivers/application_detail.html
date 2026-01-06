@@ -36,8 +36,7 @@
           {% if app.status == 'Pending' %}bg-warning text-dark
           {% elif app.status == 'Approved' %}bg-success
           {% elif app.status == 'Declined' %}bg-danger
-          {% else %}bg-secondary{% endif %}
-          px-3 py-2">
+          {% else %}bg-secondary{% endif %} px-3 py-2">
           {{ app.status }}
         </span>
 
@@ -72,7 +71,6 @@
       <!-- Submitted Documents -->
       <div class="mb-4">
         <h6 class="fw-semibold mb-3">Submitted Documents</h6>
-
         <div class="row g-3">
 
           <!-- Proof of Payment -->
@@ -113,14 +111,79 @@
         </a>
 
         {% if app.status == 'Pending' %}
-        <a href="{% url 'approve_application' app.id %}" class="btn btn-success px-4">
-          ✔ Approve
-        </a>
-        <a href="{% url 'decline_application' app.id %}" class="btn btn-danger px-4">
+        <!-- Approve -->
+        <form method="post" class="d-inline">
+          {% csrf_token %}
+          <button name="action" value="approve" class="btn btn-success px-4">
+            ✔ Approve
+          </button>
+        </form>
+
+        <!-- Decline Trigger -->
+        <button
+          class="btn btn-danger px-4"
+          data-bs-toggle="modal"
+          data-bs-target="#declineModal">
           ✖ Decline
-        </a>
+        </button>
         {% endif %}
       </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Decline Modal -->
+<div class="modal fade" id="declineModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="modal-header">
+          <h5 class="modal-title text-danger fw-bold">
+            Decline Application
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="text-success">
+            Please select a reason for declining this application.
+            This feedback will be visible to the applicant.
+          </p>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              Reason for Decline <span class="text-danger">*</span>
+            </label>
+            <select name="decline_reason" class="form-select" required>
+              <option value="" selected disabled>Select a reason</option>
+              <option value="Incomplete application">Incomplete application</option>
+              <option value="Invalid documents">Invalid documents</option>
+              <option value="Does not meet requirements">Does not meet requirements</option>
+              <option value="Payment issue">Payment issue</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            name="action"
+            value="decline"
+            class="btn btn-danger">
+            Confirm Decline
+          </button>
+        </div>
+
+      </form>
 
     </div>
   </div>
