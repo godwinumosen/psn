@@ -2,7 +2,7 @@ from django.contrib import admin
 # Register your models here.
 from . import models
 from .models import ClearanceApplication,Notification,UpcominEventsPsnRivers
-from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers
+from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers,ContactMessage
 
 #The main post model admin
 class PsnRiversPostModelAdmin (admin.ModelAdmin):
@@ -53,3 +53,9 @@ class NotificationAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at', 'is_read')
     list_filter = ('is_read', 'created_at')
     search_fields = ('title', 'user__email')
+
+
+    
+class ContactMessageModelAdmin (admin.ModelAdmin):
+    list_display = ['first_name','last_name','email','created_at']
+admin.site.register(ContactMessage, ContactMessageModelAdmin)

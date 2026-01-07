@@ -14,7 +14,7 @@ from .forms import ClearanceApplicationForm
 from django.utils import timezone
 from .models import Notification,NewsAndEventsPsnRivers,AboutPsnRivers,UpcominEventsPsnRivers
 from django.views.decorators.http import require_POST
-from .models import ClearanceApplication
+from .models import ClearanceApplication,ContactMessage
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin  
@@ -53,8 +53,21 @@ class UpcomingNewsAndEventsView(ListView):
     model = UpcominEventsPsnRivers 
     template_name = 'psnrivers/upcoming_news_events.html'
 
-def contact (request):
-    return render (request, 'psnrivers/contact.html')
+
+def contact(request):
+    if request.method == "POST":
+        ContactMessage.objects.create(
+            first_name=request.POST.get("first_name"),
+            last_name=request.POST.get("last_name"),
+            email=request.POST.get("email"),
+            phone=request.POST.get("phone"),
+            subject=request.POST.get("subject"),
+            message=request.POST.get("message"),
+        )
+        messages.success(request, "Your message has been sent successfully!")
+        return redirect("home")
+    return render(request, "psnrivers/contact.html")
+
 
 def about (request):
     return render (request, 'psnrivers/about.html')
