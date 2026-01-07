@@ -157,12 +157,19 @@
             <label class="form-label fw-semibold">
               Reason for Decline <span class="text-danger">*</span>
             </label>
-            <select name="decline_reason" class="form-select" required>
+            <select name="decline_reason" class="form-select border border-2 border-success text-success" style="border-color: #198754;" required>
               <option value="" selected disabled>Select a reason</option>
-              <option value="Incomplete application">Incomplete application</option>
-              <option value="Invalid documents">Invalid documents</option>
-              <option value="Does not meet requirements">Does not meet requirements</option>
-              <option value="Payment issue">Payment issue</option>
+              <option value="Wrong clearance year uploaded">Wrong clearance year uploaded</option>
+              <option value="Incomplete clearance documents">Incomplete clearance documents</option>
+              <option value="Unclear or unreadable receipt">Unclear or unreadable receipt</option>
+              <option value="Incorrect document uploaded">Incorrect document uploaded</option>
+              <option value="Proof of payment missing">Proof of payment missing</option>
+              <option value="Payment not verifiable">Payment not verifiable</option>
+              <option value="Membership status not active">Membership status not active</option>
+              <option value="Name mismatch between records">Name mismatch between records</option>
+              <option value="Application information incomplete">Application information incomplete</option>
+              <option value="Does not meet clearance requirements">Does not meet clearance requirements</option>
+              <option value="Pending verification – resubmit later">Pending verification – resubmit later</option>
               <option value="Other">Other</option>
             </select>
           </div>
