@@ -32,7 +32,8 @@ class RegistrationForm(forms.ModelForm):
         label="Area of Practice",
         choices=PRACTICE_AREAS,
         widget=forms.Select(attrs={
-            "class": "form-select"
+            "class": "form-select",
+            'style': 'color:#198754; border-color:#198754;'
         })
     )
 
