@@ -85,9 +85,10 @@
 
       </div>
 
-      <!-- RIGHT COLUMN -->
+      
+<!-- RIGHT COLUMN -->
 <div class="col-lg-8">
-  <h2>Send Us a Message</h2><br>
+  <h2 class="mb-4">Send Us a Message</h2>
 
   {% if messages %}
     {% for message in messages %}
@@ -95,50 +96,53 @@
     {% endfor %}
   {% endif %}
 
-  <form method="post">
-    {% csrf_token %}
-    <div class="row gy-4">
+  <div class="border rounded-4 shadow-sm p-4 bg-white">
+    <form method="post">
+      {% csrf_token %}
+      <div class="row g-4">
 
-      <div class="col-md-6">
-        <label class="form-label">First Name</label>
-        <input type="text"placeholder="Enter your first name" name="first_name" class="form-control" required>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">First Name</label>
+          <input type="text" name="first_name" class="form-control border" placeholder="Enter your first name" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Last Name</label>
+          <input type="text" name="last_name" class="form-control border" placeholder="Enter your last name" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Email</label>
+          <input type="email" name="email" class="form-control border" placeholder="Enter your email" required>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Phone Number</label>
+          <input type="tel" name="phone" class="form-control border" placeholder="Enter your phone number">
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label fw-semibold">Subject</label>
+          <input type="text" name="subject" class="form-control border" placeholder="What is this regarding" required>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label fw-semibold">Message</label>
+          <textarea name="message" class="form-control border" rows="6" placeholder="Write your message here..." required></textarea>
+        </div>
+
+        <div class="col-md-12 text-center mt-2">
+          <button type="submit" class="btn btn-success px-5 py-2">
+            Send Message
+          </button>
+        </div>
+
       </div>
-
-      <div class="col-md-6">
-        <label class="form-label">Last Name</label>
-        <input type="text" placeholder="Enter your last name" name="last_name" class="form-control" required>
-      </div>
-
-      <div class="col-md-6">
-        <label class="form-label">Email</label>
-        <input type="email"placeholder="Enter your email" name="email" class="form-control" required>
-      </div>
-
-      <div class="col-md-6">
-        <label class="form-label">Phone Number</label>
-        <input type="tel" placeholder="Enter your phone number" name="phone" class="form-control">
-      </div>
-
-      <div class="col-md-12">
-        <label class="form-label">Subject</label>
-        <input type="text" placeholder="What is this regarding"name="subject" class="form-control" required>
-      </div>
-
-      <div class="col-md-12">
-        <label class="form-label">Message</label>
-        <textarea name="message"placeholder="Write your message here.." class="form-control" rows="6" required></textarea>
-      </div>
-
-      <div class="col-md-12 text-center">
-        <button class="btn btn-success px-5" type="submit">
-          Send Message
-        </button>
-      </div>
-
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
-</div><br>
+
+<br>
 
       <div class="mb-5" data-aos="fade-up" data-aos-delay="200">
         <iframe style="border:0; width: 100%; height: 300px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.965613172319!2d7.012727499999999!3d4.775887999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1069cc0748fe5637%3A0x531cba9df02c432a!2sUnity%20Bank%20Building%2C%203%20Azikiwe%20Rd%2C%20Port%20Harcourt%2C%20500101%2C%20Rivers!5e0!3m2!1sen!2sng!4v1767186710021!5m2!1sen!2sng" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
