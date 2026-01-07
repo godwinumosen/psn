@@ -13,6 +13,11 @@ class ClearanceApplicationForm(forms.ModelForm):
             'supporting_document',
             'declaration_confirmed',
         ]
+        widgets = {
+            'technical_group': forms.Select(
+                attrs={'class': 'form-select custom-dropdown'}
+            ),
+        }
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)   # 👈 keep your addition

@@ -571,6 +571,7 @@ h6 {
     color: var(--contrast-color);
     transform: rotate(180deg);
   }
+  
 
   .navmenu .dropdown ul {
     position: static;
