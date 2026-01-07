@@ -1,0 +1,110 @@
+ 
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Article{% endblock %}
+{% block content%}
+
+
+<div class="page-title py-5 bg-success mb-5">
+  <div class="container text-white">
+    <p><a href="/" class="text-white-50 text-decoration-none">Home</a> <span class="mx-2">></span> Contact</p>
+    <h1 class="display-4 fw-bold">Contact Us</h1>
+    <p class="lead mb-0">Get in touch with PSN Rivers State Branch. We're here to help.</p>
+  </div>
+</div>
+
+<div class="container my-5" style="max-width: 900px;">
+
+  <!-- Featured Image -->
+  <div class="mb-4">
+    <img src="/static/images/article-header.jpg"
+         class="img-fluid rounded"
+         alt="Article Image">
+  </div>
+
+  <!-- Share -->
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <span class="text-muted small">Share this article:</span>
+    <a href="#" class="text-dark"><i class="bi bi-facebook"></i></a>
+    <a href="#" class="text-dark"><i class="bi bi-twitter-x"></i></a>
+    <a href="#" class="text-dark"><i class="bi bi-whatsapp"></i></a>
+    <a href="#" class="text-dark"><i class="bi bi-share"></i></a>
+  </div>
+
+  <!-- Article Content -->
+  <div class="mb-4">
+    <p>
+      The Executive Council of the Pharmaceutical Society of Nigeria, Rivers State Branch,
+      has released comprehensive updated guidelines for community pharmacy practice.
+      These guidelines are designed to align local practices with national standards
+      and international best practices.
+    </p>
+
+    <p>
+      The new guidelines address several key areas:
+    </p>
+
+    <!-- List -->
+    <ol class="ps-3">
+      <li class="mb-3">
+        <strong>Patient Counseling Standards</strong><br>
+        All community pharmacies are now required to provide dedicated counseling areas
+        where patients can discuss their medications in private. Pharmacists must ensure
+        adequate time is allocated for patient education, particularly for new medications
+        or complex regimens.
+      </li>
+
+      <li class="mb-3">
+        <strong>Medication Safety Protocols</strong><br>
+        Enhanced protocols for medication dispensing have been introduced, including
+        mandatory double-checking systems for high-risk medications and improved labeling
+        requirements.
+      </li>
+
+      <li class="mb-3">
+        <strong>Documentation Requirements</strong><br>
+        Community pharmacies must maintain comprehensive records of dispensed medications,
+        patient counseling sessions, and any adverse drug reactions reported by patients.
+      </li>
+
+      <li class="mb-3">
+        <strong>Continuing Professional Development</strong><br>
+        Pharmacists are required to complete a minimum of 40 CPD hours annually, with at
+        least 10 hours focused on patient safety and medication management.
+      </li>
+
+      <li class="mb-3">
+        <strong>Premises Standards</strong><br>
+        Updated requirements for pharmacy premises include improved storage conditions
+        for medications, adequate lighting, and proper waste disposal systems for expired
+        or damaged medications.
+      </li>
+    </ol>
+
+    <p>
+      The guidelines take effect from January 1, 2025, with a six-month transition period
+      for full compliance. The PSN Rivers will conduct orientation sessions for community
+      pharmacists to ensure smooth implementation.
+    </p>
+
+    <p>
+      Members are encouraged to download the complete guidelines document from the members’
+      portal and attend the upcoming orientation workshops.
+    </p>
+  </div>
+
+  <!-- Divider -->
+  <hr>
+
+  <!-- Back Button -->
+  <div class="mt-4">
+    <a href="#" class="btn btn-outline-secondary">
+      <i class="bi bi-arrow-left"></i> Back
+    </a>
+  </div>
+
+</div>
+
+
+
+        {% endblock %}

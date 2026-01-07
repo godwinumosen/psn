@@ -45,7 +45,7 @@ class NewsAndEventsView(ListView):
 #The first ArticleDetailView page for news and events
 class ArticleDetailView(DetailView):
     model = NewsAndEventsPsnRivers
-    template_name = 'psnrivers/article_detail.html'
+    template_name = 'psnrivers/news_article_detail.html'
     context_object_name = 'article'
 
     

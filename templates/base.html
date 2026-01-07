@@ -103,9 +103,17 @@
         <!-- Mobile-only Sign In / Join buttons -->
         {% if not user.is_authenticated %}
           <li class="d-md-none mt-2">
-            <a class="btn-getstarted w-100 mb-1" href="{% url 'login' %}">Sign In</a>
-            <a class="btn-getstarted w-100" href="{% url 'register' %}">Join PSN</a>
+            <a href="{% url 'login' %}"
+              class="btn btn-outline-success w-100 mb-2">
+              Sign In
+            </a>
+
+            <a href="{% url 'register' %}"
+              class="btn btn-success w-100">
+              Join PSN
+            </a>
           </li>
+
         {% endif %}
         {% if user.is_authenticated %}
           <li class="d-md-none mt-2">
@@ -120,10 +128,15 @@
 
     <!-- Desktop Sign In / Join buttons -->
     {% if not user.is_authenticated %}
-      <div class="d-none d-md-flex ms-3">
-        <a class="btn-getstarted me-2" href="{% url 'login' %}"style="font-family:sans-serif;">Sign In</a>
-        <a class="btn-getstarted" href="{% url 'register' %}"style="font-family:sans-serif;">Join PSN</a>
+      <div class="d-none d-md-flex ms-3"><a href="{% url 'login' %}"class="btn btn-outline-success me-2"style="font-family:sans-serif;">
+          Sign In
+        </a>
+
+        <a href="{% url 'register' %}"class="btn btn-success"style="font-family:sans-serif;">
+          Join PSN
+        </a>
       </div>
+
     {% else %}
       <div class="d-none d-md-flex ms-3">
         <a class="btn-getstarted" href="{% url 'logout' %}"style="font-family:sans-serif;">Logout</a>
