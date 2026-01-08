@@ -2131,6 +2131,10 @@ html, body {
   border-radius: 10px;
 }
 
+.rounded-pill {
+    border-radius: 10px;
+}
+
 .contact .php-email-form button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }

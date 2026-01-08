@@ -195,7 +195,7 @@ def apply_clearance(request):
 
             # ✅ EMAIL SENT ONLY AFTER SUCCESSFUL SUBMISSION
 
-
+    
             messages.success(
                 request,
                 "Your clearance application has been submitted successfully!"

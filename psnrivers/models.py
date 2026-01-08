@@ -83,7 +83,6 @@ class UpcominEventsPsnRivers(models.Model):
 
 
 CLEARANCE_YEAR_CHOICES = [
-    ('2024', '2024'),
     ('2025', '2025'),
     ('2026', '2026'),
 ]
@@ -158,6 +157,9 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
 
 
 
