@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView,ListView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from members.utils import send_clearance_email
 from django.urls import reverse
 from django.urls import reverse_lazy
 #from .models import PsnRiversPost,
@@ -16,6 +17,8 @@ from .models import Notification,NewsAndEventsPsnRivers,AboutPsnRivers,UpcominEv
 from django.views.decorators.http import require_POST
 from .models import ClearanceApplication,ContactMessage
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin  
 
@@ -129,10 +132,8 @@ def track_status(request):
 
 
 
-
 @login_required
 def review_applications(request):
-    # ✅ Handle approve/decline actions via POST
     if request.method == "POST":
         action = request.POST.get("action")
         app_id = request.POST.get("application_id")
@@ -140,27 +141,51 @@ def review_applications(request):
 
         if action and app_id:
             app = get_object_or_404(ClearanceApplication, id=app_id)
-            
+
             if action == "approve":
                 app.approved = True
                 app.declined = False
                 app.approved_at = timezone.now()
                 app.decline_reason = ""
+                app.save()
+
+                # ✅ Email to user
+                send_clearance_email(
+                    user=app.user,
+                    subject="Clearance Application Approved",
+                    message=f"Hello {app.full_name},\n\n"
+                            "Congratulations! Your clearance application for "
+                            f"{app.clearance_year} has been approved.\n\n"
+                            "Thank you for completing the process."
+                )
+
                 messages.success(request, f"{app.full_name}'s application has been approved.")
+
             elif action == "decline":
                 app.approved = False
                 app.declined = True
                 app.approved_at = None
                 app.decline_reason = decline_reason
+                app.save()
+
+                # ✅ Email to user
+                send_clearance_email(
+                    user=app.user,
+                    subject="Clearance Application Declined",
+                    message=f"Hello {app.full_name},\n\n"
+                            "Unfortunately, your clearance application for "
+                            f"{app.clearance_year} has been declined.\n"
+                            f"Reason: {decline_reason}\n\n"
+                            "Please contact support if you need more information."
+                )
+
                 messages.success(request, f"{app.full_name}'s application has been declined.")
 
-            app.save()
             return redirect("review_applications")
 
-    # ✅ Fetch applications for listing
+    # Fetch applications for listing
     applications = ClearanceApplication.objects.all().order_by("-submitted_at")
 
-    # ✅ Stats cards
     total_applications = applications.count()
     pending_count = applications.filter(approved=False, declined=False).count()
     approved_count = applications.filter(approved=True).count()
@@ -174,6 +199,8 @@ def review_applications(request):
         'declined_count': declined_count,
     }
     return render(request, 'psnrivers/review_applications.html', context)
+
+
 
 
 
@@ -193,23 +220,38 @@ def apply_clearance(request):
             clearance.user = request.user
             clearance.save()
 
-            # ✅ EMAIL SENT ONLY AFTER SUCCESSFUL SUBMISSION
+            # ✅ Email to user
+            send_clearance_email(
+                user=request.user,
+                subject="Clearance Application Submitted",
+                message=f"Hello {request.user.first_name or request.user.email},\n\n"
+                        "Your clearance application has been submitted successfully.\n"
+                        f"Clearance Year: {clearance.clearance_year}\n"
+                        f"Technical Group: {clearance.technical_group}\n\n"
+                        "We will notify you once it is reviewed."
+            )
 
-    
+            # ✅ Optional: notify admins
+            admin_emails = User.objects.filter(is_staff=True)
+            for admin in admin_emails:
+                send_clearance_email(
+                    user=admin,
+                    subject="New Clearance Application Submitted",
+                    message=f"User {request.user.get_full_name()} submitted a clearance application "
+                            f"for {clearance.clearance_year}."
+                )
+
             messages.success(
                 request,
                 "Your clearance application has been submitted successfully!"
             )
             return redirect('home')
-
     else:
         form = ClearanceApplicationForm(user=request.user)
 
-    return render(
-        request,
-        'psnrivers/apply_clearance.html',
-        {'form': form}
-    )
+    return render(request, 'psnrivers/apply_clearance.html', {'form': form})
+
+
 
 
 
@@ -221,19 +263,28 @@ def approve_application(request, app_id):
     app = get_object_or_404(ClearanceApplication, id=app_id)
 
     if request.user.is_staff:
-        app.status = "Approved"
+        app.approved = True
+        app.declined = False
         app.approved_at = timezone.now()
+        app.decline_reason = ""
         app.save()
 
-        send_mail(
-            "Clearance Approved",
-            f"Congratulations {app.full_name},\n\n"
-            f"Your clearance for {app.clearance_year} has been APPROVED.",
-            None,
-            [app.user.email],
+        # ✅ Email to user
+        send_clearance_email(
+            user=app.user,
+            subject="Clearance Application Approved",
+            message=f"Hello {app.full_name},\n\n"
+                    "Congratulations! Your clearance application for "
+                    f"{app.clearance_year} has been approved.\n\n"
+                    "Thank you for completing the process."
         )
 
     return redirect('review_applications')
+
+
+
+
+
 
 
 
@@ -243,23 +294,22 @@ def decline_application(request, app_id):
     app = get_object_or_404(ClearanceApplication, id=app_id)
 
     if request.user.is_staff:
-        app.status = "Declined"
+        app.approved = False
+        app.declined = True
+        app.approved_at = None
         app.save()
 
-        send_mail(
-            "Clearance Declined",
-            f"Dear {app.full_name},\n\n"
-            "Unfortunately, your clearance application has been declined.\n"
-            "Please contact support for more details.",
-            None,
-            [app.user.email],
+        # ✅ Email to user
+        send_clearance_email(
+            user=app.user,
+            subject="Clearance Application Declined",
+            message=f"Hello {app.full_name},\n\n"
+                    "Unfortunately, your clearance application for "
+                    f"{app.clearance_year} has been declined.\n\n"
+                    "Please contact support if you need more information."
         )
 
     return redirect('review_applications')
-
-
-
-
 
 
 
@@ -267,9 +317,9 @@ def decline_application(request, app_id):
 def application_detail(request, app_id):
     app = get_object_or_404(ClearanceApplication, id=app_id)
 
-    # Handle approve/decline button clicks
     if request.method == 'POST' and not app.approved and not app.declined:
         action = request.POST.get('action')
+        decline_reason = request.POST.get('decline_reason', '')
 
         if action == 'approve':
             app.approved = True
@@ -277,19 +327,38 @@ def application_detail(request, app_id):
             app.approved_at = timezone.now()
             app.save()
 
+            # ✅ Email to user
+            send_clearance_email(
+                user=app.user,
+                subject="Clearance Application Approved",
+                message=f"Hello {app.full_name},\n\n"
+                        "Congratulations! Your clearance application for "
+                        f"{app.clearance_year} has been approved.\n\n"
+                        "Thank you for completing the process."
+            )
+
             messages.success(
                 request,
                 f"✅ Application for {app.full_name} has been approved successfully."
             )
 
         elif action == 'decline':
-            decline_reason = request.POST.get('decline_reason')
-
             app.approved = False
             app.declined = True
             app.approved_at = None
             app.decline_reason = decline_reason
             app.save()
+
+            # ✅ Email to user
+            send_clearance_email(
+                user=app.user,
+                subject="Clearance Application Declined",
+                message=f"Hello {app.full_name},\n\n"
+                        "Unfortunately, your clearance application for "
+                        f"{app.clearance_year} has been declined.\n"
+                        f"Reason: {decline_reason}\n\n"
+                        "Please contact support if you need more information."
+            )
 
             messages.error(
                 request,
@@ -298,11 +367,13 @@ def application_detail(request, app_id):
 
         return redirect('application_detail', app_id=app.id)
 
-    return render(
-        request,
-        'psnrivers/application_detail.html',
-        {'app': app}
-    )
+    return render(request, 'psnrivers/application_detail.html', {'app': app})
+
+
+
+
+
+
 
 
 
