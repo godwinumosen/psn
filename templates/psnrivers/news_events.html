@@ -48,7 +48,7 @@
              {{ post.newsandevents_psnriver_title }}
             </h5>
             <p class="text-muted">
-              {{ post.newsandevents_psnriver_description }}
+              {{ post.newsandevents_psnriver_description|truncatechars:120}}
             </p>
             <a href="{% url 'detail' post.pk %}" class="text-success fw-semibold text-decoration-none">
               Read more <i class="bi bi-arrow-right"></i>

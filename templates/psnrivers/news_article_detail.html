@@ -8,7 +8,7 @@
 <div class="page-title py-5 bg-success mb-5">
   <div class="container text-white">
     <p><a href="/" class="text-white-50 text-decoration-none">Home</a> <span class="mx-2">></span> Contact</p>
-    <h1 class="display-4 fw-bold">{{ article.newsandevents_psnriver_title }}</h1>
+    <h3 class="display-4 fw-bold">{{ article.newsandevents_psnriver_title }}</h3>
     <p class="lead mb-0">Get in touch with PSN Rivers State Branch. We're here to help.</p>
   </div>
 </div>
@@ -45,45 +45,46 @@
     <ol class="ps-3">
       <li class="mb-3">
        
-       {{ article.newsandevents_psnriver_description_a}}s.
+       {{ article.newsandevents_psnriver_description_a}}
       </li>
 
       <li class="mb-3">
-        <strong>Medication Safety Protocols</strong><br>
-       {{ article.newsandevents_psnriver_description}}
+       {{ article.newsandevents_psnriver_description_b}}
       </li>
 
       <li class="mb-3">
-        <strong>Documentation Requirements</strong><br>
-        {{ article.newsandevents_psnriver_description}}
+        {{ article.newsandevents_psnriver_description_c}}
       </li>
 
       <li class="mb-3">
-        <strong>Continuing Professional Development</strong><br>
-        {{ article.newsandevents_psnriver_description}}
+        {{ article.newsandevents_psnriver_description_d}}
       </li>
 
-      <li class="mb-3">
-        <strong>Premises Standards</strong><br>
-       {{ article.newsandevents_psnriver_description}}
+    <li class="mb-3">
+        <strong> {{ article.newsandevents_psnriver_title_3}}</strong><br><br>
+       {{ article.newsandevents_psnriver_description_3}}
       </li>
     </ol>
 
 
-    <p>
-      {{ article.newsandevents_psnriver_description}}
-    </p>
+    <li class="mb-3">
+        <strong> {{ article.newsandevents_psnriver_title_4 }}</strong><br><br>
+       {{ article.newsandevents_psnriver_description_4}}
+      </li>
+    </ol>
+
   </div>
 
   <!-- Divider -->
   <hr>
 
-  <!-- Back Button -->
-  <div class="mt-4">
-    <a href="#" class="btn btn-outline-secondary">
-      <i class="bi bi-arrow-left"></i> Back
-    </a>
-  </div>
+<!-- Back Button -->
+<div class="mt-4">
+  <a href="javascript:history.back()" class="btn btn-outline-secondary">
+    Back
+  </a>
+</div>
+
 
 </div>
 
