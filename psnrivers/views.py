@@ -43,8 +43,6 @@ class NewsAndEventsView(ListView):
     template_name = 'psnrivers/news_events.html'
     context_object_name = 'articles'
 
-
-
 #The first ArticleDetailView page for news and events
 class ArticleDetailView(DetailView):
     model = NewsAndEventsPsnRivers

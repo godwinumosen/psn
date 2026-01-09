@@ -46,7 +46,6 @@ class NewsAndEventsPsnRivers(models.Model):
     newsandevents_psnriver_title = models.CharField(max_length=255, blank=True, null=True)
     newsandevents_psnriver_description = models.TextField()
     newsandevents_psnriver_status = models.CharField(max_length=255, blank=True, null=True)
-    
     newsandevents_psnriver_title_2 = models.CharField(max_length=255, blank=True, null=True)
     newsandevents_psnriver_description_a = models.TextField()
     newsandevents_psnriver_description_b = models.TextField()
@@ -56,7 +55,6 @@ class NewsAndEventsPsnRivers(models.Model):
     newsandevents_psnriver_description_3 = models.TextField()
     newsandevents_psnriver_title_4 = models.CharField(max_length=255, blank=True, null=True)
     newsandevents_psnriver_description_4 = models.TextField()
-    
     newsandevents_psnriver_slug = models.SlugField(max_length=255, blank=True, null=True)
     newsandevents_psnriver_img = models.ImageField(upload_to='images/')
     newsandevents_psnriver_publish_date = models.DateTimeField(auto_now_add=True)
