@@ -57,7 +57,7 @@ def login_view(request):
             if user.is_active:
                 login(request, user)
                 messages.success(request, "Login successful.")
-                return redirect('home')  # replace with your dashboard URL
+                return redirect('member_portal')  # replace with your dashboard URL
             else:
                 messages.error(request, "Your account is inactive.")
         else:
