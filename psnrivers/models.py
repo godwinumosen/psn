@@ -92,7 +92,6 @@ class UpcominEventsPsnRivers(models.Model):
 
 
 CLEARANCE_YEAR_CHOICES = [
-    ('2025', '2025'),
     ('2026', '2026'),
 ]
 

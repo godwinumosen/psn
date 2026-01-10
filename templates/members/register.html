@@ -22,7 +22,7 @@
             Register to become a member of the Pharmaceutical Society of Nigeria, Rivers State Branch
           </p>
 
-          <form method="post" enctype="multipart/form-data">
+          <form method="post" action="{% url 'register' %}" enctype="multipart/form-data">
             {% csrf_token %}
 
             <!-- 🔴 NON-FIELD ERRORS (e.g. password mismatch) -->
