@@ -7,10 +7,10 @@
   <div class="container text-white">
     <p>
       <a href="/" class="text-white-50 text-decoration-none">Home</a>
-      <span class="mx-2">›</span> My Profile
+      <span class="mx-2">›</span> Member Dashboard
     </p>
-    <h1 class="display-5 fw-bold mb-1">My Profile</h1>
-    <p class="lead mb-0">Manage your account and clewarance information</p>
+    <h1 class="display-5 fw-normal mb-1">Welcome, {{ user.get_full_name }}</h1>
+    <p class="lead mb-0">View your account and clewarance information</p>
   </div>
 </div>
 
@@ -51,7 +51,7 @@
                 </div> -->
 
                  <div class="col-md-6">
-                  <small class="text-muted">PCN registration Number</small>
+                  <small class="text-muted">PCN Registration Number</small>
                   <div class="fw-normal">{{ user.pcn_number }}</div>
                 </div> 
 

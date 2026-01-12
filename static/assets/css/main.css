@@ -10,7 +10,7 @@
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #37423b; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #198754; 
+  --accent-color: #226d40; 
   --surface-color: #ffffff; 
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
@@ -18,23 +18,23 @@
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: #272828;  /* The default color of the main navmenu links */
-  --nav-hover-color: #198754; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-hover-color: #226d40; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #272828; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #198754; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-dropdown-hover-color: #226d40; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
   --background-color: #ffffff;
-  --surface-color: #198754;
+  --surface-color: #226d40;
 }
 
 .light-backgroundd {
   --background-color: #51ad6d;
-  --surface-color: #198754;
+  --surface-color: #226d40;
 }
 
 .dark-background {
@@ -112,7 +112,7 @@ h6 {
 .col-lg-3 .nav-link.btn-outline-success {
   background-color: #ffffff;          /* normal white */
   color: #212529;                     /* dark text */
-  border-color: #198754;              /* bootstrap success */
+  border-color: #226d40;              /* bootstrap success */
   transition: all 0.25s ease;
 }
 
@@ -120,15 +120,15 @@ h6 {
 .col-lg-3 .nav-link.btn-outline-success:hover {
   background-color: #f2f6f3;          /* light white */
   color: #212529;
-  border-color: #198754;
+  border-color: #226d40;
 }
 
 /* Active / current page */
 .col-lg-3 .nav-link.btn-outline-success.active,
 .col-lg-3 .nav-link.btn-outline-success:active {
-  background-color: #198754;          /* green */
+  background-color: #226d40;          /* green */
   color: #ffffff !important;
-  border-color: #198754;
+  border-color: #226d40;
 }
 
 /* Ensure arrow and text stay white when active */
@@ -149,7 +149,7 @@ h6 {
 .border.rounded.p-3.h-100:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-  border-color: #198754; /* Bootstrap green */
+  border-color: #226d40; /* Bootstrap green */
 }
 
 
@@ -342,7 +342,7 @@ h6 {
 .header .btn-getstarted,
 .header .btn-getstarted:focus {
   color: var(--contrast-color);
-  background: #198754;
+  background: #226d40;
   font-size: 14px;
   padding: 8px 25px;
   margin: 0 0 0 30px;
@@ -352,7 +352,7 @@ h6 {
 
 .bg-success {
     --bs-bg-opacity: 1;
-    background-color: #198754;
+    background-color: #226d40;
 }
 
 .header .btn-getstarted:hover,
@@ -562,7 +562,7 @@ h6 {
   .navmenu a:hover,
   .navmenu .active,
   .navmenu .active:focus {
-    color: #198754;
+    color: #226d40;
   }
 
   .navmenu .active i,
@@ -634,7 +634,7 @@ a, p {
 --------------------------------------------------------------*/
 .footer {
   color: var(--default-color);
-  background-color: #198754;
+  background-color: #226d40;
   font-size: 14px;
   padding-bottom: 1px;
   position: relative;
@@ -643,7 +643,7 @@ a, p {
 .footer .copyright {
   padding-top: 25px;
   padding-bottom: 25px;
-  background-color: #198754;
+  background-color: #226d40;
   margin-bottom: 0;
 }
 
@@ -1049,14 +1049,14 @@ section,
 }
 
 .btn-green {
-  background-color: #198754;
+  background-color: #226d40;
   color: #fff;
-  border: 2px solid #198754;
+  border: 2px solid #226d40;
 }
 
 .btn-green:hover {
-  background-color: #198754; /* darker green */
-  border-color: #198754;
+  background-color: #226d40; /* darker green */
+  border-color: #226d40;
   color: #fff;
 }
 
@@ -1165,7 +1165,7 @@ section,
 
 .counts .stats-box {
   background-color: #fff; /* green */
-  color: #198754;
+  color: #226d40;
   max-width: 220px;        /* smaller box */
   margin: 0 auto;          /* center box */
   border-radius: 10px;
@@ -1179,12 +1179,12 @@ section,
 /* Number */
 .counts .stats-box span {
   font-size: 2rem;         /* smaller than 48px */
-  color: #198754;             /* override accent color */
+  color: #226d40;             /* override accent color */
 }
 
 /* Text */
 .counts .stats-box p {
-  color: #198754;             /* override muted text */
+  color: #226d40;             /* override muted text */
   font-size: 0.85rem;
   margin-top: 6px;
 }
@@ -1281,7 +1281,7 @@ section,
 
 
  .service-card {
-    background-color: #198754; /* Bootstrap success */
+    background-color: #226d40; /* Bootstrap success */
     color: #fff;
     transition: all 0.35s ease;
     cursor: pointer;
@@ -1303,19 +1303,19 @@ section,
 
   .service-card:hover {
     background-color: #fff;
-    color: #198754;
+    color: #226d40;
     transform: translateY(-6px);
     box-shadow: 0 .75rem 1.5rem rgba(0,0,0,.15);
   }
 
   .service-card:hover .text-muted,
   .service-card:hover a {
-    color: #198754 !important;
+    color: #226d40 !important;
   }
 
   .service-card:hover .icon-box {
     background-color: rgba(25, 135, 84, 0.1);
-    color: #198754;
+    color: #226d40;
   }
 
 
@@ -1348,7 +1348,7 @@ section,
 
 .news-card:hover h5,
 .news-card:hover a {
-  color: #198754; /* green on hover */
+  color: #226d40; /* green on hover */
 }
 
 

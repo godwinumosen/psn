@@ -3,11 +3,11 @@ from .models import User
 
 # ✅ Use the same name that the form will use
 PRACTICE_AREAS = [
-    ("community", "Community Pharmacy"),
-    ("hospital", "Hospital and Administrative Pharmacy"),
-    ("industry", "Industry Pharmacy"),
-    ("academia", "Academia and Research"),
-    ("regulatory", "Others"),
+    ("Community Pharmacy", "Community Pharmacy"),
+    ("Hospital and Administrative Pharmacy", "Hospital and Administrative Pharmacy"),
+    ("Industry Pharmacy", "Industry Pharmacy"),
+    ("Academia and Research", "Academia and Research"),
+    ("Others", "Others"),
 ]
 
 class RegistrationForm(forms.ModelForm):

@@ -1,9 +1,10 @@
-{% load static %}
+<!--{% load static %}
 
 {% for message in messages %}
 <div id='lower-side'>
   <p id='message'>{{ message }}</p>
-  {% endfor %}
+  {% endfor %} -->
+
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -41,7 +42,8 @@
 
   <!-- Top Bar -->
   
-<div class="bg-success text-white py-1 py-md-1">
+<!--<div class="bg-success text-white py-1 py-md-1"> -->
+  <div class="text-white py-1 py-md-1" style="background-color:#226d40;">
   <div class="container-fluid px-3 px-md-4 pe-md-5">
     <div class="d-flex justify-content-between align-items-center">
 
@@ -50,14 +52,14 @@
       <a href="mailto:psnriversstate.com"
         target="_blank"
         class="d-flex align-items-center gap-1 text-white text-decoration-none font-sans-serif">
-        <i class="bi bi-envelope-fill text-white fs-4 fs-md-6"></i>
+        <i class="bi bi-envelope text-white fs-4 fs-md-6"></i>
         <span class="d-none d-md-inline"style="font-family: sans-serif;">psnriversstate.com</span>
       </a>
 
       <a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?"
         target="_blank"
         class="d-flex align-items-center gap-1 text-white text-decoration-none font-sans-serif">
-        <i class="bi bi-telephone-fill text-white fs-4 fs-md-6"></i>
+        <i class="bi bi-telephone text-white fs-4 fs-md-6"></i>
         <span class="d-none d-md-inline"style="font-family: sans-serif;">+234 801 234 5678</span>
       </a>
     </div>
@@ -74,7 +76,8 @@
 </div>
 
 
-<!-- Header -->
+
+
 <!-- Header -->
 <header id="header" class="header sticky-top">
   <div class="container-xl d-flex align-items-center">
@@ -85,7 +88,7 @@
       <h6 class="sitename ms-2 d-none d-md-block"
           style="font-family: 'Playfair Display', serif;">
         Pharmaceutical Society of Nigeria,<br>
-        <span style="color: #198754;">Rivers State Branch</span>
+        <span style="color: #226d40;">Rivers State Branch</span>
       </h6>
     </a>
 
@@ -169,14 +172,25 @@
   <!-- Footer Top -->
   <div class="container footer-top">
     <div class="row gy-4">
+
+      
       
       <!-- About Section -->
       <div class="col-lg-4 col-md-6 footer-about">
         <a href="{% url 'home' %}" class="logo d-flex align-items-center">
-          <span class="sitename text-white"style="font-family: Playfair Display;">PSN Rivers <h4 class=" text-white"style="font-family: Playfair Display;">State Branch</h4></span>
+          <img src="{% static 'assets/img/psn-logo.png' %}" alt="">
+          <div class="sitename text-white" style="font-family: 'Playfair Display', serif;">
+       
+          <h5  class=" text-white"style="font-family: Playfair Display;">Pharmaceutical Society of Nigeria,</h5>
+        <h4 class="fw-light text-white mt-1" style="font-family: 'Playfair Display', serif;">
+          Rivers State Branch
+        </h4>
+      </div>
+
         </a>
         <p  class=" text-white"style="font-family: sans-serif;">The Pharmaceutical Society of Nigeria, Rivers State Branch is committed to advancing pharmacy practice and promoting public health in Rivers State.</p>
-     <div class="social-links d-flex mt-4">
+     
+        <div class="social-links d-flex mt-4">
         <a href="#"><i class="bi bi-twitter-x" style="color: white;"></i></a>
         <a href="#"><i class="bi bi-facebook" style="color: white;"></i></a>
         <a href="#"><i class="bi bi-instagram" style="color: white;"></i></a>
