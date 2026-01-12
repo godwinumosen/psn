@@ -1,7 +1,7 @@
 from django.contrib import admin
 # Register your models here.
 from . import models
-from .models import ClearanceApplication,Notification,UpcominEventsPsnRivers
+from .models import ClearanceApplication,Notification,UpcominEventsPsnRivers,NewsletterSubscriber
 from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers,ContactMessage
 
 #The main post model admin
@@ -59,3 +59,8 @@ class NotificationAdmin(admin.ModelAdmin):
 class ContactMessageModelAdmin (admin.ModelAdmin):
     list_display = ['first_name','last_name','email','created_at']
 admin.site.register(ContactMessage, ContactMessageModelAdmin)
+
+
+class NewsletterSubscriberModelAdmin (admin.ModelAdmin):
+    list_display = ['email','subscribed_at']
+admin.site.register(NewsletterSubscriber, NewsletterSubscriberModelAdmin)

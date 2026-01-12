@@ -169,8 +169,6 @@ class Notification(models.Model):
 
 
 
-
-
 class ContactMessage(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -185,3 +183,11 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.first_name} - {self.subject}"
+    
+    
+class NewsletterSubscriber(models.Model):
+    email = models.EmailField(unique=True)
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email

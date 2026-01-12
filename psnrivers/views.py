@@ -15,7 +15,7 @@ from .forms import ClearanceApplicationForm
 from django.utils import timezone
 from .models import Notification,NewsAndEventsPsnRivers,AboutPsnRivers,UpcominEventsPsnRivers
 from django.views.decorators.http import require_POST
-from .models import ClearanceApplication,ContactMessage
+from .models import ClearanceApplication,ContactMessage,NewsletterSubscriber
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -408,3 +408,18 @@ def profile(request):
         "clearance": latest_clearance,
         "notifications": notifications
     })
+    
+    
+    
+
+def subscribe_newsletter(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+
+        if email:
+            NewsletterSubscriber.objects.get_or_create(email=email)
+            messages.success(request, "Thank you for subscribing!")
+        else:
+            messages.error(request, "Please enter a valid email.")
+
+    return redirect(request.META.get("HTTP_REFERER", "/"))

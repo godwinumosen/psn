@@ -27,5 +27,8 @@ urlpatterns = [
     path('decline/<int:app_id>/', views.decline_application, name='decline_application'),
     path("profile/", views.profile, name="profile"),
     #path("success/", views.success, name="success"),
+    # urls.py
+    path("newsletter/subscribe/", views.subscribe_newsletter, name="newsletter_subscribe"),
+
     
 ]

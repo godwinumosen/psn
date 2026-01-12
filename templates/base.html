@@ -177,17 +177,21 @@
       
       <!-- About Section -->
       <div class="col-lg-4 col-md-6 footer-about">
-        <a href="{% url 'home' %}" class="logo d-flex align-items-center">
-          <img src="{% static 'assets/img/psn-logo.png' %}" alt="">
-          <div class="sitename text-white" style="font-family: 'Playfair Display', serif;">
-       
-          <h5  class=" text-white"style="font-family: Playfair Display;">Pharmaceutical Society of Nigeria,</h5>
-        <h4 class="fw-light text-white mt-1" style="font-family: 'Playfair Display', serif;">
-          Rivers State Branch
-        </h4>
-      </div>
+        <a href="{% url 'home' %}" class="logo d-flex align-items-center gap-3">
+        <img src="{% static 'assets/img/psn-logo.png' %}"
+            alt=""
+            style="height:60px; width:auto;">
 
-        </a>
+        <div class="sitename text-white" style="font-family: 'Playfair Display', serif;">
+          <h5 class="mb-0 fw-normal text-white fw-bold">
+            Pharmaceutical Society of Nigeria,
+          </h5>
+          <h6 class="mb-0 fw-light text-white">
+            Rivers State Branch
+          </h6>
+        </div>
+      </a><br>
+
         <p  class=" text-white"style="font-family: sans-serif;">The Pharmaceutical Society of Nigeria, Rivers State Branch is committed to advancing pharmacy practice and promoting public health in Rivers State.</p>
      
         <div class="social-links d-flex mt-4">
@@ -201,9 +205,9 @@
 
       <!-- Quick Links -->
       <div class="col-lg-2 col-md-3 footer-links ">
-        <h5  class=" text-white"style="font-family: Playfair Display;">Quick Links</h5>
+        <h5  class=" text-white fw-bold"style="font-family: Playfair Display;">Quick Links</h5><br>
         <ul style="font-family: sans-serif;">
-          <li class=" text-white"><a href="#">About PSN Rivers</a></li>
+          <li class=" text-white"><a href="{% url 'about' %}">About PSN Rivers</a></li>
           <li><a href="{% url 'member_portal' %}">Membership</a></li>
           <li><a href="{% url 'directory' %}">Find a Pharmacist</a></li>
           <li><a href="{% url 'news_events' %}">News & Events</a></li>
@@ -213,7 +217,7 @@
 
       <!-- Resources -->
       <div class="col-lg-2 col-md-3 footer-links">
-        <h5  class=" text-white"style="font-family: Playfair Display;">Resources</h5>
+        <h5  class="fw-bold text-white"style="font-family: Playfair Display;">Resources</h5><br>
         <ul style="font-family: sans-serif;">
           <li><a href="{% url 'constitution' %}">Constitution</a></li>
           <li><a href="{% url 'code' %}">Code of Ethics</a></li>
@@ -225,25 +229,23 @@
 
       <!-- Newsletter -->
       <div class="col-lg-4 col-md-12 footer-newsletter">
-        <h5  class=" text-white"style="font-family: Playfair Display;">Stay Updated</h5>
+        <h5  class="fw-bold text-white"style="font-family: Playfair Display;">Stay Updated</h5><br>
         <p  class=" text-white"style="font-family: sans-serif;">Subscribe to our newsletter for the latest news, events, and updates from PSN Rivers.</p>
-        <form action="forms/newsletter.php" method="post" class="php-email-form">
-          <div class="newsletter-form ">
-            <input type="email" name="email" placeholder="Your Email">
-            <input style="font-family: sans-serif;"type="submit" value="Subscribe">
+        <form action="{% url 'newsletter_subscribe' %}" method="post">
+          {% csrf_token %}
+          <div class="newsletter-form">
+            <input class="text-white"type="email" name="email" placeholder="Your Email" required>
+            <input type="submit" value="Subscribe">
           </div>
-          <div class="loading"style="font-family: sans-serif;">Loading</div>
-          <div class="error-message"></div>
-          <div class="sent-message"style="font-family: sans-serif;">Your subscription request has been sent. Thank you!</div>
         </form>
       </div>
 
       <!-- Contact -->
       <div class="col-lg-2 col-md-3 footer-links">
-        <h5  class=" text-white"style="font-family: Playfair Display;">Contact</h5>
+        <h5  class="fw-bold text-white"style="font-family: Playfair Display;">Contact</h5><br>
         <ul style="font-family: sans-serif;">
           <li><a href="https://maps.app.goo.gl/kdfNHAz5x9kMmgbcA"target="_blank">PSN Secretariat, Port Harcourt, Rivers State, Nigeria</a></li>
-          <li><a href="mailto:psnriversstate.com"target="_blank">psnriversstate.com</a></li>
+          <li><a href="mailto:psnriversstate.com"target="_blank">info@psnriversstate.com</a></li>
           <li><a href="https://wa.me/+2348124928163?text=Hi PSN Rivers?"target="_blank">+234 801 234 5678</a></li> 
         </ul>
       </div>
