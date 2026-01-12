@@ -369,12 +369,6 @@ def application_detail(request, app_id):
 
 
 
-
-
-
-
-
-
 def profile(request):
     # Get the logged-in user
     user = request.user

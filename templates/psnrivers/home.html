@@ -17,7 +17,7 @@
                  color: #ffffff;
                  line-height: 1.2;
                  margin-bottom: 0.5rem;
-                 font-size: clamp(1.5rem, 5vw, 2.5rem);">
+                 font-size: 30px">
         Pharmaceutical Society of Nigeria
         <span class="d-none d-lg-inline"><br></span>
         <span style="color: #ffbb2c;">Rivers State Branch</span>
@@ -36,19 +36,22 @@
 
 
       <!-- ================= MOBILE BUTTONS ONLY ================= -->
-      <div class="d-block d-md-none mt-4">
-        <div class="d-flex flex-column gap-3">
-          <a href="{% url 'member_portal' %}"
-             class="btn-get-started btn-green d-flex align-items-center justify-content-center gap-2 w-100"style="font-family: sans-serif;">
-            Become a Member <i class="bi bi-arrow-right"></i>
-          </a>
+<div class="d-block d-md-none mt-1">
+  <div class="d-flex flex-column gap-1">
+    <a href="{% url 'member_portal' %}"
+       class="btn-get-started btn-green d-flex align-items-center justify-content-center gap-2 w-100"
+       style="font-family: sans-serif;">
+      Become a Member <i class="bi bi-arrow-right"></i>
+    </a>
 
-          <a href="{% url 'about' %}"
-             class="btn-get-started w-100 text-center"style="font-family: sans-serif;">
-            Learn About Us
-          </a>
-        </div>
-      </div>
+    <a href="{% url 'about' %}"
+       class="btn-get-started w-100 text-center"
+       style="font-family: sans-serif;">
+      Learn About Us
+    </a>
+  </div>
+</div>
+
 
       <!-- ================= DESKTOP BUTTONS ONLY ================= -->
       <div class="d-none d-md-flex mt-4 gap-3" data-aos="fade-up" data-aos-delay="300">
@@ -73,21 +76,21 @@
 
       <div class="col-lg-3 col-md-6">
         <div class="stats-item stats-box text-center">
-          <span data-purecounter-start="0" data-purecounter-end="2500" data-purecounter-duration="1" class="purecounter inline-plus"></span>
+          <span style="font-family:Playfair Display;" data-purecounter-start="0" data-purecounter-end="2500" data-purecounter-duration="1" class="purecounter inline-plus"></span>
           <p style="font-family:sans-serif;">Registered Members</p>
         </div>
       </div><!-- End Stats Item -->
 
       <div class="col-lg-3 col-md-6">
         <div class="stats-item stats-box text-center">
-          <span data-purecounter-start="0" data-purecounter-end="500" data-purecounter-duration="1" class="purecounter inline-plus"></span>
+          <span style="font-family:Playfair Display;"data-purecounter-start="0" data-purecounter-end="500" data-purecounter-duration="1" class="purecounter inline-plus"></span>
           <p style="font-family:sans-serif;">Licensed Pharmacies</p>
         </div>
       </div><!-- End Stats Item -->
 
       <div class="col-lg-3 col-md-6">
         <div class="stats-item stats-box text-center">
-          <span data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="1" class="purecounter inline-plus"></span>
+          <span style="font-family:Playfair Display;"data-purecounter-start="0" data-purecounter-end="45" data-purecounter-duration="1" class="purecounter inline-plus"></span>
           <p style="font-family:sans-serif;">Years of Service</p>
         </div>
       </div><!-- End Stats Item -->
@@ -109,17 +112,19 @@
           </div>
           <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
              <h5 style="color: #ffbb2c;">About PSN Rivers</h5>
-            <h1 style="font-family: 'Playfair Display', serif;">{{ about_psnriver.about_psnriver_title }}</h1>
+            <h4 style="font-family: 'merriweather', serif; font-size: 28px; font-weight: bold;">
+                {{ about_psnriver.about_psnriver_title }}
+              </h4>
+
             <p class="fst-sarif"style="font-family:sans-serif;">{{ about_psnriver.about_psnriver_description }}</p>
 
-            <p class="fst-sarif"style="font-family:sans-serif;"> {{ about_psnriver.about_psnriver_description2 }}</p>
-      
-            <div class="about-actions">
-              <a href="{% url 'about' %}" class="btn btn-success about-btn"style="font-family:sans-serif;">
+            <p class="fst-sarif"style="font-family:sans-serif;"> {{ about_psnriver.about_psnriver_description2 }}</p>     
+            <div class="about-actions d-flex flex-column flex-md-row gap-3 justify-content-start">
+              <a href="{% url 'about' %}" class="btn btn-success about-btn" style="font-family:sans-serif;">
                 Read More <i class="bi bi-arrow-right"></i>
               </a>
 
-              <a href="{% url 'executive' %}" class="btn btn-outline-success about-btn"style="font-family:sans-serif;">
+              <a href="{% url 'executive' %}" class="btn  about-btn" style="font-family:sans-serif;color: #ffbb2c;">
                 Meet Our Executive Council
               </a>
             </div>
@@ -138,7 +143,7 @@
     <div class="text-center mb-5">
       <small class="text-warning fw-semibold text-uppercase">Quick Access</small>
       <h2 class="fw-bold mt-2"style="font-family:Playfair Display;">Explore Our Services</h2>
-      <p class="text-muted mx-auto mt-3"style="max-width: 600px;font-family: sans-serif;">
+      <p class="text-muted mx-auto mt-3"style="max-width: 600px;font-family: sans-serif; font-size: 17px;">
         Access key resources and services designed to support pharmacists and promote
         pharmaceutical excellence in Rivers State.
       </p>
@@ -228,7 +233,7 @@
             <p class="text-muted"style="font-family: sans-serif;">
               Discover upcoming conferences, seminars, workshops, and CPD programs.
             </p>
-            <a href="{% url 'news_events' %}" class="stretched-link fw-semibold text-decoration-none text-success"style="font-family: sans-serif;">
+            <a href="{% url 'upcoming_news_events' %}" class="stretched-link fw-semibold text-decoration-none text-success"style="font-family: sans-serif;">
               Learn more <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -299,26 +304,25 @@
   "
 >
   <div class="container">
-    <h1 class="display-4 fw-bold mb-4 text-white"style="font-family: Playfair Display;">
-      Ready to Join the Leading<br>
-      Pharmacy Association in<br>
-      Rivers State?
+    <h1 class="display-4 fw-bold mb-4 text-white"style="font-family: Playfair Display; font-size: 27px;">
+      Ready to Join the Leading Pharmacy Association in<br> Rivers State?
     </h1>
 
-    <p class="lead mb-4"style="font-family: sans-serif;">
+    <p class="lead mb-4"style="font-family: sans-serif; font-size: 16px;">
       Become part of a community dedicated to advancing pharmaceutical practice,<br>
       protecting public health, and supporting pharmacists across Rivers State.
     </p>
 
-    <div class="d-flex justify-content-center gap-3 flex-wrap">
-      <a href="{% url 'register' %}" class="btn btn-success btn-lg px-4"style="font-family: sans-serif;">
+    <div class="d-flex justify-content-center gap-2 flex-column flex-md-row">
+      <a href="{% url 'register' %}" class="btn btn-success btn-lg px-4" style="font-family: sans-serif;font-size: 16px;">
         Register Now →
       </a>
 
-      <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg px-4"style="font-family: sans-serif;">
+      <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg px-4" style="font-family: sans-serif;font-size: 16px;">
         Contact Us
       </a>
     </div>
+
   </div>
 </section>
 

@@ -67,7 +67,7 @@
       <!-- Members Portal link -->
       <div>
         <a href="{% url 'member_portal' %}"
-          class="text-white fw-semibold text-decoration-none"style="font-family: sans-serif;">
+          class="text-white fw-medium text-decoration-none"style="font-family: sans-serif;">
           Members Portal 
         </a>
       </div>
@@ -233,7 +233,7 @@
         <p  class=" text-white"style="font-family: sans-serif;">Subscribe to our newsletter for the latest news, events, and updates from PSN Rivers.</p>
         <form action="{% url 'newsletter_subscribe' %}" method="post">
           {% csrf_token %}
-          <div class="newsletter-form">
+          <div class="newsletter-form text-white">
             <input class="text-white"type="email" name="email" placeholder="Your Email" required>
             <input type="submit" value="Subscribe">
           </div>
