@@ -10,7 +10,7 @@
       <span class="mx-2">›</span> My Profile
     </p>
     <h1 class="display-5 fw-bold mb-1">My Profile</h1>
-    <p class="lead mb-0">Manage your account and clearance information</p>
+    <p class="lead mb-0">Manage your account and clewarance information</p>
   </div>
 </div>
 
@@ -19,11 +19,10 @@
 
     <!-- LEFT COLUMN -->
     <div class="col-lg-8">
-
       <!-- Member Profile -->
       <div class="card mb-4">
         <div class="card-body">
-          <h6 class="fw-semibold mb-4">
+          <h6 class="fw-normal mb-4">
             <i class="bi bi-person me-2"></i> Member Profile
           </h6>
 
@@ -43,38 +42,38 @@
               <div class="row g-3">
                 <div class="col-md-6">
                   <small class="text-muted">Full Name</small>
-                  <div class="fw-semibold">{{ user.get_full_name }}</div>
+                  <div class="fw-normal">{{ user.get_full_name }}</div>
                 </div>
 
-                <div class="col-md-6">
+               <!-- <div class="col-md-6">
                   <small class="text-muted">PSN Number</small>
-                  <div class="fw-semibold">{{ user.pcn_number }}</div>
-                </div>
+                  <div class="fw-normal">{{ user.pcn_number }}</div>
+                </div> -->
 
-                <div class="col-md-6">
-                  <small class="text-muted">PCN Number</small>
-                  <div class="fw-semibold">{{ user.pcn_number }}</div>
-                </div>
+                 <div class="col-md-6">
+                  <small class="text-muted">PCN registration Number</small>
+                  <div class="fw-normal">{{ user.pcn_number }}</div>
+                </div> 
 
                 <div class="col-md-6">
                   <small class="text-muted">Email</small>
-                  <div class="fw-semibold">{{ user.email }}</div>
+                  <div class="fw-normal">{{ user.email }}</div>
                 </div>
 
                 <div class="col-md-6">
                   <small class="text-muted">Area of Practice</small>
-                  <div class="fw-semibold">{{ user.area_of_practice }}</div>
+                  <div class="fw-normal">{{ user.area_of_practice }}</div>
                 </div>
 
                 <div class="col-md-6">
                   <small class="text-muted">Technical Group</small>
-                  <div class="fw-semibold">
+                  <div class="fw-normal">
                     {% if user.area_of_practice == "hospital" %}
                       AHPAN - Hospital & Administrative Pharmacists
                     {% elif user.area_of_practice == "community" %}
                       Community Pharmacists Group
                     {% else %}
-                      Other Technical Group
+                      None
                     {% endif %}
                   </div>
                 </div>
@@ -84,10 +83,12 @@
         </div>
       </div>
 
+
+
       <!-- Clearance Status -->
       <div class="card">
         <div class="card-body">
-          <h6 class="fw-semibold mb-1">
+          <h6 class="fw-normal mb-1">
             <i class="bi bi-shield-check me-2"></i> Clearance Status
           </h6>
           <p class="text-muted small mb-3">
@@ -102,7 +103,7 @@
                         d-flex align-items-start">
               <i class="bi bi-clock fs-4 me-3"></i>
               <div>
-                <h6 class="fw-semibold mb-1">
+                <h6 class="fw-normal mb-1">
                   {% if clearance.status == 'Pending' %} Pending Review
                   {% elif clearance.status == 'Approved' %} Approved
                   {% else %} Declined{% endif %}
@@ -131,7 +132,7 @@
         <div class="card mb-4">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="fw-semibold mb-0">
+            <h6 class="fw-normal mb-0">
                 <i class="bi bi-bell me-2"></i> Notifications
             </h6>
             <span class="badge bg-danger rounded-pill">{{ notifications|length }}</span>
@@ -139,7 +140,7 @@
 
             {% for note in notifications %}
             <div class="border rounded p-3 mb-3">
-                <div class="fw-semibold small {% if not note.is_read %}text-danger{% else %}text-muted{% endif %}">
+                <div class="fw-normal small {% if not note.is_read %}text-danger{% else %}text-muted{% endif %}">
                 ● {{ note.title }}
                 </div>
 
@@ -161,7 +162,7 @@
       <!-- Quick Actions -->
       <div class="card mb-4">
         <div class="card-body">
-          <h6 class="fw-semibold mb-3">Quick Actions</h6>
+          <h6 class="fw-normal mb-3">Quick Actions</h6>
 
           <div class="d-grid gap-2">
             <a href="{% url 'clearance' %}" class="btn btn-outline-secondary text-start">
