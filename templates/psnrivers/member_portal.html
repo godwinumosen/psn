@@ -28,7 +28,7 @@
           <h4 class="fw-bold">Sign In</h4>
           <p class="text-muted small mb-4">Already a member? Sign in to access your dashboard and member resources.</p>
           <div class="d-grid">
-            <a href="{% url 'login' %}" class="btn btn-success py-2 rounded-3">Sign In to Portal</a>
+            <a href="{% url 'members:login' %}" class="btn btn-success py-2 rounded-3">Sign In to Portal</a>
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
           <h4 class="fw-bold">Join PSN Rivers</h4>
           <p class="text-muted small mb-4">New member? Register to join our community of pharmaceutical professionals.</p>
           <div class="d-grid">
-            <a href="{% url 'register' %}" class="btn btn-success py-2 rounded-3">Register Now</a>
+            <a href="{% url 'members:register' %}" class="btn btn-success py-2 rounded-3">Register Now</a>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
           <h6 class="fw-bold">Apply for Clearance</h6>
           <p class="text-muted small">Submit your annual clearance application</p>
           <div class="d-grid mt-3">
-            <a href="{% url 'clearance'%}" class="btn btn-success btn-sm py-2">Start Application</a>
+            <a href="{% url 'members:clearance'%}" class="btn btn-success btn-sm py-2">Start Application</a>
           </div>
         </div>
       </div>
@@ -87,7 +87,7 @@
           <h6 class="fw-bold">Track Status</h6>
           <p class="text-muted small">Check your application progress</p>
           <div class="d-grid mt-3">
-            <a href="{% url 'track_status'%}" class="btn btn-outline-secondary btn-sm py-2">View Status</a>
+            <a href="{% url 'members:track_status'%}" class="btn btn-outline-secondary btn-sm py-2">View Status</a>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@
           <h6 class="fw-bold">Review Applications</h6>
           <p class="text-muted small">For Chairman/Admin only</p>
           <div class="d-grid mt-3">
-            <a href="{% url 'review_applications' %}" class="btn btn-outline-secondary btn-sm py-2">Review Dashboard</a>
+            <a href="{% url 'members:review_applications' %}" class="btn btn-outline-secondary btn-sm py-2">Review Dashboard</a>
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@
           <h6 class="fw-bold">Dashboard</h6>
           <p class="text-muted small">View your dashboard profile</p>
           <div class="d-grid mt-3">
-            <a href="{% url 'profile'%}" class="btn btn-outline-secondary btn-sm py-2">View Dashboard</a>
+            <a href="{% url 'members:members:profile'%}" class="btn btn-outline-secondary btn-sm py-2">View Dashboard</a>
           </div>
         </div>
       </div>

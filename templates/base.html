@@ -84,7 +84,9 @@
 
     <!-- Logo -->
     <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
-      <img src="{% static 'assets/img/psn-logo.png' %}" alt="">
+      <img src="https://psnriversstate.com/static/assets/img/psn-logo.png"
+                             alt="PSN Rivers Logo"
+                             style="max-width:80px; margin-bottom:10px;">
       <h6 class="sitename ms-2 d-none d-md-block"
           style="font-family: 'Playfair Display', serif;">
         Pharmaceutical Society of Nigeria,<br>
@@ -106,12 +108,12 @@
         <!-- Mobile-only Sign In / Join buttons -->
         {% if not user.is_authenticated %}
         <li class="d-md-none mt-2 px-3 text-center">
-          <a href="{% url 'login' %}"
+          <a href="{% url 'members:login' %}"
             class="btn btn-outline-success w-100 mb-2">
             Sign In
           </a>
 
-          <a href="{% url 'register' %}"
+          <a href="{% url 'members:register' %}"
             class="btn btn-success w-100"style="color: #ffffff;">
             Join PSN
           </a>
@@ -122,7 +124,7 @@
 
         {% if user.is_authenticated %}
         <li class="d-md-none mt-2 px-3 text-center">
-          <a href="{% url 'logout' %}" 
+          <a href="{% url 'members:logout' %}" 
             class="btn btn-success w-100 mb-2" 
             style="color: #ffffff;">
             Logout
@@ -138,18 +140,18 @@
 
     <!-- Desktop Sign In / Join buttons -->
     {% if not user.is_authenticated %}
-      <div class="d-none d-md-flex ms-3"><a href="{% url 'login' %}"class="btn btn-outline-success me-2"style="font-family:sans-serif;">
+      <div class="d-none d-md-flex ms-3"><a href="{% url 'members:login' %}"class="btn btn-outline-success me-2"style="font-family:sans-serif;">
           Sign In
         </a>
 
-        <a href="{% url 'register' %}"class="btn btn-success"style="font-family:sans-serif;">
+        <a href="{% url 'members:register' %}"class="btn btn-success"style="font-family:sans-serif;">
           Join PSN
         </a>
       </div>
 
     {% else %}
       <div class="d-none d-md-flex ms-3">
-        <a class="btn-getstarted" href="{% url 'logout' %}"style="font-family:sans-serif;">Logout</a>
+        <a class="btn-getstarted" href="{% url 'members:logout' %}"style="font-family:sans-serif;">Logout</a>
       </div>
     {% endif %}
 
