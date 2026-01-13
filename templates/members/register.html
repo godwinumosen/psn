@@ -33,7 +33,8 @@
             {% endif %}
 
             <!-- PERSONAL INFORMATION -->
-            <h6 class="fw-bold mb-3">Personal Information</h6>
+            <h5 class="fw-bold mb-3">Personal Information</h5>
+              <hr>
             <div class="row g-3">
               <div class="col-md-6">
                 {{ form.first_name.label_tag }}
@@ -63,7 +64,8 @@
             </div>
 
             <!-- PROFESSIONAL INFORMATION -->
-            <h6 class="fw-bold mt-4 mb-3">Professional Information</h6>
+            <h5 class="fw-bold mt-4 mb-3">Professional Information</h5>
+              <hr>
             <div class="row g-3">
               <div class="col-md-6">
                 {{ form.pcn_number.label_tag }}
@@ -96,7 +98,8 @@
             </div>
 
             <!-- ACCOUNT SECURITY -->
-            <h6 class="fw-bold mt-4 mb-3">Account Security</h6>
+            <h5 class="fw-bold mt-4 mb-3">Account Security</h5>
+              <hr>
             <div class="row g-3">
               <div class="col-md-6">
                 {{ form.password1.label_tag }}
@@ -111,18 +114,20 @@
             </div>
 
             <!-- DOCUMENT UPLOAD -->
-            <h6 class="fw-bold mt-4 mb-3">Document Upload</h6>
-
+            <h5 class="fw-bold mt-4 mb-3">Document Upload</h5>
+            <hr>
+             <b><small class="text-muted d-block mb-2">PCN License (PDF or Image)</small></b>
             <div class="border border-2 border-dashed rounded p-3 mb-3 text-center">
-              <p class="fw-semibold mb-1">PCN Certificate (PDF or Image)</p>
+              <small class="text-muted d-block mb-2">Click to upload or drag and drop</small>
               <small class="text-muted d-block mb-2">PNG, JPG, PDF up to 5MB</small>
               {{ form.pcn_certificate }}
               {{ form.pcn_certificate.errors }}
             </div>
 
+            <b><small class="text-muted d-block mb-2">Passport Photograph</small></b>
             <div class="border border-2 border-dashed rounded p-3 mb-3 text-center">
-              <p class="fw-semibold mb-1">Passport Photograph</p>
               <small class="text-muted d-block mb-2">PNG, JPG up to 2MB</small>
+              <small class="text-muted d-block mb-2">Click to upload or drag and drop</small>
               {{ form.passport_photo }}
               {{ form.passport_photo.errors }}
             </div>

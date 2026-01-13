@@ -108,7 +108,7 @@
         <div class="row gy-4">
           {% for about_psnriver in about_psnrivers %}
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">
-            <img src="{{ about_psnriver.about_psnriver_img.url }}" class="img-fluid" alt="">
+            <img src="{{ about_psnriver.about_psnriver_img.url }}" class="img-fluid rounded" alt="">
           </div>
           <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
              <h5 style="color: #ffbb2c;">About PSN Rivers</h5>
@@ -292,39 +292,52 @@
 </section>
 
 
+<section class="position-relative d-flex align-items-center text-center text-white" style="min-height:100vh; background-color:#111;">
 
+  <!-- Background image with border-radius -->
+  <img src="{% static 'assets/img/gett.jpeg' %}" 
+       class="position-absolute w-100 h-100" 
+       style="object-fit:cover; top:0; left:0; z-index:0; border-radius: 12px;" 
+       alt="PSN Rivers Background">
 
+  <!-- Overlay -->
+  <div class="position-absolute w-100 h-100" 
+       style="background: rgba(17,18,19,0.5); top:0; left:0; z-index:1; border-radius: 12px;">
+  </div>
 
-<section
-  class="d-flex align-items-center text-center text-white"
-  style="
-    min-height: 100vh;
-    background: linear-gradient(rgba(17, 18, 19, 0.5)),
-                url('{% static 'assets/img/gett.jpeg'%}') center/cover no-repeat;
-  "
->
-  <div class="container">
-    <h1 class="display-4 fw-bold mb-4 text-white"style="font-family: Playfair Display; font-size: 27px;">
-      Ready to Join the Leading Pharmacy Association in<br> Rivers State?
+  <!-- Content container -->
+  <div class="container position-relative" style="z-index:2;">
+    
+    <!-- Heading with subtle shadow -->
+    <h1 class="display-4 fw-bold mb-4 text-white" 
+        style="font-family: 'Playfair Display', serif; font-size: 27px; text-shadow: 1px 1px 5px rgba(0,0,0,0.7);">
+      Ready to Join the Leading Pharmacy Association in<br>Rivers State?
     </h1>
 
-    <p class="lead mb-4"style="font-family: sans-serif; font-size: 16px;">
+    <!-- Paragraph with shadow -->
+    <p class="lead mb-4 text-white" 
+       style="font-family: sans-serif; font-size: 16px; text-shadow: 1px 1px 4px rgba(0,0,0,0.6);">
       Become part of a community dedicated to advancing pharmaceutical practice,<br>
       protecting public health, and supporting pharmacists across Rivers State.
     </p>
 
+    <!-- Buttons with subtle shadow and consistent radius -->
     <div class="d-flex justify-content-center gap-2 flex-column flex-md-row">
-      <a href="{% url 'register' %}" class="btn btn-success btn-lg px-4" style="font-family: sans-serif;font-size: 16px;">
+      <a href="{% url 'register' %}" 
+         class="btn btn-success btn-lg px-4" 
+         style="font-family: sans-serif; font-size: 16px; border-radius:8px; box-shadow: 2px 2px 6px rgba(0,0,0,0.3);">
         Register Now →
       </a>
-
-      <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg px-4" style="font-family: sans-serif;font-size: 16px;">
+      <a href="{% url 'contact' %}" 
+         class="btn btn-outline-light btn-lg px-4" 
+         style="font-family: sans-serif; font-size: 16px; border-radius:8px; box-shadow: 2px 2px 6px rgba(0,0,0,0.3);">
         Contact Us
       </a>
     </div>
 
   </div>
 </section>
+
 
 
 

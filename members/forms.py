@@ -7,7 +7,7 @@ PRACTICE_AREAS = [
     ("Hospital and Administrative Pharmacy", "Hospital and Administrative Pharmacy"),
     ("Industry Pharmacy", "Industry Pharmacy"),
     ("Academia and Research", "Academia and Research"),
-    ("Others / Non-traditional Practice", "Others / Non-traditional Practice"),
+    ("Others", "Others"),
 ]
 
 class RegistrationForm(forms.ModelForm):

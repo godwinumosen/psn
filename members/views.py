@@ -66,6 +66,9 @@ def login_view(request):
     return render(request, 'members/login.html')
 
 
+
+
+
 def verify_email(request, uidb64, token):
     """
     Verify the user's email using UID and token.

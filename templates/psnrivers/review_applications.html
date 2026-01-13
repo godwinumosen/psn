@@ -7,7 +7,7 @@
 <div class="page-title py-5 bg-success mb-5">
   <div class="container text-white">
     <p><a href="/" class="text-white-50 text-decoration-none">Home</a> <span class="mx-2">></span> Clearance Review</p>
-    <h1 class="display-4 fw-bold"style="font-size: 35px;">Clearance Review</h1>
+    <h1 class="display-4 fw-bold"style="font-size: 35px;">Admin Portal</h1>
     <p class="lead mb-0"style="font-size: 16px;">Review and approve clearance applications.</p>
   </div>
 </div>
@@ -103,13 +103,15 @@
 
           <!-- Approve button for pending applications -->
           {% if not app.approved and not app.declined %}
-            <form method="post" class="d-inline">
+            <form method="post" class="d-inline-flex align-items-center m-0">
               {% csrf_token %}
               <input type="hidden" name="application_id" value="{{ app.id }}">
-              <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">
+              <button type="submit" name="action" value="approve"
+                      class="btn btn-success btn-sm">
                 <i class="bi bi-check-circle"></i> Approve
               </button>
             </form>
+
 
             <!-- Trigger Decline Modal -->
             <button type="button" class="btn btn-danger btn-sm"
@@ -121,6 +123,7 @@
             </button>
           {% endif %}
         </div>
+        
       </div>
     </div>
   {% empty %}
@@ -141,36 +144,36 @@
         <input type="hidden" name="application_id" id="declineAppId">
 
         <div class="modal-header">
-          <h5 class="modal-title text-danger fw-bold" id="declineModalTitle">
+          <h5 class="modal-title fw-bold text-dark" id="declineModalTitle">
             Decline Application
           </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
 
         <div class="modal-body">
-          <p class="text-success">
+          <p class="text-dark">
             Please select a reason for declining this application.
             This feedback will be visible to the applicant.
           </p>
 
           <div class="mb-3">
-            <label class="form-label fw-semibold">
+            <label class="form-label fw-semibold text-dark">
               Reason for Decline <span class="text-danger">*</span>
             </label>
-            <select name="decline_reason" class="form-select border border-2 border-success text-success" style="border-color: #198754;" required>
+
+            <select name="decline_reason"
+                    class="form-select border border-2 border-dark border-success text-dark"
+                    required>
               <option value="" selected disabled>Select a reason</option>
               <option value="Wrong clearance year uploaded">Wrong clearance year uploaded</option>
-              <option value="Incomplete clearance documents">Incomplete clearance documents</option>
               <option value="Unclear or unreadable receipt">Unclear or unreadable receipt</option>
-              <option value="Incorrect document uploaded">Incorrect document uploaded</option>
-              <option value="Proof of payment missing">Proof of payment missing</option>
               <option value="Payment not verifiable">Payment not verifiable</option>
-              <option value="Membership status not active">Membership status not active</option>
+              <option value="Incorrect payment amount">Incorrect payment amount</option>
+              <option value="Invalid PCN membership number">Invalid PCN membership number</option>
+              <option value="Membership status not active">Membership status not confirmed</option>
               <option value="Name mismatch between records">Name mismatch between records</option>
               <option value="Application information incomplete">Application information incomplete</option>
-              <option value="Does not meet clearance requirements">Does not meet clearance requirements</option>
-              <option value="Pending verification – resubmit later">Pending verification – resubmit later</option>
-              <option value="Other">Other</option>
+              <option value="Other">Others</option>
             </select>
           </div>
         </div>
