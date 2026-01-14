@@ -405,8 +405,10 @@ def subscribe_newsletter(request):
 
  
 
+
 @login_required
 def profile_pdf(request):
+    # Get latest clearance
     clearance = ClearanceApplication.objects.filter(
         user=request.user
     ).order_by('-submitted_at').first()
@@ -416,25 +418,27 @@ def profile_pdf(request):
             "You cannot download this PDF until your clearance is approved."
         )
 
+    # Prepare rounded profile image
     passport_path = None
-    if hasattr(request.user, 'passport_photo') and request.user.passport_photo:
-        original_path = os.path.join(settings.MEDIA_ROOT, request.user.passport_photo.name)
-        # Create a temporary rounded image
-        temp_path = os.path.join(settings.MEDIA_ROOT, f"temp_{request.user.id}.png")
+    if request.user.passport_photo:
+        original_path = request.user.passport_photo.path
         img = Image.open(original_path).convert("RGBA")
-        # Resize to desired PDF size
-        img = img.resize((120, 130))
-        
+        img = img.resize((120, 130))  # resize to desired dimensions
+
         # Create rounded mask
-        radius = 10  # adjust for corner roundness
         mask = Image.new("L", img.size, 0)
         draw = ImageDraw.Draw(mask)
-        draw.rounded_rectangle([0, 0, img.size[0], img.size[1]], radius, fill=255)
+        draw.rounded_rectangle([0, 0, img.width, img.height], radius=15, fill=255)
         img.putalpha(mask)
-        
-        img.save(temp_path, format="PNG")
-        passport_path = temp_path  # Pass this to template
 
+        # Save temp image
+        temp_dir = os.path.join(settings.MEDIA_ROOT, "temp")
+        os.makedirs(temp_dir, exist_ok=True)
+        temp_path = os.path.join(temp_dir, f"{request.user.username}_rounded.png")
+        img.save(temp_path, format="PNG")
+        passport_path = temp_path  # pass to template
+
+    # Render HTML template
     template = get_template('members/profile_pdf.html')
     html = template.render({
         'user': request.user,
@@ -445,5 +449,9 @@ def profile_pdf(request):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="profile_{request.user.username}.pdf"'
 
+    # Generate PDF
     pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("PDF generation failed", status=500)
+
     return response

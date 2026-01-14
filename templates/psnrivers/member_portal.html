@@ -55,6 +55,7 @@
   {% endif %}
 
   <!-- Clearance Services -->
+   {% if user.is_authenticated %}
   <h3 class="text-center fw-bold mb-4">Clearance Services</h3>
   <div class="row g-4 mb-5">
     <div class="col-md-4 text-center">
@@ -179,6 +180,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
 </div>
 </main>
 {% endblock %}

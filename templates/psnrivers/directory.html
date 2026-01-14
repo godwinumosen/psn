@@ -37,6 +37,7 @@
 </div>
 
 <div class="container mb-5">
+
   {% if not user.is_authenticated %}
   <div class="card border-0 shadow-sm rounded-4 mb-5 text-center shadow-hover">
     <div class="card-body p-4 p-md-5">
@@ -58,10 +59,8 @@
       </div>
     </div>
   </div>
-  {% endif %}
 
   <h2 class="text-center fw-bold mb-5">What You Can Find</h2>
-
   <div class="row g-4">
     <div class="col-md-6">
       <div class="card h-100 border-0 shadow-sm p-4 rounded-4 shadow-hover">
@@ -106,5 +105,10 @@
       </div>
     </div>
   </div>
+
+  {% else %}
+  <!-- LOGGED-IN USERS WILL SEE DIRECTORY CONTENT HERE -->
+  {% endif %}
+
 </div>
 {% endblock %}

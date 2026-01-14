@@ -79,13 +79,15 @@ It removes navbar, footer, and notifications for a clean PDF.
  
  
 {% if passport_path %}
-    <img src="{{ passport_path }}">
+    <img src="{{ passport_path }}" style="width: 120px; height: 130px; object-fit: cover; border-radius: 8px;">
 {% endif %}
+
     <p><span class="label">Full Name:</span> <span class="value">{{ user.get_full_name }}</span></p>
     <p><span class="label">PCN Registration Number:</span> <span class="value">{{ user.pcn_number }}</span></p>
     <p><span class="label">Email:</span> <span class="value">{{ user.email }}</span></p>
     <p><span class="label">Area of Practice:</span> <span class="value">{{ user.area_of_practice }}</span></p>
     <p><span class="label">Technical Group:</span>  <span class="value">  {{ clearance.get_technical_group_display }}</span>
+    <p><span class="label">Clearance Year:</span>  <span class="value">  {{ clearance.clearance_year }}</span>
     </p>
 </div>
 
