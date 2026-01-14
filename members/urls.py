@@ -20,7 +20,7 @@ app_name = 'members'
 urlpatterns = [
     # Public member pages under /members/
     path('register/', register, name='register'),
-    path('dashboard/', admin_dashboard, name='dashboard'),
+   # path('dashboard/', admin_dashboard, name='dashboard'),
     path('success/', views.success, name='success'),
     path('verify-email/<uidb64>/<token>/', views.verify_email, name='verify_email'),
     path('resend-verification/', views.resend_verification_email_view, name='resend_verification'),

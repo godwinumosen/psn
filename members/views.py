@@ -211,8 +211,6 @@ def success(request):
     return render(request, 'members/success.html')
 
 
-
-
 @login_required
 def admin_dashboard(request):
     if request.user.role != 'admin':

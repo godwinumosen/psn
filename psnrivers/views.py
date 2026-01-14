@@ -368,40 +368,26 @@ def application_detail(request, app_id):
     return render(request, 'psnrivers/application_detail.html', {'app': app})
 
 
-def profile(request):
-    # Get the logged-in user
-    user = request.user
 
-    # Get latest clearance application
-    latest_clearance = ClearanceApplication.objects.filter(
-        user=user
-    ).order_by('-submitted_at').first()
-
-    # Get latest 5 notifications for the user
-    notifications = Notification.objects.filter(user=user).order_by('-created_at')[:5]
-    context = {
-        "user": user,
-        "clearance": latest_clearance,
-        "notifications": notifications,
-    }
-
-    return render(request, "members/profile.html", context)
-    
     
 @login_required
 def profile(request):
+    # Get the latest clearance application for the logged-in user
     latest_clearance = ClearanceApplication.objects.filter(
         user=request.user
     ).order_by('-submitted_at').first()
 
+    # Get latest 10 notifications
     notifications = Notification.objects.order_by('-created_at')[:10]
 
-    return render(request, "members/profile.html", {
-        "clearance": latest_clearance,
-        "notifications": notifications
-    })
-    
-    
+    context = {
+        "user": request.user,
+        "clearance": latest_clearance,   # ✅ pass this to template
+        "notifications": notifications,
+    }
+
+    return render(request, "members/profile.html", context)
+
     
 
 def subscribe_newsletter(request):
@@ -419,32 +405,6 @@ def subscribe_newsletter(request):
 
 
 
-
-'''@login_required
-def profile_pdf(request):
-    # Render PDF-only template
-    html_string = render_to_string('members/profile_pdf.html', {
-        'user': request.user,
-        'clearance': getattr(request.user, 'clearance', None),
-    })
-
-    # Optional CSS for styling (inline)
-    css = CSS(string='''
-        #body { font-family: Arial, sans-serif; font-size: 12px; }
-       # h1, h2 { color: #2d6a4f; margin-bottom: 10px; }
-        #.card { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
-       # .label { font-weight: bold; display: inline-block; width: 180px; }
-       # img { max-width: 100px; max-height: 100px; border-radius: 5px; }
-       # .bg-success { background-color: #2d6a4f; color: white; padding: 10px; margin-bottom: 15px; }
-    #''')
-
-    #pdf_file = HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(stylesheets=[css])
-
-    #response = HttpResponse(pdf_file, content_type='application/pdf')
-    #response['Content-Disposition'] = f'attachment; filename="profile_{request.user.username}.pdf"'
-    #return response'''
-    
-    
     
 
 @login_required

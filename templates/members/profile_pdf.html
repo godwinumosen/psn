@@ -50,7 +50,7 @@ It removes navbar, footer, and notifications for a clean PDF.
     .value { 
         font-weight: 700; 
         color: #2d6a4f; 
-        font-size: 14px; /* increased from 12px */
+        font-size: 18px; /* increased from 12px */
     }
 
     img { 
@@ -71,15 +71,6 @@ It removes navbar, footer, and notifications for a clean PDF.
 </head>
 <body>
 
-
-
-{% if clearance and clearance.status == "Approved" %}
-<div class="d-flex justify-content-center justify-content-md-end mb-4">
-    <a href="{% url 'profile_pdf' %}" class="btn btn-success px-4 py-2">
-        <i class="bi bi-download me-2"></i> Download Profile
-    </a>
-</div>
-{% endif %}
 
 
 <!-- Profile Card -->

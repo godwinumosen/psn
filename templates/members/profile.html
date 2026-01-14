@@ -9,8 +9,8 @@
       <a href="/" class="text-white-50 text-decoration-none">Home</a>
       <span class="mx-2">›</span> Member Dashboard
     </p>
-    <h1 class="display-5 fw-normal mb-1"style="font-size: 35px;">Welcome, {{ user.get_full_name }}</h1>
-    <p class="lead mb-0"style="font-size: 16px;">View your account and clearance information</p>
+    <h1 class="display-5 fw-normal mb-1" style="font-size: 35px;">Welcome, {{ user.get_full_name }}</h1>
+    <p class="lead mb-0" style="font-size: 16px;">View your account and clearance information</p>
   </div>
 </div>
 
@@ -45,11 +45,6 @@
                   <div class="fw-normal">{{ user.get_full_name }}</div>
                 </div>
 
-               <!-- <div class="col-md-6">
-                  <small class="text-muted">PSN Number</small>
-                  <div class="fw-normal">{{ user.pcn_number }}</div>
-                </div> -->
-
                  <div class="col-md-6">
                   <small class="text-muted">PCN Registration Number</small>
                   <div class="fw-normal">{{ user.pcn_number }}</div>
@@ -68,13 +63,9 @@
                 <div class="col-md-6">
                   <small class="text-muted">Technical Group</small>
                   <div class="fw-normal">
-                    {% if user.area_of_practice == "hospital" %}
-                      AHPAN - Hospital & Administrative Pharmacists
-                    {% elif user.area_of_practice == "community" %}
-                      Community Pharmacists Group
-                    {% else %}
-                      None
-                    {% endif %}
+                   
+                        {{ clearance.technical_group}}
+  
                   </div>
                 </div>
               </div>
@@ -82,14 +73,14 @@
           </div>
         </div>
 
-    {% comment %}
+{% comment %}
 Show the download button only if the user's latest clearance is approved
 {% endcomment %}
 {% with user_clearance=user.clearanceapplication_set.all|dictsortreversed:"submitted_at"|first %}
     {% if user_clearance and user_clearance.approved %}
         <div class="d-flex justify-content-center justify-content-md-end mb-4">
-            <a href="{% url 'profile_pdf' %}" class="btn btn-success px-4 py-2">
-                <i class="bi bi-download me-2"></i> Download Profile as PDF
+            <a href="{% url 'profile_pdf' %}" class="btn btn-success px-4 py-2 me-md-3">
+                <i class="bi bi-download me-2"></i> Download Profile
             </a>
         </div>
     {% endif %}
@@ -97,8 +88,6 @@ Show the download button only if the user's latest clearance is approved
 
 
       </div>
-
-
 
       <!-- Clearance Status -->
       <div class="card">
