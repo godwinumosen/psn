@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from .views import HomeView,NewsAndEventsView,UpcomingNewsAndEventsView
-from .views import ArticleDetailView
+from .views import ArticleDetailView,ExecutivesView
 
 urlpatterns = [
     path('index/', views.index, name='index'),
@@ -16,7 +16,8 @@ urlpatterns = [
     path("about/aims/", views.aims, name="aims"),
     path("about/code/", views.code, name="code"),
     path("about/constitution/", views.constitution, name="constitution"),
-    path("about/executive/", views.executive, name="executive"),
+    #path("about/executive/", views.executive, name="executive"),
+    path("about/executive/", ExecutivesView.as_view(), name="executive"),
     path('directory/', views.directory, name='directory'),
     path('member_portal/', views.member_portal, name='member_portal'),
     path('clearance/', views.apply_clearance, name='clearance'),

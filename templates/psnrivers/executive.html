@@ -14,34 +14,17 @@
 </p>
 
 <div class="row g-4 mt-2">
+ 
+    {% for post in object_list %}
     <div class="col-md-4">
         <div class="card h-100 border-0 shadow-sm text-center">
-            <img src="{% static 'assets/img/psn-logo.png' %}" class="card-img-top rounded-top" alt="Pharm. Dr. Chukwuemeka Okonkwo">
+            <img src="{{ post.psnriver_executive_img.url }}" class="card-img-top rounded-top" alt="Pharm. Dr. Chukwuemeka Okonkwo">
             <div class="card-body">
-                <h6 class="fw-bold mb-1">Pharm. Dr. Chukwuemeka Okonkwo</h6>
-                <small class="text-warning fw-bold text-uppercase">Chairman</small>
+                <h6 class="fw-bold mb-1">{{ post.psnriver_executive_name }}</h6>
+                <small class="text-warning fw-bold text-uppercase">{{ post.psnriver_executive_position }}</small>
             </div>
         </div>
     </div>
-
-    <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm text-center">
-            <img src="{% static 'assets/img/psn-logo.png' %}" class="card-img-top rounded-top" alt="Pharm. Mrs. Adaeze Nwosu">
-            <div class="card-body">
-                <h6 class="fw-bold mb-1">Pharm. Mrs. Adaeze Nwosu</h6>
-                <small class="text-warning fw-bold text-uppercase">Vice Chairman</small>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm text-center">
-            <img src="{% static 'assets/img/psn-logo.png' %}" class="card-img-top rounded-top" alt="Pharm. Emeka Obi">
-            <div class="card-body">
-                <h6 class="fw-bold mb-1">Pharm. Emeka Obi</h6>
-                <small class="text-warning fw-bold text-uppercase">General Secretary</small>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </div>
 {% endblock %}

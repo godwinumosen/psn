@@ -2,7 +2,7 @@ from django.contrib import admin
 # Register your models here.
 from . import models
 from .models import ClearanceApplication,Notification,UpcominEventsPsnRivers,NewsletterSubscriber
-from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers,ContactMessage
+from .models import PsnRiversPost,AboutPsnRivers,NewsAndEventsPsnRivers,ContactMessage,PsnRiversExecutive
 
 #The main post model admin
 class PsnRiversPostModelAdmin (admin.ModelAdmin):
@@ -64,3 +64,11 @@ admin.site.register(ContactMessage, ContactMessageModelAdmin)
 class NewsletterSubscriberModelAdmin (admin.ModelAdmin):
     list_display = ['email','subscribed_at']
 admin.site.register(NewsletterSubscriber, NewsletterSubscriberModelAdmin)
+
+
+class PsnRiversExecutiveModelAdmin (admin.ModelAdmin):
+    list_display = ['psnriver_executive_name','psnriver_executive_position']
+admin.site.register(PsnRiversExecutive, PsnRiversExecutiveModelAdmin)
+
+
+

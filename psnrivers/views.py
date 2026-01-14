@@ -23,7 +23,7 @@ from .forms import ClearanceApplicationForm
 from django.utils import timezone
 from .models import Notification,NewsAndEventsPsnRivers,AboutPsnRivers,UpcominEventsPsnRivers
 from django.views.decorators.http import require_POST
-from .models import ClearanceApplication,ContactMessage,NewsletterSubscriber
+from .models import ClearanceApplication,ContactMessage,NewsletterSubscriber,PsnRiversExecutive
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -455,3 +455,10 @@ def profile_pdf(request):
         return HttpResponse("PDF generation failed", status=500)
 
     return response
+
+
+
+class ExecutivesView(ListView):
+    model = PsnRiversExecutive
+    template_name = 'psnrivers/executive.html'
+    context_object_name = 'object_list'
