@@ -8,7 +8,7 @@ from django.contrib.auth.views import PasswordResetConfirmView
 # Custom Password Reset Confirm View with success message
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'members/password_reset_confirm.html'
-    success_url = reverse_lazy('login')  # Redirect to login page
+    success_url = reverse_lazy('members:login')  # ✅ include namespace
 
     def form_valid(self, form):
         messages.success(self.request, "Your password has been reset successfully. You can now log in.")
@@ -35,7 +35,7 @@ urlpatterns = [
              template_name='members/password_reset.html',
              email_template_name='members/password_reset_email.html',
              subject_template_name='members/password_reset_subject.txt',
-             success_url=reverse_lazy('password_reset_done'),  # ✅ reversed without namespace
+             success_url=reverse_lazy('members:password_reset_done'),  
          ),
          name='password_reset'),
 

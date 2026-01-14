@@ -125,7 +125,7 @@ def login_view(request):
             if user.is_active:
                 login(request, user)
                 messages.success(request, "Login successful.")
-                return redirect('members:member_portal')
+                return redirect('member_portal')
             else:
                 messages.error(request, "Your account is inactive.")
         else:

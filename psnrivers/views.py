@@ -281,11 +281,6 @@ def approve_application(request, app_id):
 
 
 
-
-
-
-
-
 @login_required
 @require_POST
 def decline_application(request, app_id):
@@ -304,7 +299,7 @@ def decline_application(request, app_id):
             message=f"Hello {app.full_name},\n\n"
                     "Unfortunately, your clearance application for "
                     f"{app.clearance_year} has been declined.\n\n"
-                    "Please contact support if you need more information."
+                    "Please contact support if you need more information ."
         )
 
     return redirect('review_applications')
@@ -368,7 +363,6 @@ def application_detail(request, app_id):
     return render(request, 'psnrivers/application_detail.html', {'app': app})
 
 
-
 def profile(request):
     # Get the logged-in user
     user = request.user
@@ -389,7 +383,6 @@ def profile(request):
     return render(request, "members/profile.html", context)
     
     
-
 @login_required
 def profile(request):
     latest_clearance = ClearanceApplication.objects.filter(
