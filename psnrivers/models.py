@@ -96,11 +96,11 @@ CLEARANCE_YEAR_CHOICES = [
 ]
 
 TECHNICAL_GROUP_CHOICES = [
-    ('Community Pharmacy', 'Association of Community Pharmacists of Nigeria (ACPN)'),
-    ('Hospital Pharmacy', 'Association of Hospital & Administrative Pharmacists of Nigeria (AHAPN)'),
-    ('Industrial Pharmacy', 'National Association of Industrial Pharmacists of Nigeria (NAIP)'),
-    ('Administrative Pharmacy', 'Nigerian Association of Pharmacists in Academia (NAPA)'),
-    ('Regulatory Pharmacy', 'Other / Non-traditional Practice'),
+    ('Association of Community Pharmacists of Nigeria (ACPN)', 'Association of Community Pharmacists of Nigeria (ACPN)'),
+    ('Association of Hospital & Administrative Pharmacists of Nigeria (AHAPN)', 'Association of Hospital & Administrative Pharmacists of Nigeria (AHAPN)'),
+    ('National Association of Industrial Pharmacists of Nigeria (NAIP)', 'National Association of Industrial Pharmacists of Nigeria (NAIP)'),
+    ('Nigerian Association of Pharmacists in Academia (NAPA)', 'Nigerian Association of Pharmacists in Academia (NAPA)'),
+    ('Other / Non-traditional Practice', 'Other / Non-traditional Practice'),
 ]
 
 from django.conf import settings
@@ -112,7 +112,7 @@ class ClearanceApplication(models.Model):
     membership_number = models.CharField(max_length=50)
     full_name = models.CharField(max_length=255)
     technical_group = models.CharField(
-        max_length=50,
+        max_length=200,
         choices=TECHNICAL_GROUP_CHOICES
     )
     clearance_year = models.CharField(

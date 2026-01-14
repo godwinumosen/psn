@@ -389,6 +389,8 @@ def profile(request):
     return render(request, "members/profile.html", context)
 
     
+    
+    
 
 def subscribe_newsletter(request):
     if request.method == "POST":
