@@ -1,18 +1,21 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
 # Create your views here.
+import os
+from django.conf import settings
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView,ListView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from PIL import Image, ImageDraw
 from members.utils import send_clearance_email
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-from weasyprint import HTML, CSS
+#from weasyprint import HTML, CSS
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.contrib import messages
@@ -405,38 +408,47 @@ def subscribe_newsletter(request):
     return redirect(request.META.get("HTTP_REFERER", "/"))
 
 
-
-
-    
+ 
 
 @login_required
 def profile_pdf(request):
-    # Get the latest clearance application for the user
-    clearance = ClearanceApplication.objects.filter(user=request.user).order_by('-submitted_at').first()
+    clearance = ClearanceApplication.objects.filter(
+        user=request.user
+    ).order_by('-submitted_at').first()
 
-    # Only allow download if approved
     if not clearance or not clearance.approved:
-        return HttpResponseForbidden("You cannot download this PDF until your clearance is approved by the admin. You will be notified once it is approved. Please go back and check again later.")
+        return HttpResponseForbidden(
+            "You cannot download this PDF until your clearance is approved."
+        )
 
-    # Render PDF template
-    html_string = render_to_string('members/profile_pdf.html', {
+    passport_path = None
+    if hasattr(request.user, 'passport_photo') and request.user.passport_photo:
+        original_path = os.path.join(settings.MEDIA_ROOT, request.user.passport_photo.name)
+        # Create a temporary rounded image
+        temp_path = os.path.join(settings.MEDIA_ROOT, f"temp_{request.user.id}.png")
+        img = Image.open(original_path).convert("RGBA")
+        # Resize to desired PDF size
+        img = img.resize((120, 130))
+        
+        # Create rounded mask
+        radius = 10  # adjust for corner roundness
+        mask = Image.new("L", img.size, 0)
+        draw = ImageDraw.Draw(mask)
+        draw.rounded_rectangle([0, 0, img.size[0], img.size[1]], radius, fill=255)
+        img.putalpha(mask)
+        
+        img.save(temp_path, format="PNG")
+        passport_path = temp_path  # Pass this to template
+
+    template = get_template('members/profile_pdf.html')
+    html = template.render({
         'user': request.user,
         'clearance': clearance,
+        'passport_path': passport_path,
     })
 
-    # Simple inline CSS for PDF
-    css = CSS(string='''
-        body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; }
-        h1, h2 { color: #2d6a4f; margin-bottom: 10px; }
-        .card { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
-        .label { font-weight: bold; display: inline-block; width: 180px; }
-        img { max-width: 100px; max-height: 100px; border-radius: 5px; }
-    ''')
-
-    # Generate PDF
-    pdf_file = HTML(string=html_string).write_pdf(stylesheets=[css])
-
-    # Return PDF response
-    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="profile_{request.user.username}.pdf"'
+
+    pisa_status = pisa.CreatePDF(html, dest=response)
     return response

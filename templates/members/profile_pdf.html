@@ -3,6 +3,7 @@ This template is for PDF export only.
 It removes navbar, footer, and notifications for a clean PDF.
 {% endcomment %}
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,23 +76,16 @@ It removes navbar, footer, and notifications for a clean PDF.
 
 <!-- Profile Card -->
 <div class="card profile">
-    {% if user.passport_photo %}
-        <img src="{{ user.passport_photo.url }}">
-    {% endif %}
+ 
+ 
+{% if passport_path %}
+    <img src="{{ passport_path }}">
+{% endif %}
     <p><span class="label">Full Name:</span> <span class="value">{{ user.get_full_name }}</span></p>
     <p><span class="label">PCN Registration Number:</span> <span class="value">{{ user.pcn_number }}</span></p>
     <p><span class="label">Email:</span> <span class="value">{{ user.email }}</span></p>
     <p><span class="label">Area of Practice:</span> <span class="value">{{ user.area_of_practice }}</span></p>
-    <p><span class="label">Technical Group:</span> 
-        <span class="value">
-            {% if user.area_of_practice == "hospital" %}
-                AHPAN - Hospital & Administrative Pharmacists
-            {% elif user.area_of_practice == "community" %}
-                Community Pharmacists Group
-            {% else %}
-                None
-            {% endif %}
-        </span>
+    <p><span class="label">Technical Group:</span>  <span class="value">  {{ clearance.get_technical_group_display }}</span>
     </p>
 </div>
 
