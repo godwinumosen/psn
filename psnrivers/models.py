@@ -8,7 +8,7 @@ class PsnRiversPost(models.Model):
     psnriver_status = models.CharField(max_length=255, blank=True, null=True)
     psnriver_description = models.TextField()
     psnriver_slug = models.SlugField(max_length=255, blank=True, null=True)
-    psnriver_img = models.ImageField(upload_to='images/')
+    psnriver_img = models.ImageField(upload_to='psnpost_images/')
     psnriver_publish_date = models.DateTimeField(auto_now_add=True)
     psnriver_author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
@@ -28,7 +28,7 @@ class AboutPsnRivers(models.Model):
     about_psnriver_description = models.TextField()
     about_psnriver_description2 = models.TextField()
     about_psnriver_slug = models.SlugField(max_length=255, blank=True, null=True)
-    about_psnriver_img = models.ImageField(upload_to='images/')
+    about_psnriver_img = models.ImageField(upload_to='about_images/')
     about_psnriver_publish_date = models.DateTimeField(auto_now_add=True)
     about_psnriver_author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
@@ -56,7 +56,7 @@ class NewsAndEventsPsnRivers(models.Model):
     newsandevents_psnriver_title_4 = models.CharField(max_length=255, blank=True, null=True)
     newsandevents_psnriver_description_4 = models.TextField()
     newsandevents_psnriver_slug = models.SlugField(max_length=255, blank=True, null=True)
-    newsandevents_psnriver_img = models.ImageField(upload_to='images/')
+    newsandevents_psnriver_img = models.ImageField(upload_to='News_images/')
     newsandevents_psnriver_publish_date = models.DateTimeField(auto_now_add=True)
     newsandevents_psnriver_author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
@@ -198,7 +198,7 @@ class NewsletterSubscriber(models.Model):
 class PsnRiversExecutive(models.Model):
     psnriver_executive_name = models.CharField(max_length=255, blank=True, null=True)
     psnriver_executive_position = models.TextField()
-    psnriver_executive_img = models.ImageField(upload_to='images/')
+    psnriver_executive_img = models.ImageField(upload_to='executive_images/')
     psnriver_executive_publish_date = models.DateTimeField(auto_now_add=True)
     psnriver_executive_author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
