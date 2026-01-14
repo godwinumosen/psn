@@ -251,7 +251,7 @@ def apply_clearance(request):
                 request,
                 "Your clearance application has been submitted successfully!"
             )
-            return redirect('home')
+            return redirect('member_portal')
     else:
         form = ClearanceApplicationForm(user=request.user)
 
