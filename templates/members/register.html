@@ -6,11 +6,10 @@
 
 <div class="page-title py-5 bg-success mb-5">
   <div class="container text-white">
-    <h1 class="display-5 fw-bold mb-1"style="font-size: 35px;">Join PSN Rivers</h1>
-    <p class="lead mb-0"style="font-size: 16px;"> Register to become a member</p>
+    <h1 class="display-5 fw-bold mb-1" style="font-size: 35px;">Join PSN Rivers</h1>
+    <p class="lead mb-0" style="font-size: 16px;"> Register to become a member</p>
   </div>
 </div>
-
 
 <div class="container py-5">
   <div class="row justify-content-center">
@@ -25,16 +24,14 @@
           <form method="post" action="{% url 'members:register' %}" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <!-- 🔴 NON-FIELD ERRORS (e.g. password mismatch) -->
             {% if form.non_field_errors %}
               <div class="alert alert-danger">
                 {{ form.non_field_errors }}
               </div>
             {% endif %}
 
-            <!-- PERSONAL INFORMATION -->
             <h5 class="fw-bold mb-3">Personal Information</h5>
-              <hr>
+            <hr>
             <div class="row g-3">
               <div class="col-md-6">
                 {{ form.first_name.label_tag }}
@@ -49,11 +46,8 @@
               <div class="col-md-6">
                 {{ form.email.label_tag }}
                 {{ form.email }}
-                <!-- 🔴 EMAIL ERROR -->
                 {% if form.email.errors %}
-                  <small class="text-danger">
-                    {{ form.email.errors|striptags }}
-                  </small>
+                  <small class="text-danger">{{ form.email.errors|striptags }}</small>
                 {% endif %}
               </div>
               <div class="col-md-6">
@@ -63,9 +57,8 @@
               </div>
             </div>
 
-            <!-- PROFESSIONAL INFORMATION -->
             <h5 class="fw-bold mt-4 mb-3">Professional Information</h5>
-              <hr>
+            <hr>
             <div class="row g-3">
               <div class="col-md-6">
                 {{ form.pcn_number.label_tag }}
@@ -77,19 +70,16 @@
                 {{ form.year_qualified }}
                 {{ form.year_qualified.errors }}
               </div>
-
-              <div class="col-12" >
+              <div class="col-12">
                 {{ form.area_of_practice.label_tag }}
                 {{ form.area_of_practice }}
                 {{ form.area_of_practice.errors }}
               </div>
-
               <div class="col-12">
                 {{ form.workplace_name.label_tag }}
                 {{ form.workplace_name }}
                 {{ form.workplace_name.errors }}
               </div>
-
               <div class="col-12">
                 {{ form.workplace_address.label_tag }}
                 {{ form.workplace_address }}
@@ -97,9 +87,8 @@
               </div>
             </div>
 
-            <!-- ACCOUNT SECURITY -->
             <h5 class="fw-bold mt-4 mb-3">Account Security</h5>
-              <hr>
+            <hr>
             <div class="row g-3">
               <div class="col-md-6">
                 {{ form.password1.label_tag }}
@@ -113,10 +102,9 @@
               </div>
             </div>
 
-            <!-- DOCUMENT UPLOAD -->
             <h5 class="fw-bold mt-4 mb-3">Document Upload</h5>
             <hr>
-             <b><small class="text-muted d-block mb-2">PCN License (PDF or Image)</small></b>
+            <b><small class="text-muted d-block mb-2">PCN License (PDF or Image)</small></b>
             <div class="border border-2 border-dashed rounded p-3 mb-3 text-center">
               <small class="text-muted d-block mb-2">Click to upload or drag and drop</small>
               <small class="text-muted d-block mb-2">PNG, JPG, PDF up to 5MB</small>
@@ -132,7 +120,6 @@
               {{ form.passport_photo.errors }}
             </div>
 
-            <!-- TERMS -->
             <div class="form-check mb-3">
               <input class="form-check-input" type="checkbox" required>
               <label class="form-check-label">
@@ -150,10 +137,42 @@
             </p>
 
           </form>
-
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- ✅ BOOTSTRAP ICONS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- ✅ PASSWORD EYE TOGGLE (NO FORM CHANGES) -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('input[type="password"]').forEach(function (input) {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("position-relative");
+
+    input.parentNode.insertBefore(wrapper, input);
+    wrapper.appendChild(input);
+
+    const eye = document.createElement("i");
+    eye.className = "bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3";
+    eye.style.cursor = "pointer";
+
+    wrapper.appendChild(eye);
+
+    eye.addEventListener("click", function () {
+      if (input.type === "password") {
+        input.type = "text";
+        eye.classList.replace("bi-eye", "bi-eye-slash");
+      } else {
+        input.type = "password";
+        eye.classList.replace("bi-eye-slash", "bi-eye");
+      }
+    });
+  });
+});
+</script>
+
 {% endblock %}

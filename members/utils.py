@@ -12,7 +12,7 @@ def send_verification_email(user, request):
     token = default_token_generator.make_token(user)
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     verify_url = request.build_absolute_uri(
-        reverse('verify_email', kwargs={'uidb64': uid, 'token': token})
+        reverse('members:verify_email', kwargs={'uidb64': uid, 'token': token})
     )
     subject = 'Verify your PSN Rivers Membership Email'
     text_message = f"""

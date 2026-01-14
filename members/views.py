@@ -161,8 +161,6 @@ def verify_email(request, uidb64, token):
         return redirect('members:login')
 
 
-def success(request):
-    return render(request, 'members/success.html')
 
 
 def register(request):
@@ -202,9 +200,17 @@ def register(request):
     return render(request, 'members/register.html', {'form': form})
 
 
+
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+
+
+def success(request):
+    return render(request, 'members/success.html')
+
+
 
 
 @login_required

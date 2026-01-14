@@ -9,6 +9,8 @@ from django.http import HttpResponse
 from members.utils import send_clearance_email
 from django.urls import reverse
 from django.urls import reverse_lazy
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 #from .models import PsnRiversPost,
 from django.contrib import messages
 from .forms import ClearanceApplicationForm 
@@ -410,3 +412,18 @@ def subscribe_newsletter(request):
             messages.error(request, "Please enter a valid email.")
 
     return redirect(request.META.get("HTTP_REFERER", "/"))
+
+
+
+def profile_pdf(request):
+    template = get_template('members/profile.html')
+    html = template.render({'user': request.user})
+    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="profile.pdf"'
+    
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("Error generating PDF")
+    
+    return response
