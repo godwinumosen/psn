@@ -82,11 +82,19 @@
           </div>
         </div>
 
-        <div class="d-flex justify-content-center justify-content-md-end mb-4 px-md-3">
+    {% comment %}
+Show the download button only if the user's latest clearance is approved
+{% endcomment %}
+{% with user_clearance=user.clearanceapplication_set.all|dictsortreversed:"submitted_at"|first %}
+    {% if user_clearance and user_clearance.approved %}
+        <div class="d-flex justify-content-center justify-content-md-end mb-4">
             <a href="{% url 'profile_pdf' %}" class="btn btn-success px-4 py-2">
                 <i class="bi bi-download me-2"></i> Download Profile as PDF
             </a>
         </div>
+    {% endif %}
+{% endwith %}
+
 
       </div>
 

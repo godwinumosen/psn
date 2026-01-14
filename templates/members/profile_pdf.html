@@ -71,11 +71,16 @@ It removes navbar, footer, and notifications for a clean PDF.
 </head>
 <body>
 
-<!-- Page Header -->
-<div class="bg-success">
-    <h1 style="color: #fff;">Welcome, <span style="color: #fff;">{{ user.get_full_name }}</span></h1>
-    <p>Member Profile Details</p>
+
+
+{% if clearance and clearance.status == "Approved" %}
+<div class="d-flex justify-content-center justify-content-md-end mb-4">
+    <a href="{% url 'profile_pdf' %}" class="btn btn-success px-4 py-2">
+        <i class="bi bi-download me-2"></i> Download Profile
+    </a>
 </div>
+{% endif %}
+
 
 <!-- Profile Card -->
 <div class="card profile">

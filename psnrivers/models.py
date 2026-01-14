@@ -106,6 +106,7 @@ TECHNICAL_GROUP_CHOICES = [
 from django.conf import settings
 from django.db import models
 
+
 class ClearanceApplication(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     membership_number = models.CharField(max_length=50)

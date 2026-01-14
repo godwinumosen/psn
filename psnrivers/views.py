@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from members.utils import send_clearance_email
 from django.urls import reverse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -419,7 +420,7 @@ def subscribe_newsletter(request):
 
 
 
-@login_required
+'''@login_required
 def profile_pdf(request):
     # Render PDF-only template
     html_string = render_to_string('members/profile_pdf.html', {
@@ -429,16 +430,51 @@ def profile_pdf(request):
 
     # Optional CSS for styling (inline)
     css = CSS(string='''
-        body { font-family: Arial, sans-serif; font-size: 12px; }
+        #body { font-family: Arial, sans-serif; font-size: 12px; }
+       # h1, h2 { color: #2d6a4f; margin-bottom: 10px; }
+        #.card { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
+       # .label { font-weight: bold; display: inline-block; width: 180px; }
+       # img { max-width: 100px; max-height: 100px; border-radius: 5px; }
+       # .bg-success { background-color: #2d6a4f; color: white; padding: 10px; margin-bottom: 15px; }
+    #''')
+
+    #pdf_file = HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(stylesheets=[css])
+
+    #response = HttpResponse(pdf_file, content_type='application/pdf')
+    #response['Content-Disposition'] = f'attachment; filename="profile_{request.user.username}.pdf"'
+    #return response'''
+    
+    
+    
+
+@login_required
+def profile_pdf(request):
+    # Get the latest clearance application for the user
+    clearance = ClearanceApplication.objects.filter(user=request.user).order_by('-submitted_at').first()
+
+    # Only allow download if approved
+    if not clearance or not clearance.approved:
+        return HttpResponseForbidden("You cannot download this PDF until your clearance is approved by the admin. You will be notified once it is approved. Please go back and check again later.")
+
+    # Render PDF template
+    html_string = render_to_string('members/profile_pdf.html', {
+        'user': request.user,
+        'clearance': clearance,
+    })
+
+    # Simple inline CSS for PDF
+    css = CSS(string='''
+        body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; }
         h1, h2 { color: #2d6a4f; margin-bottom: 10px; }
         .card { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
         .label { font-weight: bold; display: inline-block; width: 180px; }
         img { max-width: 100px; max-height: 100px; border-radius: 5px; }
-        .bg-success { background-color: #2d6a4f; color: white; padding: 10px; margin-bottom: 15px; }
     ''')
 
-    pdf_file = HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(stylesheets=[css])
+    # Generate PDF
+    pdf_file = HTML(string=html_string).write_pdf(stylesheets=[css])
 
+    # Return PDF response
     response = HttpResponse(pdf_file, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="profile_{request.user.username}.pdf"'
     return response
