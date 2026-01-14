@@ -11,7 +11,9 @@ from django.urls import reverse
 from django.urls import reverse_lazy
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-#from .models import PsnRiversPost,
+from weasyprint import HTML, CSS
+from django.http import HttpResponse
+from django.template.loader import render_to_string
 from django.contrib import messages
 from .forms import ClearanceApplicationForm 
 from django.utils import timezone
@@ -415,15 +417,28 @@ def subscribe_newsletter(request):
 
 
 
+
+
+@login_required
 def profile_pdf(request):
-    template = get_template('members/profile.html')
-    html = template.render({'user': request.user})
-    
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="profile.pdf"'
-    
-    pisa_status = pisa.CreatePDF(html, dest=response)
-    if pisa_status.err:
-        return HttpResponse("Error generating PDF")
-    
+    # Render PDF-only template
+    html_string = render_to_string('members/profile_pdf.html', {
+        'user': request.user,
+        'clearance': getattr(request.user, 'clearance', None),
+    })
+
+    # Optional CSS for styling (inline)
+    css = CSS(string='''
+        body { font-family: Arial, sans-serif; font-size: 12px; }
+        h1, h2 { color: #2d6a4f; margin-bottom: 10px; }
+        .card { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
+        .label { font-weight: bold; display: inline-block; width: 180px; }
+        img { max-width: 100px; max-height: 100px; border-radius: 5px; }
+        .bg-success { background-color: #2d6a4f; color: white; padding: 10px; margin-bottom: 15px; }
+    ''')
+
+    pdf_file = HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(stylesheets=[css])
+
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="profile_{request.user.username}.pdf"'
     return response

@@ -1,0 +1,123 @@
+{% comment %}
+This template is for PDF export only.
+It removes navbar, footer, and notifications for a clean PDF.
+{% endcomment %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ user.get_full_name }} - Profile</title>
+<style>
+    body { 
+        font-family: sans-serif; 
+        font-size: 18px; /* increased from 12px */
+        margin: 20px; 
+        color: #333;
+    }
+
+    /* Headers */
+    h1 { 
+        color: #2d6a4f; 
+        font-size: 35px; /* increased from 28px */
+        margin-bottom: 5px; 
+    }
+    h2 { 
+        color: #2d6a4f; 
+        font-size: 29px; /* increased from 22px */
+        border-bottom: 2px solid #2d6a4f; 
+        padding-bottom: 5px; 
+        margin-bottom: 15px;
+    }
+
+    /* Cards */
+    .card { 
+        border: 1px solid #ccc; 
+        padding: 25px; /* slightly more padding */
+        margin-bottom: 20px; 
+        border-radius: 8px; 
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+        position: relative;
+    }
+
+    .label { 
+        font-weight: bold; 
+        display: inline-block; 
+        width: 180px; 
+        color: #555;
+        font-size: 15px; /* increased from 12px */
+    }
+    .value { 
+        font-weight: 700; 
+        color: #2d6a4f; 
+        font-size: 14px; /* increased from 12px */
+    }
+
+    img { 
+        max-width: 120px; /* slightly bigger image */
+        max-height: 120px; 
+        border-radius: 8px; 
+        margin-bottom: 10px;
+    }
+
+    .bg-success { 
+        background-color: #2d6a4f; 
+        color: white; 
+        padding: 25px; /* bigger header */
+        margin-bottom: 20px; 
+        border-radius: 8px;
+    }
+</style>
+</head>
+<body>
+
+<!-- Page Header -->
+<div class="bg-success">
+    <h1 class="text-white">Welcome, <span style="color: #fff;">{{ user.get_full_name }}</span></h1>
+    <p>Member Profile Details</p>
+</div>
+
+<!-- Profile Card -->
+<div class="card profile">
+    {% if user.passport_photo %}
+        <img src="{{ user.passport_photo.url }}">
+    {% endif %}
+    <p><span class="label">Full Name:</span> <span class="value">{{ user.get_full_name }}</span></p>
+    <p><span class="label">PCN Registration Number:</span> <span class="value">{{ user.pcn_number }}</span></p>
+    <p><span class="label">Email:</span> <span class="value">{{ user.email }}</span></p>
+    <p><span class="label">Area of Practice:</span> <span class="value">{{ user.area_of_practice }}</span></p>
+    <p><span class="label">Technical Group:</span> 
+        <span class="value">
+            {% if user.area_of_practice == "hospital" %}
+                AHPAN - Hospital & Administrative Pharmacists
+            {% elif user.area_of_practice == "community" %}
+                Community Pharmacists Group
+            {% else %}
+                None
+            {% endif %}
+        </span>
+    </p>
+</div>
+
+<!-- Clearance Card -->
+<div class="card">
+    <h2>Clearance Status</h2>
+    {% if clearance %}
+        <p>
+            <span class="label">Status:</span> 
+            <span class="
+                {% if clearance.status == 'Approved' %}status-approved
+                {% elif clearance.status == 'Pending' %}status-pending
+                {% else %}status-declined{% endif %}
+            ">
+                {{ clearance.status }}
+            </span>
+        </p>
+        <p><span class="label">Comments:</span> <span class="value">{{ clearance.comments|default:"Your application is being reviewed." }}</span></p>
+    {% else %}
+        <p>No clearance application submitted yet.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
