@@ -258,11 +258,6 @@ def apply_clearance(request):
     return render(request, 'psnrivers/apply_clearance.html', {'form': form})
 
 
-
-
-
-
-
 @login_required
 @require_POST
 def approve_application(request, app_id):
