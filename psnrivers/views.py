@@ -185,7 +185,7 @@ def review_applications(request):
                     user=app.user,
                     subject="Clearance Application Approved",
                     message=f"Hello {app.full_name},\n\n"
-                            "Congratulations! Your  "
+                            "Congratulations! Your"
                             f"{app.clearance_year} Clearance Application has been approved.\n\n"
                             "Thank you for completing the process.\n\n"
                             "You can now download your Proof of Clearance from your Member Dashboard.\n\n"
@@ -239,10 +239,6 @@ def review_applications(request):
         'declined_count': declined_count,
     }
     return render(request, 'psnrivers/review_applications.html', context)
-
-
-
-
 
 
 
@@ -422,7 +418,6 @@ def profile(request):
 
     
     
-    
 
 def subscribe_newsletter(request):
     if request.method == "POST":
@@ -437,8 +432,6 @@ def subscribe_newsletter(request):
     return redirect(request.META.get("HTTP_REFERER", "/"))
 
 
- 
-
 
 class ExecutivesView(ListView):
     model = PsnRiversExecutive
@@ -446,8 +439,6 @@ class ExecutivesView(ListView):
     context_object_name = 'object_list'
     
     
-
-
 
 @login_required
 def profile_pdf(request):
@@ -558,3 +549,4 @@ def profile_pdf(request):
     p.save()
 
     return response
+    
