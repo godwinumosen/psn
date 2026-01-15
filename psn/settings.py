@@ -151,9 +151,7 @@ LOGIN_URL = 'login'          # redirects non-authenticated users
 LOGIN_REDIRECT_URL = 'home'  # where to go after login
 LOGOUT_REDIRECT_URL = 'login'
   
-
 AUTH_USER_MODEL = 'members.User'
-
 
 # ✅ BOOTSTRAP MESSAGE TAGS (THIS IS THE FIX)
 MESSAGE_TAGS = {
@@ -163,3 +161,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'danger',
 }
+
+# This is for the admin login
+#info@psnriversstate.com/
+#admin/
