@@ -547,6 +547,5 @@ def profile_pdf(request):
 
     p.showPage()
     p.save()
-
     return response
     
