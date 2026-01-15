@@ -1,34 +1,59 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
-# Create your views here.
-import os
 from django.conf import settings
-from django.shortcuts import render,redirect,get_object_or_404
-from django.views.generic import TemplateView
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView,ListView
+from django.views.generic import (
+    TemplateView,
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from PIL import Image, ImageDraw
-from members.utils import send_clearance_email
-from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseForbidden
-from django.urls import reverse_lazy
-from django.template.loader import get_template
-from xhtml2pdf import pisa
-#from weasyprint import HTML, CSS
-from django.http import HttpResponse
-from django.template.loader import render_to_string
+from django.urls import reverse, reverse_lazy
+from django.template.loader import get_template, render_to_string
 from django.contrib import messages
-from .forms import ClearanceApplicationForm 
 from django.utils import timezone
-from .models import Notification,NewsAndEventsPsnRivers,AboutPsnRivers,UpcominEventsPsnRivers
 from django.views.decorators.http import require_POST
-from .models import ClearanceApplication,ContactMessage,NewsletterSubscriber,PsnRiversExecutive
-from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
-User = get_user_model()
 from django.db.models import Q
-from django.contrib.auth.mixins import LoginRequiredMixin  
+from django.contrib.auth import get_user_model
+
+from PIL import Image, ImageDraw
+import os
+
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import inch, mm
+from reportlab.lib import colors
+from reportlab.lib.enums import TA_LEFT, TA_CENTER
+from reportlab.lib.utils import ImageReader
+from reportlab.pdfgen import canvas
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    Image,
+    Table,
+    TableStyle,
+    KeepTogether,
+)
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+
+from members.utils import send_clearance_email
+from .forms import ClearanceApplicationForm
+from .models import (
+    Notification,
+    NewsAndEventsPsnRivers,
+    AboutPsnRivers,
+    UpcominEventsPsnRivers,
+    ClearanceApplication,
+    ContactMessage,
+    NewsletterSubscriber,
+    PsnRiversExecutive,
+)
+
+User = get_user_model()
 
 
 
@@ -406,9 +431,17 @@ def subscribe_newsletter(request):
  
 
 
+class ExecutivesView(ListView):
+    model = PsnRiversExecutive
+    template_name = 'psnrivers/executive.html'
+    context_object_name = 'object_list'
+    
+    
+
+
+
 @login_required
 def profile_pdf(request):
-    # Get latest clearance
     clearance = ClearanceApplication.objects.filter(
         user=request.user
     ).order_by('-submitted_at').first()
@@ -418,47 +451,101 @@ def profile_pdf(request):
             "You cannot download this PDF until your clearance is approved."
         )
 
-    # Prepare rounded profile image
-    passport_path = None
-    if request.user.passport_photo:
-        original_path = request.user.passport_photo.path
-        img = Image.open(original_path).convert("RGBA")
-        img = img.resize((120, 130))  # resize to desired dimensions
-
-        # Create rounded mask
-        mask = Image.new("L", img.size, 0)
-        draw = ImageDraw.Draw(mask)
-        draw.rounded_rectangle([0, 0, img.width, img.height], radius=15, fill=255)
-        img.putalpha(mask)
-
-        # Save temp image
-        temp_dir = os.path.join(settings.MEDIA_ROOT, "temp")
-        os.makedirs(temp_dir, exist_ok=True)
-        temp_path = os.path.join(temp_dir, f"{request.user.username}_rounded.png")
-        img.save(temp_path, format="PNG")
-        passport_path = temp_path  # pass to template
-
-    # Render HTML template
-    template = get_template('members/profile_pdf.html')
-    html = template.render({
-        'user': request.user,
-        'clearance': clearance,
-        'passport_path': passport_path,
-    })
-
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="profile_{request.user.username}.pdf"'
 
-    # Generate PDF
-    pisa_status = pisa.CreatePDF(html, dest=response)
-    if pisa_status.err:
-        return HttpResponse("PDF generation failed", status=500)
+    # ===== PDF Setup =====
+    p = canvas.Canvas(response, pagesize=A4)
+    width, height = A4
+    left_margin = 50
+    right_margin = 50
+    current_y = height - 60
+
+    # ===== HEADER =====
+    p.setFont("Helvetica-Bold", 30)
+    p.setFillColor(colors.HexColor("#2d6a4f"))
+    p.drawCentredString(width / 2, current_y, "PSN Rivers Clearance Approval")
+    current_y -= 60
+
+    # ===== PROFILE IMAGE =====
+    img_size = 120  # bigger image
+    if request.user.passport_photo:
+        try:
+            img = ImageReader(request.user.passport_photo.path)
+            p.drawImage(
+                img,
+                (width - img_size) / 2,   # centered
+                current_y - img_size,
+                img_size,
+                img_size,
+                mask='auto'
+            )
+        except Exception:
+            pass
+    current_y -= img_size + 30  # spacing after image
+
+    # ===== PROFILE CARD =====
+    profile_data = [
+        ("Full Name", request.user.get_full_name()),
+        ("PCN Registration Number", getattr(request.user, "pcn_number", "")),
+        ("Email", request.user.email),
+        ("Area of Practice", getattr(request.user, "area_of_practice", "")),
+        ("Technical Group", clearance.get_technical_group_display() if clearance else ""),
+        ("Clearance Year", clearance.clearance_year if clearance else ""),
+    ]
+
+    # Draw profile details with nice spacing
+    y = current_y
+    for label, value in profile_data:
+        p.setFont("Helvetica-Bold", 13)
+        p.setFillColor(colors.HexColor("#555"))
+        p.drawString(left_margin, y, f"{label}:")
+        p.setFont("Helvetica", 13)
+        p.setFillColor(colors.HexColor("#2d6a4f"))
+        p.drawString(left_margin + 200, y, str(value))
+        y -= 28
+
+    current_y = y - 40
+
+    # ===== CLEARANCE STATUS =====
+    p.setFont("Helvetica-Bold", 20)
+    p.setFillColor(colors.HexColor("#2d6a4f"))
+    p.drawString(left_margin, current_y, "Clearance Status")
+    current_y -= 30
+
+    clearance_status = clearance.status if clearance else "Pending"
+    clearance_comments = getattr(clearance, "comments", "Your application is being reviewed.")
+
+    table_data = [
+        ["Status", clearance_status],
+        ["Comments", clearance_comments],
+    ]
+
+    table = Table(table_data, colWidths=[140, width - left_margin - right_margin - 140])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#2d6a4f")),
+        ('TEXTCOLOR', (0,0), (-1,0), colors.white),
+        ('BACKGROUND', (0,1), (-1,-1), colors.whitesmoke),
+        ('TEXTCOLOR', (0,1), (-1,-1), colors.HexColor("#2d6a4f")),
+        ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
+        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+        ('LEFTPADDING', (0,0), (-1,-1), 8),
+        ('RIGHTPADDING', (0,0), (-1,-1), 8),
+        ('TOPPADDING', (0,0), (-1,-1), 6),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 6),
+        ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+        ('FONTNAME', (0,1), (-1,-1), 'Helvetica'),
+    ]))
+    table.wrapOn(p, width, height)
+    table.drawOn(p, left_margin, current_y - 70)
+
+    # ===== FOOTER =====
+    p.setFont("Helvetica-Oblique", 10)
+    p.setFillColor(colors.grey)
+    p.drawCentredString(width / 2, 40,
+                        "This document was generated electronically and is valid without signature.")
+
+    p.showPage()
+    p.save()
 
     return response
-
-
-
-class ExecutivesView(ListView):
-    model = PsnRiversExecutive
-    template_name = 'psnrivers/executive.html'
-    context_object_name = 'object_list'
