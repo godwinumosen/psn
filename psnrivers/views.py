@@ -185,12 +185,21 @@ def review_applications(request):
                     user=app.user,
                     subject="Clearance Application Approved",
                     message=f"Hello {app.full_name},\n\n"
-                            "Congratulations! Your clearance application for "
-                            f"{app.clearance_year} has been approved.\n\n"
-                            "Thank you for completing the process."
+                            "Congratulations! Your  "
+                            f"{app.clearance_year} Clearance Application has been approved.\n\n"
+                            "Thank you for completing the process.\n\n"
+                            "You can now download your Proof of Clearance from your Member Dashboard.\n\n"
+                            "How to access it:\n"
+                            "1. Sign in via the Member Portal.\n"
+                            "2. Click View Dashboard.\n"
+                            "3. Click Download Clearance Certificate.\n\n"
+                            "If you need any assistance, please contact the PSN Rivers Secretaria.\n\n"
+                            "Warm regards,\n"
+                            "Pharmaceutical Society of Nigeria\n"
+                            "Rivers State Branch."
                 )
 
-                messages.success(request, f"{app.full_name}'s application has been approved.")
+                messages.success(request, f"{app.full_name}'s application has been approved successfully.")
 
             elif action == "decline":
                 app.approved = False
@@ -514,7 +523,7 @@ def profile_pdf(request):
     current_y -= 30
 
     clearance_status = clearance.status if clearance else "Pending"
-    clearance_comments = getattr(clearance, "comments", "Your application is being reviewed.")
+    clearance_comments = getattr(clearance, "comments", "Your application has been approved.")
 
     table_data = [
         ["Status", clearance_status],
@@ -543,7 +552,7 @@ def profile_pdf(request):
     p.setFont("Helvetica-Oblique", 10)
     p.setFillColor(colors.grey)
     p.drawCentredString(width / 2, 40,
-                        "This document was generated electronically and is valid without signature.")
+                        "This document is valid without signature.")
 
     p.showPage()
     p.save()
