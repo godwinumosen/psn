@@ -464,7 +464,7 @@ def profile_pdf(request):
     # ===== HEADER =====
     p.setFont("Helvetica-Bold", 30)
     p.setFillColor(colors.HexColor("#2d6a4f"))
-    p.drawCentredString(width / 2, current_y, "PSN Rivers Clearance Approval")
+    p.drawCentredString(width / 2, current_y, "PSN Rivers State Clearance")
     current_y -= 60
 
     # ===== PROFILE IMAGE =====
