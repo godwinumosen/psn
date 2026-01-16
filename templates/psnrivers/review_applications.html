@@ -97,39 +97,37 @@
 
         <div class="d-flex flex-column flex-md-row gap-2">
 
-  <!-- Always show view details -->
-  <a href="{% url 'application_detail' app.id %}"
-     class="btn btn-outline-secondary btn-sm w-100 w-md-auto">
-    <i class="bi bi-eye"></i> View Detailss
-  </a>
+        <!-- Always show view details -->
+        <a href="{% url 'application_detail' app.id %}"
+          class="btn btn-outline-secondary btn-sm w-100 w-md-auto">
+          <i class="bi bi-eye"></i> View Detailss
+        </a>
 
-  <!-- Approve button for pending applications -->
-  {% if not app.approved and not app.declined %}
-    <form method="post" class="d-inline-flex align-items-center m-0 w-100 w-md-auto">
-      {% csrf_token %}
-      <input type="hidden" name="application_id" value="{{ app.id }}">
-      <button type="submit"
-              name="action"
-              value="approve"
-              class="btn btn-success btn-sm w-100 w-md-auto">
-        <i class="bi bi-check-circle"></i> Approve
-      </button>
-    </form>
+        <!-- Approve button for pending applications -->
+        {% if not app.approved and not app.declined %}
+          <form method="post" class="d-inline-flex align-items-center m-0 w-100 w-md-auto">
+            {% csrf_token %}
+            <input type="hidden" name="application_id" value="{{ app.id }}">
+            <button type="submit"
+                    name="action"
+                    value="approve"
+                    class="btn btn-success btn-sm w-100 w-md-auto">
+              <i class="bi bi-check-circle"></i> Approve
+            </button>
+          </form>
 
-    <!-- Trigger Decline Modal -->
-    <button type="button"
-            class="btn btn-danger btn-sm w-100 w-md-auto"
-            data-bs-toggle="modal"
-            data-bs-target="#declineModal"
-            data-app-id="{{ app.id }}"
-            data-app-name="{{ app.full_name }}">
-      <i class="bi bi-x-circle"></i> Decline
-    </button>
-  {% endif %}
+          <!-- Trigger Decline Modal -->
+          <button type="button"
+                  class="btn btn-danger btn-sm w-100 w-md-auto"
+                  data-bs-toggle="modal"
+                  data-bs-target="#declineModal"
+                  data-app-id="{{ app.id }}"
+                  data-app-name="{{ app.full_name }}">
+            <i class="bi bi-x-circle"></i> Decline
+          </button>
+        {% endif %}
 
-</div>
-
-        
+      </div>
       </div>
     </div>
   {% empty %}
