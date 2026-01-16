@@ -1,5 +1,6 @@
 from django import forms
 from .models import User
+import re  # ✅ UPDATE (added for phone validation)
 
 # ✅ Use the same name that the form will use
 PRACTICE_AREAS = [
@@ -11,12 +12,14 @@ PRACTICE_AREAS = [
 ]
 
 class RegistrationForm(forms.ModelForm):
+
     password1 = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(attrs={
             "class": "form-control",
             "placeholder": "Create a password"
-        })
+        }),
+        required=True
     )
 
     password2 = forms.CharField(
@@ -24,17 +27,18 @@ class RegistrationForm(forms.ModelForm):
         widget=forms.PasswordInput(attrs={
             "class": "form-control",
             "placeholder": "Confirm your password"
-        })
+        }),
+        required=True
     )
 
-    # ✅ Add / replace this field here
     area_of_practice = forms.ChoiceField(
         label="Area of Practice",
         choices=PRACTICE_AREAS,
         widget=forms.Select(attrs={
             "class": "form-select",
             'style': 'color:#198754; border-color:#198754;'
-        })
+        }),
+        required=True
     )
 
     workplace_name = forms.CharField(
@@ -42,7 +46,8 @@ class RegistrationForm(forms.ModelForm):
         widget=forms.TextInput(attrs={
             "class": "form-control",
             "placeholder": "Name of pharmacy/hospital/organization"
-        })
+        }),
+        required=True
     )
 
     workplace_address = forms.CharField(
@@ -51,9 +56,9 @@ class RegistrationForm(forms.ModelForm):
             "class": "form-control",
             "rows": 3,
             "placeholder": "Enter workplace address"
-        })
+        }),
+        required=True
     )
-
 
     class Meta:
         model = User
@@ -97,13 +102,23 @@ class RegistrationForm(forms.ModelForm):
             }),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Force ALL fields to be compulsory (backend + frontend)
+        for field in self.fields.values():
+            field.required = True
+            field.widget.attrs['required'] = 'required'
+
     def clean(self):
         cleaned_data = super().clean()
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
 
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match. Please check and try again.")
+            raise forms.ValidationError(
+                "Passwords don't match. Please check and try again."
+            )
 
         return cleaned_data
 
@@ -116,6 +131,21 @@ class RegistrationForm(forms.ModelForm):
             )
 
         return email
+
+    # ✅ UPDATE (PHONE VALIDATION ONLY)
+    def clean_phone(self):
+        phone = self.cleaned_data.get("phone")
+
+        phone = phone.replace(" ", "")
+
+        pattern = r'^(?:\+234|234|0)(7[0-9]|8[0-9]|9[0-9])[0-9]{8}$'
+
+        if not re.match(pattern, phone):
+            raise forms.ValidationError(
+                "Enter a valid Nigerian phone number (e.g. 08031234567 or +2348031234567)."
+            )
+
+        return phone
 
     def save(self, commit=True):
         user = super().save(commit=False)
