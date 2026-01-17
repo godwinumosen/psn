@@ -1,8 +1,8 @@
 
 :root {
-  --default-font: "Open Sans",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Times New Roman", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway",  "Times New Roman";
-  --nav-font: "Poppins",  "Times New Roman";
+  --default-font: "Open Sans",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Merriweather", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Raleway",  "Merriweather";
+  --nav-font: "Poppins",  "Merriweather";
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
@@ -72,7 +72,7 @@
 body {
   color: var(--default-color);
   background-color: var(--background-color);
-  font-family: "Times New Roman", serif;
+  font-family: "Merriweather", serif;
   font-size: 1.rem;
 }
 
@@ -80,7 +80,7 @@ p {
     margin-top: 0;
     margin-bottom: 1rem;
     font-size: 1.rem;
-    font-family: "Times New Roman"
+    font-family: "Merriweather"
 }
 
 a {
@@ -187,7 +187,7 @@ h6 {
   padding: 15px;
   margin-bottom: 24px;
   font-weight: 600;
-  font-family: "Times New Roman"
+  font-family: "Merriweather"
 }
 
 .php-email-form .loading {
@@ -528,7 +528,7 @@ h6 {
   .navmenu a:focus {
     color: var(--nav-dropdown-color);
     padding: 10px 20px;
-    font-family: "Times New Roman";
+    font-family: "Merriweather";
     font-size: 17px;
     font-weight: 500;
     display: flex;
@@ -581,7 +581,7 @@ h6 {
     margin: 10px 20px;
     background-color: var(--nav-dropdown-background-color);
     transition: all 0.5s ease-in-out;
-    font-family: "Times New Roman"
+    font-family: "Merriweather"
   }
 
   .navmenu .dropdown ul ul {
@@ -621,7 +621,7 @@ h6 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Times New Roman', serif !important;
+    font-family: 'Merriweather', serif !important;
 }
 
 a, p {

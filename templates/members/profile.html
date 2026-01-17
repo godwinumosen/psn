@@ -41,34 +41,34 @@
             <div class="col-md-9">
               <div class="row g-3">
                 <div class="col-md-6">
-                  <small class="text-muted">Full Name</small>
+                  <small class="text-muted">Full Name:</small>
                   <div class="fw-normal">{{ user.get_full_name }}</div>
                 </div>
 
                  <div class="col-md-6">
-                  <small class="text-muted">PCN Registration Number</small>
+                  <small class="text-muted">PCN Registration Number:</small>
                   <div class="fw-normal">{{ user.pcn_number }}</div>
                 </div> 
 
                 <div class="col-md-6">
-                  <small class="text-muted">Email</small>
+                  <small class="text-muted">Email:</small>
                   <div class="fw-normal">{{ user.email }}</div>
                 </div>
 
                 <div class="col-md-6">
-                  <small class="text-muted">Area of Practice</small>
+                  <small class="text-muted">Area of Practice:</small>
                   <div class="fw-normal">{{ user.area_of_practice }}</div>
                 </div>
 
                 <div class="col-md-6">
-                  <small class="text-muted">Technical Group</small>
+                  <small class="text-muted">Technical Group:</small>
                   <div class="fw-normal">   
                         {{ clearance.get_technical_group_display }}
                   </div>
                 </div>
 
                  <div class="col-md-6">
-                  <small class="text-muted">Clearance Year</small>
+                  <small class="text-muted">Clearance Year:</small>
                   <div class="fw-normal">   
                         {{ clearance.clearance_year }}
                   </div>
@@ -117,7 +117,7 @@ Show the download button only if the user's latest clearance is approved
                   {% elif clearance.status == 'Approved' %} Approved
                   {% else %} Declined{% endif %}
                 </h6>
-                <p class="mb-0 small">{{ clearance.comments|default:"Your application is being reviewed." }}</p>
+                <p class="mb-0 small">{{ clearance.comments|default:"Your application has been submitted successfully." }}</p>
               </div>
             </div>
           {% else %}

@@ -68,57 +68,62 @@
     </div>
   </div>
 
-  <!-- Application List -->
-  {% for app in applications %}
-    <div class="card mb-3">
-      <div class="card-body d-flex justify-content-between align-items-center">
-        <div class="d-flex gap-3">
-          <div class="rounded-circle bg-success-subtle text-success d-flex align-items-center justify-content-center" style="width:40px;height:40px;">
-            {{ app.full_name|slice:":1" }}
-          </div>
-          <div>
-            <div class="fw-semibold">
-              {{ app.full_name }}
-              <span class="badge 
-                {% if not app.approved and not app.declined %}bg-warning-subtle text-warning border border-warning{% endif %}
-                {% if app.approved %}bg-success-subtle text-success border border-success{% endif %}
-                {% if app.declined %}bg-danger-subtle text-danger border border-danger{% endif %} ms-2">
-                {% if app.approved %}Approved{% elif app.declined %}Declined{% else %}Pending{% endif %}
-              </span>
-            </div>
-            <div class="small text-muted">
-              {{ app.membership_number }} · {{ app.technical_group }}
-            </div>
-            <div class="small text-muted">
-              Submitted: {{ app.submitted_at|date:"F j, Y" }} · Clearance Year: {{ app.clearance_year }}
-            </div>
-          </div>
+<!-- Application List -->
+{% for app in applications %}
+  <div class="card mb-3">
+
+    <div class="card-body d-flex flex-column flex-md-row justify-content-start justify-content-md-between align-items-start align-items-md-center gap-3 w-100">
+
+      <!-- User Info Section -->
+      <div class="d-flex gap-3">
+        <div class="rounded-circle bg-success-subtle text-success d-flex align-items-center justify-content-center"
+             style="width:40px;height:40px;">
+          {{ app.full_name|slice:":1" }}
         </div>
 
-        <div class="d-flex flex-column flex-md-row gap-2">
+        <div>
+          <div class="fw-semibold">
+            {{ app.full_name }}
+            <span class="badge 
+              {% if not app.approved and not app.declined %}bg-warning-subtle text-warning border border-warning{% endif %}
+              {% if app.approved %}bg-success-subtle text-success border border-success{% endif %}
+              {% if app.declined %}bg-danger-subtle text-danger border border-danger{% endif %} ms-2">
+              {% if app.approved %}Approved{% elif app.declined %}Declined{% else %}Pending{% endif %}
+            </span>
+          </div>
 
-        <!-- Always show view details -->
+          <div class="small text-muted">
+            {{ app.membership_number }} · {{ app.technical_group }}
+          </div>
+
+          <div class="small text-muted">
+            Submitted: {{ app.submitted_at|date:"F j, Y" }} · Clearance Year: {{ app.clearance_year }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex flex-column flex-md-row gap-2 w-100 w-md-auto align-items-start text-start text-md-center">
+
         <a href="{% url 'application_detail' app.id %}"
-          class="btn btn-outline-secondary btn-sm w-100 w-md-auto">
+           class="btn btn-outline-secondary btn-sm w-100 w-md-auto text-start text-md-center">
           <i class="bi bi-eye"></i> View Detailss
         </a>
 
-        <!-- Approve button for pending applications -->
         {% if not app.approved and not app.declined %}
-          <form method="post" class="d-inline-flex align-items-center m-0 w-100 w-md-auto">
+          <form method="post" class="m-0 w-100 w-md-auto">
             {% csrf_token %}
             <input type="hidden" name="application_id" value="{{ app.id }}">
             <button type="submit"
                     name="action"
                     value="approve"
-                    class="btn btn-success btn-sm w-100 w-md-auto">
-              <i class="bi bi-check-circle"></i> Approve
+                    class="btn btn-success btn-sm w-100 w-md-auto text-start text-md-center">
+              <i class="bi bi-check-circle"></i> Approveb
             </button>
           </form>
 
-          <!-- Trigger Decline Modal -->
           <button type="button"
-                  class="btn btn-danger btn-sm w-100 w-md-auto"
+                  class="btn btn-danger btn-sm w-100 w-md-auto text-start text-md-center"
                   data-bs-toggle="modal"
                   data-bs-target="#declineModal"
                   data-app-id="{{ app.id }}"
@@ -126,16 +131,18 @@
             <i class="bi bi-x-circle"></i> Decline
           </button>
         {% endif %}
-
-      </div>
       </div>
     </div>
-  {% empty %}
-    <div class="alert alert-info">
-      No clearance applications found.
-    </div>
-  {% endfor %}
+  </div>
 
+{% empty %}
+  <div class="alert alert-info">
+    No clearance applications found.
+  </div>
+{% endfor %}
+
+
+  
       <!-- Action -->
   <div class="mt-4">
     <a href="{% url 'clearance' %}" class="btn btn-outline-secondary">

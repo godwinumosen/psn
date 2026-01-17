@@ -46,7 +46,7 @@
     <div>
       <h6 class="fw-semibold mb-1">Application Approved</h6>
       <p class="mb-0 small">
-        Your clearance application has been approved by the PSN Rivers officials.
+        Your clearance application has been approved by the PSN Rivers Stats.
       </p>
     </div>
   </div>
@@ -58,7 +58,7 @@
     <div>
       <h6 class="fw-semibold mb-1">Application Declined</h6>
       <p class="mb-0 small">
-        Your clearance application has been declined by the PSN Rivers officials.
+        Your clearance application has been declined by the PSN Rivers Stats.
         {% if latest_application.decline_reason %}
           Reason: {{ latest_application.decline_reason }}
         {% endif %}
@@ -73,7 +73,7 @@
     <div>
       <h6 class="fw-semibold mb-1">Application Under Review</h6>
       <p class="mb-0 small">
-        Your clearance application is being reviewed by PSN Rivers officials.
+        Your clearance application is being reviewed by PSN Rivers Stats.
       </p>
     </div>
   </div>
@@ -164,14 +164,21 @@
 
 
   <!-- Action -->
-  <div class="mt-4">
-    <a href="{% url 'member_portal' %}" class="btn btn-outline-secondary">
-      <i class="bi bi-plus-back-arrow me-1"></i> Back
-    </a>
-      <a href="{% url 'clearance' %}" class="btn btn-outline-secondary">
+<!-- Action -->
+<div class="mt-4">
+  <!-- Back button always visible -->
+  <a href="{% url 'member_portal' %}" class="btn btn-outline-secondary">
+    <i class="bi bi-plus-back-arrow me-1"></i> Back
+  </a>
+
+  <!-- Submit New Application button only if no submission or declined -->
+  {% if not latest_application or latest_application.declined %}
+    <a href="{% url 'clearance' %}" class="btn btn-outline-secondary">
       <i class="bi bi-plus-circle me-1"></i> Submit New Application
     </a>
-  </div>
+  {% endif %}
+</div>
+
 
 </div>
 
